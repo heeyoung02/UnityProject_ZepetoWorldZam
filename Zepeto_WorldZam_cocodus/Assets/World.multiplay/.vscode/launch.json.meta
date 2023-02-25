@@ -1,0 +1,12 @@
+
+fileFormatVersion: 2
+guid: 52bc123e3a014cf6b518164d21e6b806
+importerOverride: Assembly-CSharp-Editor:ZEPETO.Multiplay.Script.Editor:ZepetoMultiplayResourceImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 339498544, guid: 7799470b795644eda20afacb2fc786bf, type: 3}

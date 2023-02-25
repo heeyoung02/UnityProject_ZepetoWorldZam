@@ -1,0 +1,30 @@
+fileFormatVersion: 2
+guid: af6c2a8ea4c6d974caad162139cb775a
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst PlayerSync_1 = require(\"../Multi/Player/PlayerSync\");\r\nclass
+    ColliderEnter_AnimationPlayer extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n   
+    Start() {\r\n        this.openAnim = this.GetComponentInChildren($typeof(UnityEngine_1.Animation));\r\n   
+    }\r\n    OnTriggerEnter(coll) {\r\n        if (!coll.transform.GetComponent($typeof(PlayerSync_1.default))?.isLocal)\r\n           
+    return;\r\n        this.openAnim.Play();\r\n    }\r\n}\r\nexports.default = ColliderEnter_AnimationPlayer;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ29sbGlkZXJFbnRlcl9BbmltYXRpb25QbGF5ZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJDb2xsaWRlckVudGVyX0FuaW1hdGlvblBsYXllci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUFrRDtBQUNsRCxpREFBcUQ7QUFDckQsMkRBQW9EO0FBRXBELE1BQXFCLDZCQUE4QixTQUFRLHFDQUFxQjtJQUk1RSxLQUFLO1FBQ0QsSUFBSSxDQUFDLFFBQVEsR0FBRyxJQUFJLENBQUMsc0JBQXNCLFNBQUMsdUJBQVMsRUFBRyxDQUFDO0lBQzdELENBQUM7SUFFRCxjQUFjLENBQUMsSUFBYztRQUN6QixJQUFJLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxZQUFZLFNBQUMsb0JBQVUsRUFBRyxFQUFFLE9BQU87WUFDbkQsT0FBTztRQUNYLElBQUksQ0FBQyxRQUFRLENBQUMsSUFBSSxFQUFFLENBQUM7SUFDekIsQ0FBQztDQUVKO0FBZEQsZ0RBY0MifQ==","assetPath":"Assets/Scripts/ColliderEnter_AnimationPlayer.ts","manifest":{"properties":[],"name":"ColliderEnter_AnimationPlayer","description":""},"isCompiled":true}'
+  typescriptHash: 66e7c7d8f3b1cad1195d624ca5698215
+  onlyWriteTrigger: 0

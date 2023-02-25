@@ -1,0 +1,37 @@
+fileFormatVersion: 2
+guid: 0c5b78dcb6be7434399e769d21b6c601
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Character_Controller_1 = require(\"ZEPETO.Character.Controller\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst PlayerSync_1 = require(\"../Multi/Player/PlayerSync\");\r\nclass
+    TouchOut extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    OnTriggerEnter(coll)
+    {\r\n        if (!coll.transform.GetComponent($typeof(PlayerSync_1.default))?.isLocal)\r\n           
+    return;\r\n        console.log(\"die!!!\");\r\n        const player = coll.GetComponent($typeof(PlayerSync_1.default));\r\n       
+    this.StartCoroutine(this.DieCoroutine(player));\r\n    }\r\n    *DieCoroutine(player)
+    {\r\n        const animator = player.transform.GetComponentInChildren($typeof(UnityEngine_1.Animator));\r\n       
+    const character = player.zepetoPlayer.character;\r\n        animator.SetInteger(\"State\",
+    109);\r\n        animator.SetInteger(\"LandingState\", 0);\r\n        character.StateMachine.Stop();\r\n       
+    yield new UnityEngine_1.WaitForSeconds(1);\r\n        character.StateMachine.Start(ZEPETO_Character_Controller_1.CharacterState.Idle);\r\n       
+    ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character.Teleport(this.spawnPoint.position,
+    UnityEngine_1.Quaternion.identity);\r\n    }\r\n}\r\nexports.default = TouchOut;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVG91Y2hPdXQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJUb3VjaE91dC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUF3RjtBQUN4Riw2RUFBNEU7QUFDNUUsaURBQXFEO0FBQ3JELDJEQUFvRDtBQUVwRCxNQUFxQixRQUFTLFNBQVEscUNBQXFCO0lBSXZELGNBQWMsQ0FBQyxJQUFjO1FBQ3pCLElBQUksQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLFlBQVksU0FBQyxvQkFBVSxFQUFHLEVBQUUsT0FBTztZQUNuRCxPQUFPO1FBQ1gsT0FBTyxDQUFDLEdBQUcsQ0FBQyxRQUFRLENBQUMsQ0FBQztRQUV0QixNQUFNLE1BQU0sR0FBRyxJQUFJLENBQUMsWUFBWSxTQUFDLG9CQUFVLEVBQUcsQ0FBQztRQUMvQyxJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQztJQUVuRCxDQUFDO0lBRU8sQ0FBQyxZQUFZLENBQUMsTUFBa0I7UUFFcEMsTUFBTSxRQUFRLEdBQUcsTUFBTSxDQUFDLFNBQVMsQ0FBQyxzQkFBc0IsU0FBQyxzQkFBUSxFQUFHLENBQUM7UUFDckUsTUFBTSxTQUFTLEdBQUcsTUFBTSxDQUFDLFlBQVksQ0FBQyxTQUFTLENBQUM7UUFFaEQsUUFBUSxDQUFDLFVBQVUsQ0FBQyxPQUFPLEVBQUUsR0FBRyxDQUFDLENBQUM7UUFDbEMsUUFBUSxDQUFDLFVBQVUsQ0FBQyxjQUFjLEVBQUUsQ0FBQyxDQUFDLENBQUM7UUFDdkMsU0FBUyxDQUFDLFlBQVksQ0FBQyxJQUFJLEVBQUUsQ0FBQztRQUU5QixNQUFNLElBQUksNEJBQWMsQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUU1QixTQUFTLENBQUMsWUFBWSxDQUFDLEtBQUssQ0FBQyw0Q0FBYyxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQ2xELDJDQUFhLENBQUMsUUFBUSxDQUFDLFdBQVcsQ0FBQyxZQUFZLENBQUMsU0FBUyxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLFFBQVEsRUFBRSx3QkFBVSxDQUFDLFFBQVEsQ0FBQyxDQUFDO0lBQ3RILENBQUM7Q0FFSjtBQTdCRCwyQkE2QkMifQ==","assetPath":"Assets/Scripts/TouchOut.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"spawnPoint","type":"UnityEngine.Transform","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"TouchOut","description":""},"isCompiled":true}'
+  typescriptHash: 53252fbeb74dd47e54bc0739ea0d2881
+  onlyWriteTrigger: 0

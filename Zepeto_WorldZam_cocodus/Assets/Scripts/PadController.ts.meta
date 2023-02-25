@@ -1,0 +1,35 @@
+fileFormatVersion: 2
+guid: 1bbf865149e5ccd4b8083f674b995eef
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    ZEPETO_Character_Controller_1 = require(\\\"ZEPETO.Character.Controller\\\");\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst TouchPadUI_1 = require(\\\"./TouchPadUI\\\");\\r\\n//
+    local player\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\\r\\nclass PadController extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    Start() {\\r\\n        // \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u0435\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n        var myJoyPad = UnityEngine_1.Object.Instantiate(ZEPETO_Character_Controller_1.ZepetoPlayers.instance.controllerData.horizontalController);\\r\\n       
+    this.padUI = myJoyPad.GetComponent($typeof(TouchPadUI_1.default));\\r\\n    }\\r\\n   
+    OnTriggerEnter(Coll) {\\r\\n        if (Coll.CompareTag(\\\"Sofa\\\")) {\\r\\n           
+    this.sofaPos = Coll.transform;\\r\\n            this.padUI.IconTrigger();\\r\\n       
+    }\\r\\n    }\\r\\n    OnTriggerExit(Coll) {\\r\\n        if (Coll.CompareTag(\\\"Sofa\\\"))
+    {\\r\\n            this.sofaPos = null;\\r\\n            this.padUI.IconTrigger();\\r\\n       
+    }\\r\\n    }\\r\\n}\\r\\nexports.default = PadController;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUGFkQ29udHJvbGxlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlBhZENvbnRyb2xsZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFDQSw2Q0FBc0U7QUFDdEUsNkVBQTREO0FBQzVELGlEQUFxRDtBQUNyRCw2Q0FBc0M7QUFFdEMsc0JBQXNCO0FBQ3RCLE1BQXFCLGFBQWMsU0FBUSxxQ0FBcUI7SUFLNUQsS0FBSztRQUNELGVBQWU7UUFDZixJQUFJLFFBQVEsR0FBRyxvQkFBTSxDQUFDLFdBQVcsQ0FBYSwyQ0FBYSxDQUFDLFFBQVEsQ0FBQyxjQUFjLENBQUMsb0JBQW9CLENBQUMsQ0FBQztRQUMxRyxJQUFJLENBQUMsS0FBSyxHQUFHLFFBQVEsQ0FBQyxZQUFZLFNBQUMsb0JBQVUsRUFBRyxDQUFDO0lBQ3JELENBQUM7SUFFRCxjQUFjLENBQUMsSUFBYztRQUN6QixJQUFJLElBQUksQ0FBQyxVQUFVLENBQUMsTUFBTSxDQUFDLEVBQUU7WUFDekIsSUFBSSxDQUFDLE9BQU8sR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDO1lBQzlCLElBQUksQ0FBQyxLQUFLLENBQUMsV0FBVyxFQUFFLENBQUM7U0FDNUI7SUFDTCxDQUFDO0lBRUQsYUFBYSxDQUFDLElBQWM7UUFDeEIsSUFBSSxJQUFJLENBQUMsVUFBVSxDQUFDLE1BQU0sQ0FBQyxFQUFFO1lBQ3pCLElBQUksQ0FBQyxPQUFPLEdBQUcsSUFBSSxDQUFDO1lBQ3BCLElBQUksQ0FBQyxLQUFLLENBQUMsV0FBVyxFQUFFLENBQUM7U0FDNUI7SUFDTCxDQUFDO0NBQ0o7QUF4QkQsZ0NBd0JDIn0=\",\"assetPath\":\"Assets/Scripts/PadController.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"sofaPos\",\"type\":\"UnityEngine.Transform\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"PadController\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: fcf0b11dc528060127792d44d7451051
+  onlyWriteTrigger: 0

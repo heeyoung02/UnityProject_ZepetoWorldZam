@@ -1,0 +1,51 @@
+fileFormatVersion: 2
+guid: b1e0600261239c647bf5430eff89665a
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    ZEPETO_Character_Controller_1 = require(\\\"ZEPETO.Character.Controller\\\");\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst PlayerSync_1 = require(\\\"../Multi/Player/PlayerSync\\\");\\r\\nconst
+    PadController_1 = require(\\\"./PadController\\\");\\r\\n// touchpad UI\uFFFD\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\\r\\nclass TouchPadUI extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\\r\\n    constructor() {\\r\\n        super(...arguments);\\r\\n        this.isSitting
+    = false;\\r\\n    }\\r\\n    Start() {\\r\\n        const player = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character.GetComponent($typeof(PlayerSync_1.default));\\r\\n       
+    // \uFFFD\u0271\uFFFD\uFFFD\u01B0 \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD
+    \uFFFD\u033A\uFFFD\u01AE\\r\\n        this.sitIcon.onClick.AddListener(() =>
+    {\\r\\n            if (!this.isSitting)\\r\\n                this.SitDown(player);\\r\\n           
+    else\\r\\n                this.StandUp(player);\\r\\n        });\\r\\n    }\\r\\n   
+    // \uFFFD\u0271\uFFFD\\r\\n    SitDown(player) {\\r\\n        this.isSitting
+    = true;\\r\\n        const sofaPos = player.GetComponent($typeof(PadController_1.default)).sofaPos;
+    // player\uFFFD\uFFFD trigger\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD transform\\r\\n       
+    const sofaPosForward = sofaPos.rotation.eulerAngles;\\r\\n        const eulerAngle
+    = new UnityEngine_1.Vector3(sofaPosForward.x, (sofaPosForward.y - 180), sofaPosForward.z);
+    // y\uFFFD\u07B1\u06FF\uFFFD\uFFFD\uFFFD -180\uFFFD\u063E\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\u0676\uFFFD\\r\\n       
+    player.transform.rotation = UnityEngine_1.Quaternion.Euler(eulerAngle);\\r\\n       
+    player.GetComponentInChildren($typeof(UnityEngine_1.Animator)).SetBool(\\\"isSitting\\\",
+    true); // \uFFFD\u0271\uFFFD \uFFFD\u05B4\u03F8\uFFFD\uFFFD\u033C\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n       
+    player.zepetoPlayer.character.StateMachine.Stop(); // \uFFFD\uFFFD\uFFFD\u06F8\uFFFD\uFFFD\u07F1\uFFFD\\r\\n   
+    }\\r\\n    StandUp(player) {\\r\\n        this.isSitting = false;\\r\\n       
+    player.GetComponentInChildren($typeof(UnityEngine_1.Animator)).SetBool(\\\"isSitting\\\",
+    false);\\r\\n        player.zepetoPlayer.character.StateMachine.Start(ZEPETO_Character_Controller_1.CharacterState.Idle);
+    // \uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u03F0\uFFFD\uFFFD\u03F1\uFFFD\\r\\n   
+    }\\r\\n    IconTrigger() {\\r\\n        if (!this.sitIcon.gameObject.activeSelf)\\r\\n           
+    this.sitIcon.gameObject.SetActive(true);\\r\\n        else\\r\\n            this.sitIcon.gameObject.SetActive(false);\\r\\n   
+    }\\r\\n}\\r\\nexports.default = TouchPadUI;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVG91Y2hQYWRVSS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlRvdWNoUGFkVUkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSw2Q0FBNkY7QUFFN0YsNkVBQTRFO0FBQzVFLGlEQUFxRDtBQUNyRCwyREFBb0Q7QUFDcEQsbURBQTRDO0FBRTVDLHFCQUFxQjtBQUNyQixNQUFxQixVQUFXLFNBQVEscUNBQXFCO0lBQTdEOztRQUdZLGNBQVMsR0FBUyxLQUFLLENBQUM7SUF1Q3BDLENBQUM7SUFyQ0csS0FBSztRQUNELE1BQU0sTUFBTSxHQUFHLDJDQUFhLENBQUMsUUFBUSxDQUFDLFdBQVcsQ0FBQyxZQUFZLENBQUMsU0FBUyxDQUFDLFlBQVksU0FBQyxvQkFBVSxFQUFHLENBQUM7UUFDcEcsd0JBQXdCO1FBQ3hCLElBQUksQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDbEMsSUFBSSxDQUFDLElBQUksQ0FBQyxTQUFTO2dCQUNmLElBQUksQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLENBQUM7O2dCQUVyQixJQUFJLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxDQUFDO1FBQzdCLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQztJQUVELE1BQU07SUFDRSxPQUFPLENBQUMsTUFBa0I7UUFDOUIsSUFBSSxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUM7UUFDdEIsTUFBTSxPQUFPLEdBQUcsTUFBTSxDQUFDLFlBQVksU0FBQyx1QkFBYSxHQUFJLE9BQU8sQ0FBQyxDQUFDLG9DQUFvQztRQUNsRyxNQUFNLGNBQWMsR0FBRyxPQUFPLENBQUMsUUFBUSxDQUFDLFdBQVcsQ0FBQztRQUNwRCxNQUFNLFVBQVUsR0FBRyxJQUFJLHFCQUFPLENBQUMsY0FBYyxDQUFDLENBQUMsRUFBRSxDQUFDLGNBQWMsQ0FBQyxDQUFDLEdBQUcsR0FBRyxDQUFDLEVBQUUsY0FBYyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMseUJBQXlCO1FBQ3ZILE1BQU0sQ0FBQyxTQUFTLENBQUMsUUFBUSxHQUFHLHdCQUFVLENBQUMsS0FBSyxDQUFDLFVBQVUsQ0FBQyxDQUFDO1FBRXpELE1BQU0sQ0FBQyxzQkFBc0IsU0FBQyxzQkFBUSxHQUFJLE9BQU8sQ0FBQyxXQUFXLEVBQUUsSUFBSSxDQUFDLENBQUMsQ0FBQyxtQkFBbUI7UUFDekYsTUFBTSxDQUFDLFlBQVksQ0FBQyxTQUFTLENBQUMsWUFBWSxDQUFDLElBQUksRUFBRSxDQUFDLENBQUMsV0FBVztJQUNsRSxDQUFDO0lBRU8sT0FBTyxDQUFDLE1BQWtCO1FBQzlCLElBQUksQ0FBQyxTQUFTLEdBQUcsS0FBSyxDQUFDO1FBQ3ZCLE1BQU0sQ0FBQyxzQkFBc0IsU0FBQyxzQkFBUSxHQUFJLE9BQU8sQ0FBQyxXQUFXLEVBQUUsS0FBSyxDQUFDLENBQUM7UUFDdEUsTUFBTSxDQUFDLFlBQVksQ0FBQyxTQUFTLENBQUMsWUFBWSxDQUFDLEtBQUssQ0FBQyw0Q0FBYyxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsa0JBQWtCO0lBQzdGLENBQUM7SUFHTSxXQUFXO1FBQ2QsSUFBSSxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsVUFBVSxDQUFDLFVBQVU7WUFDbkMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDOztZQUV4QyxJQUFJLENBQUMsT0FBTyxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7SUFDakQsQ0FBQztDQUVKO0FBMUNELDZCQTBDQyJ9\",\"assetPath\":\"Assets/Scripts/TouchPadUI.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.UI\",\"name\":\"sitIcon\",\"type\":\"UnityEngine.UI.Button\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"TouchPadUI\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 8f54851fb04e85ca4ebeaed6f03471fa
+  onlyWriteTrigger: 0

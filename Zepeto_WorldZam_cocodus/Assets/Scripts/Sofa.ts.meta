@@ -1,0 +1,28 @@
+fileFormatVersion: 2
+guid: 4ec1b68b3392d3f4397ccd906451c4a2
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    PlayerSync_1 = require(\"../Multi/Player/PlayerSync\");\r\nclass Sofa extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start() {\r\n    }\r\n    OnTriggerEnter(coll)
+    {\r\n        if (!coll.transform.GetComponent($typeof(PlayerSync_1.default))?.isLocal)\r\n           
+    return;\r\n    }\r\n}\r\nexports.default = Sofa;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU29mYS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNvZmEudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFHQSxpREFBcUQ7QUFDckQsMkRBQW9EO0FBRXBELE1BQXFCLElBQUssU0FBUSxxQ0FBcUI7SUFJbkQsS0FBSztJQUNMLENBQUM7SUFFRCxjQUFjLENBQUMsSUFBYztRQUN6QixJQUFJLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxZQUFZLFNBQUMsb0JBQVUsRUFBRyxFQUFFLE9BQU87WUFDbkQsT0FBTztJQUVmLENBQUM7Q0FFSjtBQWJELHVCQWFDIn0=","assetPath":"Assets/Scripts/Sofa.ts","manifest":{"properties":[],"name":"Sofa","description":""},"isCompiled":true}'
+  typescriptHash: 68ccb851ed8f27e08a5000dfd175bafa
+  onlyWriteTrigger: 0

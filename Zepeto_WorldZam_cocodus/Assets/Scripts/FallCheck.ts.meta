@@ -1,0 +1,36 @@
+fileFormatVersion: 2
+guid: 28ef2f801c15b424e9a3729af9bada85
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    ZEPETO_Character_Controller_1 = require(\\\"ZEPETO.Character.Controller\\\");\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst PlayerSync_1 = require(\\\"../Multi/Player/PlayerSync\\\");\\r\\nclass
+    FallCheck extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    OnTriggerEnter(coll)
+    {\\r\\n        if (!coll.transform.GetComponent($typeof(PlayerSync_1.default))?.isLocal)\\r\\n           
+    return;\\r\\n        const localCharacter = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character;\\r\\n       
+    this.StartCoroutine(this.MoveSpawnPoint(localCharacter));\\r\\n    }\\r\\n   
+    *MoveSpawnPoint(player) {\\r\\n        yield new UnityEngine_1.WaitForSeconds(1);
+    // \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD 1\uFFFD\uFFFD \uFFFD\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u04B7\uFFFD \uFFFD\u06B7\uFFFD\uFFFD\uFFFD\u01AE(\uFFFD\u05B4\u03F8\uFFFD\uFFFD\u033C\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD)\\r\\n        player.Teleport(this.spawnPoint.position,
+    UnityEngine_1.Quaternion.identity);\\r\\n    }\\r\\n}\\r\\nexports.default =
+    FallCheck;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRmFsbENoZWNrLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiRmFsbENoZWNrLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQThFO0FBQzlFLDZFQUEyRjtBQUMzRixpREFBcUQ7QUFDckQsMkRBQW9EO0FBRXBELE1BQXFCLFNBQVUsU0FBUSxxQ0FBcUI7SUFJaEQsY0FBYyxDQUFDLElBQWM7UUFDakMsSUFBSSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsWUFBWSxTQUFDLG9CQUFVLEVBQUcsRUFBRSxPQUFPO1lBQ25ELE9BQU87UUFDWCxNQUFNLGNBQWMsR0FBRywyQ0FBYSxDQUFDLFFBQVEsQ0FBQyxXQUFXLENBQUMsWUFBWSxDQUFDLFNBQVMsQ0FBQztRQUNqRixJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxjQUFjLENBQUMsY0FBYyxDQUFDLENBQUMsQ0FBQztJQUM3RCxDQUFDO0lBRU8sQ0FBQyxjQUFjLENBQUMsTUFBdUI7UUFDM0MsTUFBTSxJQUFJLDRCQUFjLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxxREFBcUQ7UUFDbEYsTUFBTSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLFFBQVEsRUFBRSx3QkFBVSxDQUFDLFFBQVEsQ0FBQyxDQUFDO0lBQ25FLENBQUM7Q0FFSjtBQWhCRCw0QkFnQkMifQ==\",\"assetPath\":\"Assets/Scripts/FallCheck.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"spawnPoint\",\"type\":\"UnityEngine.Transform\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"FallCheck\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 35339ce06f18bfd62a7db43fde338bdc
+  onlyWriteTrigger: 0

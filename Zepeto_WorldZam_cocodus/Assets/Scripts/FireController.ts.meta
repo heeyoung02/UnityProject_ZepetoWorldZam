@@ -1,0 +1,30 @@
+fileFormatVersion: 2
+guid: dc7256dca6a4f5548a7296fa571ce84f
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst PlayerSync_1 = require(\"../Multi/Player/PlayerSync\");\r\nclass
+    FireController extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start()
+    {\r\n        this.particles = this.GetComponentsInChildren($typeof(UnityEngine_1.ParticleSystem));\r\n   
+    }\r\n    OnTriggerEnter(coll) {\r\n        if (!coll.transform.GetComponent($typeof(PlayerSync_1.default))?.isLocal)\r\n           
+    return;\r\n        this.particles.forEach((particle) => {\r\n            particle.Play();\r\n       
+    });\r\n    }\r\n}\r\nexports.default = FireController;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRmlyZUNvbnRyb2xsZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJGaXJlQ29udHJvbGxlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUF1RDtBQUN2RCxpREFBcUQ7QUFDckQsMkRBQW9EO0FBRXBELE1BQXFCLGNBQWUsU0FBUSxxQ0FBcUI7SUFJN0QsS0FBSztRQUNELElBQUksQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDLHVCQUF1QixTQUFDLDRCQUFjLEVBQUcsQ0FBQztJQUNwRSxDQUFDO0lBRUQsY0FBYyxDQUFDLElBQWM7UUFDekIsSUFBSSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsWUFBWSxTQUFDLG9CQUFVLEVBQUcsRUFBRSxPQUFPO1lBQ25ELE9BQU87UUFDWCxJQUFJLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQyxDQUFDLFFBQXdCLEVBQUUsRUFBRTtZQUNoRCxRQUFRLENBQUMsSUFBSSxFQUFFLENBQUM7UUFDcEIsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDO0NBRUo7QUFoQkQsaUNBZ0JDIn0=","assetPath":"Assets/Scripts/FireController.ts","manifest":{"properties":[],"name":"FireController","description":""},"isCompiled":true}'
+  typescriptHash: 31dc0d003313eacbd2f0277b63c6596b
+  onlyWriteTrigger: 0

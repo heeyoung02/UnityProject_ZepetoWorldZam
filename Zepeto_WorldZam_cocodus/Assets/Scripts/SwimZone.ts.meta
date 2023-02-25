@@ -1,0 +1,40 @@
+fileFormatVersion: 2
+guid: 68ebcfc6ae45f8f459ebf090143cadda
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst PlayerSync_1 = require(\\\"../Multi/Player/PlayerSync\\\");\\r\\nclass
+    SwimZone extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor()
+    {\\r\\n        super(...arguments);\\r\\n        this.additionalRunSpeed = -1;\\r\\n   
+    }\\r\\n    OnTriggerEnter(coll) {\\r\\n        if (!coll.transform.GetComponent($typeof(PlayerSync_1.default))?.isLocal)\\r\\n           
+    return;\\r\\n        // \uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\u05B4\u03F8\uFFFD\uFFFD\u033C\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD
+    \uFFFD\uFFFD\u022F\\r\\n        const animator = coll.transform.GetComponentInChildren($typeof(UnityEngine_1.Animator));\\r\\n       
+    animator.SetBool(\\\"isSwimming\\\", true);\\r\\n        // \uFFFD\u04F5\uFFFD
+    \uFFFD\uFFFD\uFFFD\u07F1\uFFFD\\r\\n        const zepCharacter = coll.GetComponent($typeof(PlayerSync_1.default)).zepetoPlayer.character;\\r\\n       
+    zepCharacter.additionalRunSpeed = this.additionalRunSpeed;\\r\\n    }\\r\\n   
+    OnTriggerExit(coll) {\\r\\n        if (!coll.transform.GetComponent($typeof(PlayerSync_1.default))?.isLocal)\\r\\n           
+    return;\\r\\n        // \uFFFD\u05B4\u03F8\uFFFD\uFFFD\u033C\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\r\\n       
+    coll.transform.GetComponentInChildren($typeof(UnityEngine_1.Animator)).SetBool(\\\"isSwimming\\\",
+    false);\\r\\n        // \uFFFD\u04F5\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\r\\n       
+    const zepCharacter = coll.GetComponent($typeof(PlayerSync_1.default)).zepetoPlayer.character;\\r\\n       
+    zepCharacter.additionalRunSpeed = 0;\\r\\n    }\\r\\n}\\r\\nexports.default =
+    SwimZone;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU3dpbVpvbmUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTd2ltWm9uZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUFpRDtBQUNqRCxpREFBcUQ7QUFDckQsMkRBQW9EO0FBRXBELE1BQXFCLFFBQVMsU0FBUSxxQ0FBcUI7SUFBM0Q7O1FBRThCLHVCQUFrQixHQUFXLENBQUMsQ0FBQyxDQUFDO0lBd0I5RCxDQUFDO0lBckJHLGNBQWMsQ0FBQyxJQUFjO1FBQ3pCLElBQUksQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLFlBQVksU0FBQyxvQkFBVSxFQUFHLEVBQUUsT0FBTztZQUNuRCxPQUFPO1FBQ1gsdUJBQXVCO1FBQ3ZCLE1BQU0sUUFBUSxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUMsc0JBQXNCLFNBQUMsc0JBQVEsRUFBRyxDQUFDO1FBQ25FLFFBQVEsQ0FBQyxPQUFPLENBQUMsWUFBWSxFQUFFLElBQUksQ0FBQyxDQUFDO1FBQ3JDLFlBQVk7UUFDWixNQUFNLFlBQVksR0FBRyxJQUFJLENBQUMsWUFBWSxTQUFDLG9CQUFVLEdBQUksWUFBWSxDQUFDLFNBQVMsQ0FBQztRQUM1RSxZQUFZLENBQUMsa0JBQWtCLEdBQUcsSUFBSSxDQUFDLGtCQUFrQixDQUFDO0lBQzlELENBQUM7SUFFRCxhQUFhLENBQUMsSUFBYztRQUN4QixJQUFJLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxZQUFZLFNBQUMsb0JBQVUsRUFBRyxFQUFFLE9BQU87WUFDbkQsT0FBTztRQUNYLGtCQUFrQjtRQUNsQixJQUFJLENBQUMsU0FBUyxDQUFDLHNCQUFzQixTQUFDLHNCQUFRLEdBQUksT0FBTyxDQUFDLFlBQVksRUFBRSxLQUFLLENBQUMsQ0FBQztRQUMvRSxjQUFjO1FBQ2QsTUFBTSxZQUFZLEdBQUcsSUFBSSxDQUFDLFlBQVksU0FBQyxvQkFBVSxHQUFJLFlBQVksQ0FBQyxTQUFTLENBQUM7UUFDNUUsWUFBWSxDQUFDLGtCQUFrQixHQUFHLENBQUMsQ0FBQztJQUN4QyxDQUFDO0NBRUo7QUExQkQsMkJBMEJDIn0=\",\"assetPath\":\"Assets/Scripts/SwimZone.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"mscorlib\",\"name\":\"additionalRunSpeed\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]}],\"name\":\"SwimZone\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: ca3c5074b83beb3fd60e2e1c63fbd157
+  onlyWriteTrigger: 0
