@@ -21,6 +21,8 @@ export default class extends Sandbox {
             animationParam.FallSpeed = message.animationParam.FallSpeed;
             animationParam.Acceleration = message.animationParam.Acceleration;
             animationParam.MoveProgress = message.animationParam.MoveProgress;
+            animationParam.isSitting = message.animationParam.isSitting;
+            animationParam.isSwimming = message.animationParam.isSwimming;
             player!.animationParam = animationParam;
 
             player!.gestureName = message.gestureName; // Gesture Sync

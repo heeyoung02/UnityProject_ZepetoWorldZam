@@ -49,5 +49,7 @@ declare module "ZEPETO.Multiplay.Schema" {
 		FallSpeed: number;
 		Acceleration: number;
 		MoveProgress: number;
+		isSwimming: boolean;
+		isSitting: boolean;
 	}
 }

@@ -48,6 +48,8 @@ export default class PlayerSync extends ZepetoScriptBehaviour {
         this.m_animator.SetFloat("FallSpeed", animationParam.FallSpeed);
         this.m_animator.SetFloat("Acceleration", animationParam.Acceleration);
         this.m_animator.SetFloat("MoveProgress", animationParam.MoveProgress);
+        this.m_animator.SetBool("isSwimming", animationParam.isSwimming);
+        this.m_animator.SetBool("isSitting", animationParam.isSitting);
         
         //sync gesture
         if (animationParam.State == CharacterState.Gesture && this.UseZepetoGestureAPI || this.GetAnimationClipFromResources ) { 
@@ -128,6 +130,8 @@ export default class PlayerSync extends ZepetoScriptBehaviour {
                 animationParam.Add("FallSpeed", this.m_animator.GetFloat("FallSpeed"));
                 animationParam.Add("Acceleration", this.m_animator.GetFloat("Acceleration"));
                 animationParam.Add("MoveProgress", this.m_animator.GetFloat("MoveProgress"));
+                animationParam.Add("isSwimming", this.m_animator.GetBool("isSwimming"));
+                animationParam.Add("isSitting", this.m_animator.GetBool("isSitting"));
                 data.Add("animationParam", animationParam.GetObject());
 
                 if (state === CharacterState.Gesture && (this.GetAnimationClipFromResources || this.UseZepetoGestureAPI)) {
