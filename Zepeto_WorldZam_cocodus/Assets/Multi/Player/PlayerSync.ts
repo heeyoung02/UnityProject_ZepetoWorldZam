@@ -2,7 +2,7 @@ import {ZepetoScriptBehaviour} from 'ZEPETO.Script'
 import {RoomBase, RoomData} from 'ZEPETO.Multiplay';
 import {ZepetoWorldMultiplay} from "ZEPETO.World";
 import {CharacterJumpState, CharacterMoveState, CharacterState, ZepetoPlayer} from 'ZEPETO.Character.Controller';
-import { RuntimeAnimatorController, Object, Animator, AnimatorClipInfo, Resources,CharacterController, AnimationClip, WaitForSeconds, AnimatorOverrideController, Mathf} from 'UnityEngine';
+import { Object, Animator, AnimatorClipInfo, Resources, AnimationClip, WaitForSeconds, Mathf} from 'UnityEngine';
 import {Player} from 'ZEPETO.Multiplay.Schema';
 import ZepetoPlayersManager from './ZepetoPlayersManager';
 import TransformSyncHelper from '../TransformSyncHelper';

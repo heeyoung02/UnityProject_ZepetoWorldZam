@@ -1,0 +1,47 @@
+fileFormatVersion: 2
+guid: b209e2189b5df444cb378afe756824b4
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    UnityEngine_UI_1 = require(\\\"UnityEngine.UI\\\");\\r\\nconst ZEPETO_Character_Controller_1
+    = require(\\\"ZEPETO.Character.Controller\\\");\\r\\nconst ZEPETO_Script_1 =
+    require(\\\"ZEPETO.Script\\\");\\r\\nconst PlayerSync_1 = require(\\\"../Multi/Player/PlayerSync\\\");\\r\\nclass
+    SitButton extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor()
+    {\\r\\n        super(...arguments);\\r\\n        this.isSitting = false;\\r\\n   
+    }\\r\\n    Start() {\\r\\n        const player = ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character.GetComponent($typeof(PlayerSync_1.default));\\r\\n       
+    this.sitButton = this.GetComponent($typeof(UnityEngine_UI_1.Button));\\r\\n       
+    this.sitButton.onClick.AddListener(() => {\\r\\n            this.SitBtnClick(player);\\r\\n       
+    });\\r\\n    }\\r\\n    SitBtnClick(player) {\\r\\n        if (!this.isSitting)\\r\\n           
+    this.SitDown(player);\\r\\n        else\\r\\n            this.StandUp(player);\\r\\n   
+    }\\r\\n    // \uFFFD\u0271\uFFFD\\r\\n    SitDown(player) {\\r\\n        this.isSitting
+    = true;\\r\\n        const sofaPosForward = this.sofaTransform.rotation.eulerAngles;\\r\\n       
+    const eulerAngle = new UnityEngine_1.Vector3(sofaPosForward.x, (sofaPosForward.y
+    - 180), sofaPosForward.z); // y\uFFFD\u07B1\u06FF\uFFFD\uFFFD\uFFFD -180\uFFFD\u063E\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\u0676\uFFFD\\r\\n        player.transform.rotation =
+    UnityEngine_1.Quaternion.Euler(eulerAngle);\\r\\n        player.GetComponentInChildren($typeof(UnityEngine_1.Animator)).SetBool(\\\"isSitting\\\",
+    true); // \uFFFD\u0271\uFFFD \uFFFD\u05B4\u03F8\uFFFD\uFFFD\u033C\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n       
+    player.zepetoPlayer.character.StateMachine.Stop(); // \uFFFD\uFFFD\uFFFD\u06F8\uFFFD\uFFFD\u07F1\uFFFD\\r\\n   
+    }\\r\\n    // \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n    StandUp(player) {\\r\\n       
+    this.isSitting = false;\\r\\n        player.GetComponentInChildren($typeof(UnityEngine_1.Animator)).SetBool(\\\"isSitting\\\",
+    false);\\r\\n        player.zepetoPlayer.character.StateMachine.Start(ZEPETO_Character_Controller_1.CharacterState.Idle);
+    // \uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u03F0\uFFFD\uFFFD\u03F1\uFFFD\\r\\n   
+    }\\r\\n}\\r\\nexports.default = SitButton;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2l0QnV0dG9uLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU2l0QnV0dG9uLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQXVFO0FBQ3ZFLG1EQUF3QztBQUN4Qyw2RUFBNEU7QUFDNUUsaURBQXFEO0FBQ3JELDJEQUFvRDtBQUVwRCxNQUFxQixTQUFVLFNBQVEscUNBQXFCO0lBQTVEOztRQUVZLGNBQVMsR0FBUyxLQUFLLENBQUM7SUFxQ3BDLENBQUM7SUEvQkcsS0FBSztRQUNELE1BQU0sTUFBTSxHQUFHLDJDQUFhLENBQUMsUUFBUSxDQUFDLFdBQVcsQ0FBQyxZQUFZLENBQUMsU0FBUyxDQUFDLFlBQVksU0FBQyxvQkFBVSxFQUFHLENBQUM7UUFDcEcsSUFBSSxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUMsWUFBWSxTQUFDLHVCQUFNLEVBQUcsQ0FBQztRQUM3QyxJQUFJLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO1lBQ3BDLElBQUksQ0FBQyxXQUFXLENBQUMsTUFBTSxDQUFDLENBQUM7UUFDN0IsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDO0lBRU0sV0FBVyxDQUFDLE1BQWtCO1FBQ2pDLElBQUksQ0FBQyxJQUFJLENBQUMsU0FBUztZQUNmLElBQUksQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLENBQUM7O1lBRXJCLElBQUksQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLENBQUM7SUFDN0IsQ0FBQztJQUVELE1BQU07SUFDRSxPQUFPLENBQUMsTUFBa0I7UUFDOUIsSUFBSSxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUM7UUFDdEIsTUFBTSxjQUFjLEdBQUcsSUFBSSxDQUFDLGFBQWEsQ0FBQyxRQUFRLENBQUMsV0FBVyxDQUFDO1FBQy9ELE1BQU0sVUFBVSxHQUFHLElBQUkscUJBQU8sQ0FBQyxjQUFjLENBQUMsQ0FBQyxFQUFFLENBQUMsY0FBYyxDQUFDLENBQUMsR0FBRyxHQUFHLENBQUMsRUFBRSxjQUFjLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyx5QkFBeUI7UUFDdkgsTUFBTSxDQUFDLFNBQVMsQ0FBQyxRQUFRLEdBQUcsd0JBQVUsQ0FBQyxLQUFLLENBQUMsVUFBVSxDQUFDLENBQUM7UUFDekQsTUFBTSxDQUFDLHNCQUFzQixTQUFDLHNCQUFRLEdBQUksT0FBTyxDQUFDLFdBQVcsRUFBRSxJQUFJLENBQUMsQ0FBQyxDQUFDLG1CQUFtQjtRQUN6RixNQUFNLENBQUMsWUFBWSxDQUFDLFNBQVMsQ0FBQyxZQUFZLENBQUMsSUFBSSxFQUFFLENBQUMsQ0FBQyxXQUFXO0lBQ2xFLENBQUM7SUFFRCxPQUFPO0lBQ0MsT0FBTyxDQUFDLE1BQWtCO1FBQzlCLElBQUksQ0FBQyxTQUFTLEdBQUcsS0FBSyxDQUFDO1FBQ3ZCLE1BQU0sQ0FBQyxzQkFBc0IsU0FBQyxzQkFBUSxHQUFJLE9BQU8sQ0FBQyxXQUFXLEVBQUUsS0FBSyxDQUFDLENBQUM7UUFDdEUsTUFBTSxDQUFDLFlBQVksQ0FBQyxTQUFTLENBQUMsWUFBWSxDQUFDLEtBQUssQ0FBQyw0Q0FBYyxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsa0JBQWtCO0lBQzdGLENBQUM7Q0FDSjtBQXZDRCw0QkF1Q0MifQ==\",\"assetPath\":\"Assets/Scripts/SitButton.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"sofaTransform\",\"type\":\"UnityEngine.Transform\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"HideInInspector\",\"args\":[]}]}],\"name\":\"SitButton\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 0ad565cb2dd37a74dc283ec34dd8f1bb
+  onlyWriteTrigger: 0

@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: 9cdfce46fef1448418b62125871e3d3c
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst PlayerSync_1 = require(\"../Multi/Player/PlayerSync\");\r\nconst
+    SoundManager_1 = require(\"./SoundManager\");\r\nclass BGMChange extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    OnTriggerEnter(coll) {\r\n        if (!coll.transform.GetComponent($typeof(PlayerSync_1.default))?.isLocal)\r\n           
+    return;\r\n        SoundManager_1.default.instance.BGM_Start(this.audioClip);\r\n   
+    }\r\n}\r\nexports.default = BGMChange;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQkdNQ2hhbmdlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiQkdNQ2hhbmdlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQWtEO0FBQ2xELGlEQUFxRDtBQUNyRCwyREFBb0Q7QUFDcEQsaURBQTBDO0FBRTFDLE1BQXFCLFNBQVUsU0FBUSxxQ0FBcUI7SUFJeEQsY0FBYyxDQUFDLElBQWM7UUFDekIsSUFBSSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsWUFBWSxTQUFDLG9CQUFVLEVBQUcsRUFBRSxPQUFPO1lBQ25ELE9BQU87UUFDWCxzQkFBWSxDQUFDLFFBQVEsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDO0lBQ3BELENBQUM7Q0FFSjtBQVZELDRCQVVDIn0=","assetPath":"Assets/Scripts/BGMChange.ts","manifest":{"properties":[{"assembly":"UnityEngine.AudioModule","name":"audioClip","type":"UnityEngine.AudioClip","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"BGMChange","description":""},"isCompiled":true}'
+  typescriptHash: bdbe8334947ba8cbb466ffbae094a9b0
+  onlyWriteTrigger: 0

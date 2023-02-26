@@ -19,10 +19,13 @@ ScriptedImporter:
   WrapperFilters: []
   wrapperOutputDirectory: Generated
   compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
-    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
-    PlayerSync_1 = require(\"../Multi/Player/PlayerSync\");\r\nclass Sofa extends
-    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start() {\r\n    }\r\n    OnTriggerEnter(coll)
-    {\r\n        if (!coll.transform.GetComponent($typeof(PlayerSync_1.default))?.isLocal)\r\n           
-    return;\r\n    }\r\n}\r\nexports.default = Sofa;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU29mYS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNvZmEudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFHQSxpREFBcUQ7QUFDckQsMkRBQW9EO0FBRXBELE1BQXFCLElBQUssU0FBUSxxQ0FBcUI7SUFJbkQsS0FBSztJQUNMLENBQUM7SUFFRCxjQUFjLENBQUMsSUFBYztRQUN6QixJQUFJLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxZQUFZLFNBQUMsb0JBQVUsRUFBRyxFQUFFLE9BQU87WUFDbkQsT0FBTztJQUVmLENBQUM7Q0FFSjtBQWJELHVCQWFDIn0=","assetPath":"Assets/Scripts/Sofa.ts","manifest":{"properties":[],"name":"Sofa","description":""},"isCompiled":true}'
-  typescriptHash: 68ccb851ed8f27e08a5000dfd175bafa
+    { value: true });\r\nconst UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst PlayerSync_1 = require(\"../Multi/Player/PlayerSync\");\r\nconst
+    SitButton_1 = require(\"./SitButton\");\r\nclass Sofa extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    OnTriggerEnter(coll) {\r\n        if (!coll.transform.GetComponent($typeof(PlayerSync_1.default))?.isLocal)\r\n           
+    return;\r\n        this.sitIcon.gameObject.SetActive(true);\r\n        this.sitIcon.GetComponent($typeof(SitButton_1.default)).sofaTransform
+    = this.transform;\r\n    }\r\n    OnTriggerExit(coll) {\r\n        if (!coll.transform.GetComponent($typeof(PlayerSync_1.default))?.isLocal)\r\n           
+    return;\r\n        this.sitIcon.gameObject.SetActive(false);\r\n        this.sitIcon.GetComponent($typeof(SitButton_1.default)).sofaTransform
+    = null;\r\n    }\r\n}\r\nexports.default = Sofa;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU29mYS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNvZmEudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFDQSxtREFBd0M7QUFDeEMsaURBQXFEO0FBQ3JELDJEQUFvRDtBQUNwRCwyQ0FBb0M7QUFFcEMsTUFBcUIsSUFBSyxTQUFRLHFDQUFxQjtJQUluRCxjQUFjLENBQUMsSUFBYztRQUN6QixJQUFJLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxZQUFZLFNBQUMsb0JBQVUsRUFBRyxFQUFFLE9BQU87WUFDbkQsT0FBTztRQUNYLElBQUksQ0FBQyxPQUFPLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUN4QyxJQUFJLENBQUMsT0FBTyxDQUFDLFlBQVksU0FBQyxtQkFBUyxHQUFJLGFBQWEsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDO0lBQzFFLENBQUM7SUFFRCxhQUFhLENBQUMsSUFBYztRQUN4QixJQUFJLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxZQUFZLFNBQUMsb0JBQVUsRUFBRyxFQUFFLE9BQU87WUFDbkQsT0FBTztRQUNYLElBQUksQ0FBQyxPQUFPLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUN6QyxJQUFJLENBQUMsT0FBTyxDQUFDLFlBQVksU0FBQyxtQkFBUyxHQUFJLGFBQWEsR0FBRyxJQUFJLENBQUM7SUFDaEUsQ0FBQztDQUNKO0FBakJELHVCQWlCQyJ9","assetPath":"Assets/Scripts/Sofa.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"sitIcon","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"Sofa","description":""},"isCompiled":true}'
+  typescriptHash: da02cc3c4d0da94b8c67693ef89bff5e
   onlyWriteTrigger: 0

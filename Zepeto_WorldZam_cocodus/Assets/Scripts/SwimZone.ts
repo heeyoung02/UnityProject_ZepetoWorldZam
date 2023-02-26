@@ -6,7 +6,6 @@ export default class SwimZone extends ZepetoScriptBehaviour {
 
     @SerializeField() private additionalRunSpeed: number = -1;
 
-
     OnTriggerEnter(coll: Collider) {
         if (!coll.transform.GetComponent<PlayerSync>()?.isLocal)
             return;

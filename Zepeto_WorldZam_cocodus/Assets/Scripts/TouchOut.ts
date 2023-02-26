@@ -10,11 +10,9 @@ export default class TouchOut extends ZepetoScriptBehaviour {
     OnTriggerEnter(coll: Collider) {
         if (!coll.transform.GetComponent<PlayerSync>()?.isLocal)
             return;
-        console.log("die!!!");
 
         const player = coll.GetComponent<PlayerSync>();
         this.StartCoroutine(this.DieCoroutine(player));
-
     }
 
     private *DieCoroutine(player: PlayerSync) {

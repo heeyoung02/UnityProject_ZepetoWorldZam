@@ -1,5 +1,5 @@
 import { Collider, Quaternion, Transform, WaitForSeconds } from 'UnityEngine';
-import { ZepetoCharacter, ZepetoPlayer, ZepetoPlayers } from 'ZEPETO.Character.Controller';
+import { ZepetoCharacter, ZepetoPlayers } from 'ZEPETO.Character.Controller';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import PlayerSync from '../Multi/Player/PlayerSync';
 

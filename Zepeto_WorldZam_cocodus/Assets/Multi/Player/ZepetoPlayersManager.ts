@@ -1,12 +1,11 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import {WorldService, ZepetoWorldMultiplay, Content, OfficialContentType, ZepetoWorldContent} from "ZEPETO.World";
 import {Room} from "ZEPETO.Multiplay";
-import {SpawnInfo, ZepetoPlayer, ZepetoPlayers} from 'ZEPETO.Character.Controller';
+import {SpawnInfo, ZepetoPlayers} from 'ZEPETO.Character.Controller';
 import {State, Player} from "ZEPETO.Multiplay.Schema";
-import {GameObject, Object, Quaternion, Vector3, WaitForSeconds} from "UnityEngine";
+import { GameObject, Object, WaitForSeconds} from "UnityEngine";
 import PlayerSync from './PlayerSync';
 import TransformSyncHelper, { PositionExtrapolationType, PositionInterpolationType } from '../TransformSyncHelper';
-import PadController from '../../Scripts/PadController';
 
 export enum ZepetoPlayerSpawnType {
     NoneSpawn,//Do not create players (플레이어 생성 x)
@@ -15,8 +14,6 @@ export enum ZepetoPlayerSpawnType {
     MultiplayerSpawnLater,// When you calling "ZepetoPlayers.instance.CreatePlayerWithUserId()" to another script (다른 스크립트에 "ZepetoPlayers.instance.CreatePlayerWithUserId()"를 호출할 때)
 }
 export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
-    // 패드컨트롤러
-    private padController: PadController;
 
     /** Options **/
     @Header("SpawnOption")
@@ -58,10 +55,6 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
     }
 
     private Start() {
-        // 터치패드컨트롤러 컴포넌트 부착
-        ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener(() => {
-            this.padController = ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character.gameObject.AddComponent<PadController>();
-        });
 
         switch (+this.ZepetoPlayerSpawnType){
             case ZepetoPlayerSpawnType.NoneSpawn:
@@ -139,6 +132,7 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
         if(isUseInjectSpeed) {
             playerStateSync.isUseInjectSpeed= true;
         }
+
     }
     
     public GestureAPIContents:Map<string,Content> =  new Map<string, Content>();
@@ -197,4 +191,5 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
         yield new WaitForSeconds(10);
         this.CreateAllPlayers();
     }
+
 }

@@ -1,0 +1,38 @@
+fileFormatVersion: 2
+guid: ac09b794fe7ec2340b0d2c711b2bb8ab
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass SoundManager extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    static get instance() {\r\n        if (this.m_instance === null) {\r\n           
+    this.m_instance = UnityEngine_1.GameObject.FindObjectOfType($typeof(SoundManager));\r\n           
+    if (this.m_instance === null) {\r\n                this.m_instance = new UnityEngine_1.GameObject(SoundManager.name).AddComponent($typeof(SoundManager));\r\n           
+    }\r\n        }\r\n        return this.m_instance;\r\n    }\r\n    Awake() {\r\n       
+    if (SoundManager.m_instance !== null && SoundManager.m_instance !== this) {\r\n           
+    UnityEngine_1.GameObject.Destroy(this.gameObject);\r\n        }\r\n        else
+    {\r\n            SoundManager.m_instance = this;\r\n            UnityEngine_1.GameObject.DontDestroyOnLoad(this.gameObject);\r\n       
+    }\r\n    }\r\n    Start() {\r\n        this.audio = this.GetComponent($typeof(UnityEngine_1.AudioSource));\r\n       
+    this.audio.loop = true;\r\n    }\r\n    BGM_Start(clip) {\r\n        if (UnityEngine_1.AudioClip.op_Equality(this.audio.clip,
+    null) || UnityEngine_1.AudioClip.op_Inequality(this.audio.clip, clip)) {\r\n           
+    this.audio.clip = clip;\r\n            this.audio.Play();\r\n        }\r\n   
+    }\r\n}\r\nexports.default = SoundManager;\r\n/* Singleton */\r\nSoundManager.m_instance
+    = null;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU291bmRNYW5hZ2VyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU291bmRNYW5hZ2VyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQWlFO0FBQ2pFLGlEQUFxRDtBQUVyRCxNQUFxQixZQUFhLFNBQVEscUNBQXFCO0lBTXBELE1BQU0sS0FBSyxRQUFRO1FBQ3RCLElBQUksSUFBSSxDQUFDLFVBQVUsS0FBSyxJQUFJLEVBQUU7WUFDMUIsSUFBSSxDQUFDLFVBQVUsR0FBRyx3QkFBVSxDQUFDLGdCQUFnQixTQUFDLFlBQVksRUFBRyxDQUFDO1lBQzlELElBQUksSUFBSSxDQUFDLFVBQVUsS0FBSyxJQUFJLEVBQUU7Z0JBQzFCLElBQUksQ0FBQyxVQUFVLEdBQUcsSUFBSSx3QkFBVSxDQUFDLFlBQVksQ0FBQyxJQUFJLENBQUMsQ0FBQyxZQUFZLFNBQUMsWUFBWSxFQUFHLENBQUM7YUFDcEY7U0FDSjtRQUNELE9BQU8sSUFBSSxDQUFDLFVBQVUsQ0FBQztJQUMzQixDQUFDO0lBQ08sS0FBSztRQUNULElBQUksWUFBWSxDQUFDLFVBQVUsS0FBSyxJQUFJLElBQUksWUFBWSxDQUFDLFVBQVUsS0FBSyxJQUFJLEVBQUU7WUFDdEUsd0JBQVUsQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDO1NBQ3ZDO2FBQU07WUFDSCxZQUFZLENBQUMsVUFBVSxHQUFHLElBQUksQ0FBQztZQUMvQix3QkFBVSxDQUFDLGlCQUFpQixDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQztTQUNqRDtJQUNMLENBQUM7SUFFTyxLQUFLO1FBQ1QsSUFBSSxDQUFDLEtBQUssR0FBRyxJQUFJLENBQUMsWUFBWSxTQUFDLHlCQUFXLEVBQUcsQ0FBQztRQUM5QyxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksR0FBRyxJQUFJLENBQUM7SUFDM0IsQ0FBQztJQUVNLFNBQVMsQ0FBQyxJQUFlO1FBQzVCLElBQUksQUFqQ0gsdUJBQVMsQ0F1QzB4VCxXQUFZLENBTjV5VCxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksRUFBSSxJQUFJLEtBakMxQix1QkFBUyxDQXVDczJULGFBQWMsQ0FOLzFULElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxFQUFJLElBQUksQ0FBQSxFQUFFO1lBQ3BELElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQztZQUN2QixJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksRUFBRSxDQUFDO1NBQ3JCO0lBQ0wsQ0FBQzs7QUFsQ0wsK0JBb0NDO0FBaENHLGVBQWU7QUFDQSx1QkFBVSxHQUFpQixJQUFJLENBQUMifQ==","assetPath":"Assets/Scripts/SoundManager.ts","manifest":{"properties":[],"name":"SoundManager","description":""},"isCompiled":true}'
+  typescriptHash: 83d4b8b74d597ada1235af89859792e8
+  onlyWriteTrigger: 0
