@@ -1,4 +1,5 @@
 import { Sandbox, SandboxOptions, SandboxPlayer } from "ZEPETO.Multiplay";
+import { DataStorage, loadDataStorage } from "ZEPETO.Multiplay.DataStorage";
 import { Player, sVector3, sQuaternion, SyncTransform, PlayerAdditionalValue, ZepetoAnimationParam } from "ZEPETO.Multiplay.Schema";
 
 export default class extends Sandbox {
@@ -172,9 +173,59 @@ export default class extends Sandbox {
                 this.broadcast?.(MESSAGE.FirstPlayerGetIn, gameEndTime);
             }
         });
+
+        // 데이터관련 onMessage는 클라이언트가 보낸 메시지 타입을 처리할 콜백 등록임
+        this.onMessage?.(MESSAGE.SavePlayerData, (client, message: PlayerData) => {
+            console.log(`save message!!??`);
+            const playerData: PlayerData = {
+                playerDeadCount: message.playerDeadCount,
+                playerSuccessCount: message.playerSuccessCount
+            };
+            this.savePlayerData(client, playerData);
+        });
+
+        // 나중에 리더보드만들때 필요할듯?
+        this.onMessage?.(MESSAGE.LoadPlayerData, (client, userId: string) => {
+            this.loadPlayerData(client, userId);
+        });
+
+
     }
 
-    onJoin(client: SandboxPlayer) {
+    async savePlayerData(client: SandboxPlayer, playerData: PlayerData) {
+        console.log(`save player data (${client.userId}) => Dead : ${playerData.playerDeadCount} , Success : ${playerData.playerSuccessCount}`);
+        const playerStorage: DataStorage | undefined = client.loadDataStorage?.();
+        if (playerStorage != undefined) {
+            const result = await playerStorage.set("PlayerData", playerData);
+            // client.send는 특정 클라이언트에게 메시지 전송하기위한 함수
+            client.send("SaveLog", `Save Result : ${result}`);
+        }
+    }
+
+    async loadPlayerData(client: SandboxPlayer, userId: string) {
+        console.log(`load player data (${client.userId})`);
+        const userStorage: DataStorage | undefined = await loadDataStorage(userId);
+        if (userStorage != undefined) {
+            const playerData = await userStorage.get<PlayerData>("PlayerData");
+            //console.log(JSON.stringify(playerData));
+
+            if (playerData) {
+                //console.log(`player data exist : (${JSON.stringify(playerData)})`);
+                client.send("PlayerData", playerData);
+            }
+            else {
+                const empty: PlayerData = {
+                    playerDeadCount: 0,
+                    playerSuccessCount: 0,
+                }
+                await userStorage.set("PlayerData", empty);
+                //console.log(`player data no exist : (${JSON.stringify(empty)})`);
+                client.send("PlayerData", empty);
+            }
+        }
+    }
+
+    async onJoin(client: SandboxPlayer) {
         const player = new Player();
         player.sessionId = client.sessionId;
         if (client.hashCode) {
@@ -189,6 +240,9 @@ export default class extends Sandbox {
             this.sessionIdQueue.push(client.sessionId.toString());
         }
         console.log(`join player, ${client.sessionId}`);
+
+        // 클라이언트의 정보 저장 및 불러오기
+        this.loadPlayerData(client, client.userId);
     }
 
     onLeave(client: SandboxPlayer, consented?: boolean) {
@@ -226,6 +280,13 @@ interface InstantiateObj {
 interface GameReport {
     playerUserId: string;
     playerLapTime: number;
+
+}
+
+/* player information */
+interface PlayerData {
+    playerDeadCount: number;
+    playerSuccessCount: number;
 }
 
 enum MESSAGE {
@@ -255,6 +316,12 @@ enum MESSAGE {
     FinishPlayer = "FinishPlayer",
     FirstPlayerGetIn = "FirstPlayerGetIn",
     CountDownStart = "CountDownStart",
-    ResponseGameReport = "ResponseGameReport"
+    ResponseGameReport = "ResponseGameReport",
+
+    // 데이터관련
+    SavePlayerData = "SavePlayerData",
+    LoadPlayerData = "LoadPlayerData",
+    RecieveTryCnt = "RecieveTryCnt",
+    RecieveSucCnt = "RecieveSucCnt"
 }
 

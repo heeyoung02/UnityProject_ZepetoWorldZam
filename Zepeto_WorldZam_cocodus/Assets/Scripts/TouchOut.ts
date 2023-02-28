@@ -2,6 +2,7 @@ import { Animator, Collider, Quaternion, Transform, WaitForSeconds } from 'Unity
 import { CharacterState, ZepetoPlayers } from 'ZEPETO.Character.Controller';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import PlayerSync from '../Multi/Player/PlayerSync';
+import DataManager from './DataManager';
 
 export default class TouchOut extends ZepetoScriptBehaviour {
 
@@ -16,6 +17,9 @@ export default class TouchOut extends ZepetoScriptBehaviour {
     }
 
     private *DieCoroutine(player: PlayerSync) {
+
+        DataManager.instance.ShowData(1);
+        DataManager.instance.SaveData();
 
         const animator = player.transform.GetComponentInChildren<Animator>();
         const character = player.zepetoPlayer.character;

@@ -6,6 +6,7 @@ import {State, Player} from "ZEPETO.Multiplay.Schema";
 import { GameObject, Object, WaitForSeconds} from "UnityEngine";
 import PlayerSync from './PlayerSync';
 import TransformSyncHelper, { PositionExtrapolationType, PositionInterpolationType } from '../TransformSyncHelper';
+import DataManager from '../../Scripts/DataManager';
 
 export enum ZepetoPlayerSpawnType {
     NoneSpawn,//Do not create players (플레이어 생성 x)
@@ -133,6 +134,7 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
             playerStateSync.isUseInjectSpeed= true;
         }
 
+        //const playerDataManager = zepetoPlayer.character.transform.gameObject.AddComponent<DataManager>();
     }
     
     public GestureAPIContents:Map<string,Content> =  new Map<string, Content>();

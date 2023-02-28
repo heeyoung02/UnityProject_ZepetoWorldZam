@@ -1,0 +1,67 @@
+fileFormatVersion: 2
+guid: cd4cd5fefdbe9f24fb3887ca40086bad
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    ZEPETO_Multiplay_1 = require(\\\"ZEPETO.Multiplay\\\");\\r\\nconst ZEPETO_Script_1
+    = require(\\\"ZEPETO.Script\\\");\\r\\nconst ZEPETO_World_1 = require(\\\"ZEPETO.World\\\");\\r\\nconst
+    PlayerSync_1 = require(\\\"../Multi/Player/PlayerSync\\\");\\r\\nclass DataManager
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    // \uFFFD\u073A\u03BF\uFFFD\uFFFD\uFFFD
+    \uFFFD\u0431\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\r\\n    UserTryCnt() {\\r\\n       
+    return this.userTryCnt;\\r\\n    }\\r\\n    ;\\r\\n    UserSuccessCnt() {\\r\\n       
+    return this.userSuccessCnt;\\r\\n    }\\r\\n    ;\\r\\n    static get instance()
+    {\\r\\n        if (this.m_instance === null) {\\r\\n            this.m_instance
+    = UnityEngine_1.GameObject.FindObjectOfType($typeof(DataManager));\\r\\n           
+    if (this.m_instance === null) {\\r\\n                this.m_instance = new UnityEngine_1.GameObject(DataManager.name).AddComponent($typeof(DataManager));\\r\\n           
+    }\\r\\n        }\\r\\n        return this.m_instance;\\r\\n    }\\r\\n    Awake()
+    {\\r\\n        if (DataManager.m_instance !== null && DataManager.m_instance
+    !== this) {\\r\\n            UnityEngine_1.GameObject.Destroy(this.gameObject);\\r\\n       
+    }\\r\\n        else {\\r\\n            DataManager.m_instance = this;\\r\\n           
+    UnityEngine_1.GameObject.DontDestroyOnLoad(this.gameObject);\\r\\n        }\\r\\n   
+    }\\r\\n    Start() {\\r\\n        this.multiplay = UnityEngine_1.Object.FindObjectOfType($typeof(ZEPETO_World_1.ZepetoWorldMultiplay));\\r\\n       
+    this.multiplay.add_RoomJoined((room) => {\\r\\n            this.room = room;\\r\\n           
+    // \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD loadPlayerData\uFFFD\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n           
+    this.room.AddMessageHandler(\\\"PlayerData\\\", (playerData) => {\\r\\n               
+    // \xF3\uFFFD\uFFFD \uFFFD\uBFE1 \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD
+    client\uFFFD\uFFFD dataStorage\uFFFD\uFFFD \uFFFD\uFFFD\u03F5\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD
+    \uFFFD\u04B7\uFFFD\uFFFD\u037C\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\\r\\n                console.log(`player
+    data load!! dead count is : ${playerData.playerDeadCount}, success count is :
+    ${playerData.playerSuccessCount}`);\\r\\n                this.userTryCnt = playerData.playerDeadCount;\\r\\n               
+    this.userSuccessCnt = playerData.playerSuccessCount;\\r\\n                this.tryTxt.text
+    = playerData.playerDeadCount.toString();\\r\\n                this.sucTxt.text
+    = playerData.playerSuccessCount.toString();\\r\\n            });\\r\\n       
+    });\\r\\n    }\\r\\n    ShowData(tryCnt = 0, sucCnt = 0) {\\r\\n        // \uFFFD\uFFFD\uFFFD\uFFFD
+    \uFFFD\u0170\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD \u012B\uFFFD\uFFFD\u01AE\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\u0475\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\r\\n        this.userTryCnt += tryCnt;\\r\\n       
+    this.userSuccessCnt += sucCnt;\\r\\n        console.log(`show data! recieve tryCnt
+    is ${tryCnt} , result tryCnt is ${this.userTryCnt}`);\\r\\n        this.tryTxt.text
+    = this.userTryCnt.toString();\\r\\n        this.sucTxt.text = this.userSuccessCnt.toString();\\r\\n   
+    }\\r\\n    // \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD playerData \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n   
+    SaveData() {\\r\\n        const data = new ZEPETO_Multiplay_1.RoomData();\\r\\n       
+    data.Add(\\\"playerDeadCount\\\", this.userTryCnt);\\r\\n        data.Add(\\\"playerSuccessCount\\\",
+    this.userSuccessCnt);\\r\\n        this.room?.Send(\\\"SavePlayerData\\\", data.GetObject());\\r\\n       
+    console.log(`data saved! deadCount : ${this.userTryCnt}, sucCount : ${this.userSuccessCnt}`);\\r\\n   
+    }\\r\\n}\\r\\nexports.default = DataManager;\\r\\n/* Singleton */\\r\\nDataManager.m_instance
+    = null;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRGF0YU1hbmFnZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJEYXRhTWFuYWdlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUNBLDZDQUFpRDtBQUNqRCx1REFBa0Q7QUFDbEQsaURBQXFEO0FBQ3JELCtDQUFtRDtBQUNuRCwyREFBb0Q7QUFFcEQsTUFBcUIsV0FBWSxTQUFRLHFDQUFxQjtJQVExRCxpQkFBaUI7SUFDVixVQUFVO1FBQ2IsT0FBTyxJQUFJLENBQUMsVUFBVSxDQUFDO0lBQzNCLENBQUM7SUFBQSxDQUFDO0lBQ0ssY0FBYztRQUNqQixPQUFPLElBQUksQ0FBQyxjQUFjLENBQUM7SUFDL0IsQ0FBQztJQUFBLENBQUM7SUFPSyxNQUFNLEtBQUssUUFBUTtRQUN0QixJQUFJLElBQUksQ0FBQyxVQUFVLEtBQUssSUFBSSxFQUFFO1lBQzFCLElBQUksQ0FBQyxVQUFVLEdBQUcsd0JBQVUsQ0FBQyxnQkFBZ0IsU0FBQyxXQUFXLEVBQUcsQ0FBQztZQUM3RCxJQUFJLElBQUksQ0FBQyxVQUFVLEtBQUssSUFBSSxFQUFFO2dCQUMxQixJQUFJLENBQUMsVUFBVSxHQUFHLElBQUksd0JBQVUsQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUMsWUFBWSxTQUFDLFdBQVcsRUFBRyxDQUFDO2FBQ2xGO1NBQ0o7UUFDRCxPQUFPLElBQUksQ0FBQyxVQUFVLENBQUM7SUFDM0IsQ0FBQztJQUNPLEtBQUs7UUFDVCxJQUFJLFdBQVcsQ0FBQyxVQUFVLEtBQUssSUFBSSxJQUFJLFdBQVcsQ0FBQyxVQUFVLEtBQUssSUFBSSxFQUFFO1lBQ3BFLHdCQUFVLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQztTQUN2QzthQUFNO1lBQ0gsV0FBVyxDQUFDLFVBQVUsR0FBRyxJQUFJLENBQUM7WUFDOUIsd0JBQVUsQ0FBQyxpQkFBaUIsQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUM7U0FDakQ7SUFDTCxDQUFDO0lBRUQsS0FBSztRQUNELElBQUksQ0FBQyxTQUFTLEdBQUcsb0JBQU0sQ0FBQyxnQkFBZ0IsU0FBQyxtQ0FBb0IsRUFBRyxDQUFDO1FBRWpFLElBQUksQ0FBQyxTQUFTLGdCQUFlLENBQUMsSUFBVSxFQUFFLEVBQUU7WUFDeEMsSUFBSSxDQUFDLElBQUksR0FBRyxJQUFJLENBQUM7WUFDakIsNkNBQTZDO1lBQzdDLElBQUksQ0FBQyxJQUFJLENBQUMsaUJBQWlCLENBQUMsWUFBWSxFQUFFLENBQUMsVUFBc0IsRUFBRSxFQUFFO2dCQUNqRSwrRUFBK0U7Z0JBQy9FLE9BQU8sQ0FBQyxHQUFHLENBQUMsc0NBQXNDLFVBQVUsQ0FBQyxlQUFlLHdCQUF3QixVQUFVLENBQUMsa0JBQWtCLEVBQUUsQ0FBQyxDQUFDO2dCQUNySSxJQUFJLENBQUMsVUFBVSxHQUFHLFVBQVUsQ0FBQyxlQUFlLENBQUM7Z0JBQzdDLElBQUksQ0FBQyxjQUFjLEdBQUcsVUFBVSxDQUFDLGtCQUFrQixDQUFDO2dCQUVwRCxJQUFJLENBQUMsTUFBTSxDQUFDLElBQUksR0FBRyxVQUFVLENBQUMsZUFBZSxDQUFDLFFBQVEsRUFBRSxDQUFDO2dCQUN6RCxJQUFJLENBQUMsTUFBTSxDQUFDLElBQUksR0FBRyxVQUFVLENBQUMsa0JBQWtCLENBQUMsUUFBUSxFQUFFLENBQUM7WUFDaEUsQ0FBQyxDQUFDLENBQUE7UUFDTixDQUFDLEVBQUE7SUFDTCxDQUFDO0lBRU0sUUFBUSxDQUFDLFNBQWlCLENBQUMsRUFBRSxTQUFpQixDQUFDO1FBQ2xELCtDQUErQztRQUMvQyxJQUFJLENBQUMsVUFBVSxJQUFJLE1BQU0sQ0FBQztRQUMxQixJQUFJLENBQUMsY0FBYyxJQUFJLE1BQU0sQ0FBQztRQUM5QixPQUFPLENBQUMsR0FBRyxDQUFDLGdDQUFnQyxNQUFNLHVCQUF1QixJQUFJLENBQUMsVUFBVSxFQUFFLENBQUMsQ0FBQztRQUU1RixJQUFJLENBQUMsTUFBTSxDQUFDLElBQUksR0FBRyxJQUFJLENBQUMsVUFBVSxDQUFDLFFBQVEsRUFBRSxDQUFDO1FBQzlDLElBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQyxjQUFjLENBQUMsUUFBUSxFQUFFLENBQUM7SUFDdEQsQ0FBQztJQUdELHdCQUF3QjtJQUNqQixRQUFRO1FBQ1gsTUFBTSxJQUFJLEdBQUcsSUFBSSwyQkFBUSxFQUFFLENBQUM7UUFDNUIsSUFBSSxDQUFDLEdBQUcsQ0FBQyxpQkFBaUIsRUFBRSxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUM7UUFDN0MsSUFBSSxDQUFDLEdBQUcsQ0FBQyxvQkFBb0IsRUFBRSxJQUFJLENBQUMsY0FBYyxDQUFDLENBQUM7UUFDcEQsSUFBSSxDQUFDLElBQUksRUFBRSxJQUFJLENBQUMsZ0JBQWdCLEVBQUUsSUFBSSxDQUFDLFNBQVMsRUFBRSxDQUFDLENBQUM7UUFDcEQsT0FBTyxDQUFDLEdBQUcsQ0FBQywyQkFBMkIsSUFBSSxDQUFDLFVBQVUsZ0JBQWdCLElBQUksQ0FBQyxjQUFjLEVBQUUsQ0FBQyxDQUFDO0lBQ2pHLENBQUM7O0FBM0VMLDhCQTRFQztBQXpERyxlQUFlO0FBQ0Esc0JBQVUsR0FBZ0IsSUFBSSxDQUFDIn0=\",\"assetPath\":\"Assets/Scripts/DataManager.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"Unity.TextMeshPro\",\"name\":\"tryTxt\",\"type\":\"TMPro.TextMeshProUGUI\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"Unity.TextMeshPro\",\"name\":\"sucTxt\",\"type\":\"TMPro.TextMeshProUGUI\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"DataManager\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 3f93500f39148ad46bb245fefdfa2b17
+  onlyWriteTrigger: 0
