@@ -1,31 +1,24 @@
-import { Collider, Quaternion, Transform, WaitForSeconds } from 'UnityEngine';
-import { ZepetoCharacter, ZepetoPlayers } from 'ZEPETO.Character.Controller';
+import { Collider, WaitForSeconds } from 'UnityEngine';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import PlayerSync from '../Multi/Player/PlayerSync';
+import ZepetoPlayersManager from '../Multi/Player/ZepetoPlayersManager';
 import DataManager from './DataManager';
 
 export default class FallCheck extends ZepetoScriptBehaviour {
 
-    public spawnPoint: Transform;
-
-
     private OnTriggerEnter(coll: Collider) {
         if (!coll.transform.GetComponent<PlayerSync>()?.isLocal)
             return;
-
         this.UserDataRenual();
-
-        const localCharacter = ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character;
-        this.StartCoroutine(this.MoveSpawnPoint(localCharacter));
+        this.StartCoroutine(this.MoveSpawnPoint());
     }
 
-    private *MoveSpawnPoint(player: ZepetoCharacter) {
+    private *MoveSpawnPoint() {
         yield new WaitForSeconds(1); // 떨어진지 1초 뒤 스폰장소로 텔레포트(애니메이션 동작 위해)
-        player.Teleport(this.spawnPoint.position, Quaternion.identity);
+        ZepetoPlayersManager.instance.MoveSpawnPoint();
     }
 
     private UserDataRenual() {
-        console.log(`user data renual!!`);
         DataManager.instance.ShowData(1);
         DataManager.instance.SaveData();
     }

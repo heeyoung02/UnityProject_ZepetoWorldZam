@@ -320,8 +320,6 @@ enum MESSAGE {
 
     // 데이터관련
     SavePlayerData = "SavePlayerData",
-    LoadPlayerData = "LoadPlayerData",
-    RecieveTryCnt = "RecieveTryCnt",
-    RecieveSucCnt = "RecieveSucCnt"
+    LoadPlayerData = "LoadPlayerData"
 }
 

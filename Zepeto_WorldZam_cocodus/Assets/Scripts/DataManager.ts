@@ -63,13 +63,9 @@ export default class DataManager extends ZepetoScriptBehaviour {
     }
 
     public ShowData(tryCnt: number = 0, sucCnt: number = 0): void {
-        // 받은 매개변수의 값을 현재 카운트에 더한뒤 보여줌
-        this.userTryCnt += tryCnt;
-        this.userSuccessCnt += sucCnt;
+        this.userTryCnt = this.NumberSetting(this.userTryCnt, tryCnt, this.tryTxt);
+        this.userSuccessCnt = this.NumberSetting(this.userSuccessCnt, sucCnt, this.sucTxt);
         console.log(`show data! recieve tryCnt is ${tryCnt} , result tryCnt is ${this.userTryCnt}`);
-
-        this.tryTxt.text = this.userTryCnt.toString();
-        this.sucTxt.text = this.userSuccessCnt.toString();
     }
 
 
@@ -80,6 +76,22 @@ export default class DataManager extends ZepetoScriptBehaviour {
         data.Add("playerSuccessCount", this.userSuccessCnt);
         this.room?.Send("SavePlayerData", data.GetObject());
         console.log(`data saved! deadCount : ${this.userTryCnt}, sucCount : ${this.userSuccessCnt}`);
+    }
+
+    // count값 9999로 제한, 넘어갈경우 9999+로 표기되도록 설정
+    private NumberSetting(resultCount: number, receiveCount: number, text: TextMeshProUGUI): number {
+
+        let newResultCount: number;
+
+        if (resultCount < 9999) {
+            newResultCount = resultCount + receiveCount;
+            text.text = newResultCount.toString();
+        }
+        else {
+            newResultCount = resultCount;
+            text.text = `${resultCount}+`;
+        }
+        return newResultCount;
     }
 }
 

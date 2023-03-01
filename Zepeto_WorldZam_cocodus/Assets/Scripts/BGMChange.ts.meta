@@ -18,12 +18,32 @@ ScriptedImporter:
   wrapperTypes: []
   WrapperFilters: []
   wrapperOutputDirectory: Generated
-  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
-    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
-    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst PlayerSync_1 = require(\"../Multi/Player/PlayerSync\");\r\nconst
-    SoundManager_1 = require(\"./SoundManager\");\r\nclass BGMChange extends ZEPETO_Script_1.ZepetoScriptBehaviour
-    {\r\n    OnTriggerEnter(coll) {\r\n        if (!coll.transform.GetComponent($typeof(PlayerSync_1.default))?.isLocal)\r\n           
-    return;\r\n        SoundManager_1.default.instance.BGM_Start(this.audioClip);\r\n   
-    }\r\n}\r\nexports.default = BGMChange;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQkdNQ2hhbmdlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiQkdNQ2hhbmdlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQWtEO0FBQ2xELGlEQUFxRDtBQUNyRCwyREFBb0Q7QUFDcEQsaURBQTBDO0FBRTFDLE1BQXFCLFNBQVUsU0FBUSxxQ0FBcUI7SUFJeEQsY0FBYyxDQUFDLElBQWM7UUFDekIsSUFBSSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsWUFBWSxTQUFDLG9CQUFVLEVBQUcsRUFBRSxPQUFPO1lBQ25ELE9BQU87UUFDWCxzQkFBWSxDQUFDLFFBQVEsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDO0lBQ3BELENBQUM7Q0FFSjtBQVZELDRCQVVDIn0=","assetPath":"Assets/Scripts/BGMChange.ts","manifest":{"properties":[{"assembly":"UnityEngine.AudioModule","name":"audioClip","type":"UnityEngine.AudioClip","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"BGMChange","description":""},"isCompiled":true}'
-  typescriptHash: bdbe8334947ba8cbb466ffbae094a9b0
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst PlayerSync_1 = require(\\\"../Multi/Player/PlayerSync\\\");\\r\\nconst
+    DataManager_1 = require(\\\"./DataManager\\\");\\r\\nconst SoundManager_1 = require(\\\"./SoundManager\\\");\\r\\nclass
+    BGMChange extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor()
+    {\\r\\n        super(...arguments);\\r\\n        this.startTrigger = false;\\r\\n       
+    this.finishTrigger = false;\\r\\n    }\\r\\n    OnTriggerEnter(coll) {\\r\\n       
+    if (!coll.transform.GetComponent($typeof(PlayerSync_1.default))?.isLocal)\\r\\n           
+    return;\\r\\n        SoundManager_1.default.instance.BGM_Start(this.audioClip);\\r\\n       
+    // \u0178\uFFFD\u04FE\u01BF\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n        if (this.audioClip.name
+    == \\\"Stage\\\") { // \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u0121\uFFFD\uFFFD\uFFFD\uFFFD
+    \u01AE\uFFFD\uFFFD\uFFFD\u0175\u01FE\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\r\\n           
+    if (this.startTrigger) // \uFFFD\u0479\uFFFD \u01AE\uFFFD\uFFFD\uFFFD\u0175\u01FE\uFFFD\uFFFD\u0678\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n               
+    return;\\r\\n            this.startTrigger = true;\\r\\n            // \u0178\uFFFD\u04FE\u01BF\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n        }\\r\\n        else { // \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD
+    \u01AE\uFFFD\uFFFD\uFFFD\u0175\u01FE\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\r\\n           
+    if (this.finishTrigger)\\r\\n                return;\\r\\n            this.finishTrigger
+    = true;\\r\\n            this.goalUI.SetActive(true);\\r\\n            // \u0178\uFFFD\u04FE\u01BF\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n            // ...\\r\\n            // \uFFFD\uFFFD\uFFFD\uFFFD\u023D\uFFFD\uFFFD
+    \uFFFD\xF8\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\u4E2E\uFFFD\uFFFD\uFFFD\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n            DataManager_1.default.instance.ShowData(0,
+    1);\\r\\n            DataManager_1.default.instance.SaveData();\\r\\n       
+    }\\r\\n    }\\r\\n    // retry\uFFFD\uFFFD \uFFFD\u0634\uFFFD\uFFFD\u053C\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n    TriggerExit() {\\r\\n        this.startTrigger
+    = false;\\r\\n        this.finishTrigger = false;\\r\\n    }\\r\\n}\\r\\nexports.default
+    = BGMChange;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQkdNQ2hhbmdlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiQkdNQ2hhbmdlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQThEO0FBQzlELGlEQUFxRDtBQUNyRCwyREFBb0Q7QUFDcEQsK0NBQXdDO0FBQ3hDLGlEQUEwQztBQUUxQyxNQUFxQixTQUFVLFNBQVEscUNBQXFCO0lBQTVEOztRQUtZLGlCQUFZLEdBQVMsS0FBSyxDQUFDO1FBQzNCLGtCQUFhLEdBQVMsS0FBSyxDQUFDO0lBdUN4QyxDQUFDO0lBckNHLGNBQWMsQ0FBQyxJQUFjO1FBQ3pCLElBQUksQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLFlBQVksU0FBQyxvQkFBVSxFQUFHLEVBQUUsT0FBTztZQUNuRCxPQUFPO1FBQ1gsc0JBQVksQ0FBQyxRQUFRLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQztRQUdoRCxhQUFhO1FBQ2IsSUFBSSxJQUFJLENBQUMsU0FBUyxDQUFDLElBQUksSUFBSSxPQUFPLEVBQUUsRUFBRSwwQkFBMEI7WUFDNUQsSUFBSSxJQUFJLENBQUMsWUFBWSxFQUFFLCtCQUErQjtnQkFDbEQsT0FBTztZQUVYLElBQUksQ0FBQyxZQUFZLEdBQUcsSUFBSSxDQUFDO1lBQ3pCLGFBQWE7U0FHaEI7YUFDSSxFQUFFLHlCQUF5QjtZQUM1QixJQUFJLElBQUksQ0FBQyxhQUFhO2dCQUNsQixPQUFPO1lBRVgsSUFBSSxDQUFDLGFBQWEsR0FBRyxJQUFJLENBQUM7WUFDMUIsSUFBSSxDQUFDLE1BQU0sQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDNUIsYUFBYTtZQUNiLE1BQU07WUFDTiw4QkFBOEI7WUFDOUIscUJBQVcsQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDLENBQUMsRUFBQyxDQUFDLENBQUMsQ0FBQztZQUNuQyxxQkFBVyxDQUFDLFFBQVEsQ0FBQyxRQUFRLEVBQUUsQ0FBQztTQUVuQztJQUNMLENBQUM7SUFFRCxzQkFBc0I7SUFDZixXQUFXO1FBQ2QsSUFBSSxDQUFDLFlBQVksR0FBRyxLQUFLLENBQUM7UUFDMUIsSUFBSSxDQUFDLGFBQWEsR0FBRyxLQUFLLENBQUM7SUFDL0IsQ0FBQztDQUVKO0FBN0NELDRCQTZDQyJ9\",\"assetPath\":\"Assets/Scripts/BGMChange.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.AudioModule\",\"name\":\"audioClip\",\"type\":\"UnityEngine.AudioClip\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"goalUI\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]}],\"name\":\"BGMChange\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: aa262d295b91559c49ed979783240901
   onlyWriteTrigger: 0

@@ -1,0 +1,76 @@
+fileFormatVersion: 2
+guid: 0425f84243043654f81799fc0deb2e37
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst ZepetoPlayersManager_1
+    = require(\\\"../Multi/Player/ZepetoPlayersManager\\\");\\r\\nconst BGMChange_1
+    = require(\\\"./BGMChange\\\");\\r\\nclass GoalUIController extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\\r\\n    constructor() {\\r\\n        super(...arguments);\\r\\n        this.colorIndex
+    = -1;\\r\\n    }\\r\\n    Start() {\\r\\n        this.basicPos = this.GetComponent($typeof(UnityEngine_1.RectTransform)).anchoredPosition;\\r\\n       
+    this.basicScale = this.transform.localScale;\\r\\n        this.titleTxt = this.title.text;\\r\\n       
+    this.retryBtn.onClick.AddListener(() => {\\r\\n            this.Retry();\\r\\n       
+    });\\r\\n        this.cancleBtn.onClick.AddListener(() => {\\r\\n           
+    this.StartCoroutine(this.MoveAndShrinkPanel());\\r\\n        });\\r\\n    }\\r\\n   
+    OnEnable() {\\r\\n        this.StartCoroutine(this.TextAlphaChange());\\r\\n       
+    this.GetComponent($typeof(UnityEngine_1.RectTransform)).anchoredPosition = this.basicPos;\\r\\n       
+    this.transform.localScale = this.basicScale;\\r\\n    }\\r\\n    OnDisable()
+    {\\r\\n        this.StopAllCoroutines();\\r\\n    }\\r\\n    // text alpha\uFFFD\uFFFD
+    0.3\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u03FF\uFFFD 1\uFFFD\u02B5\uFFFD\uFFFD\uFFFD
+    1\uFFFD\uFFFD \uFFFD\xF8\uFFFD\\r\\n    *TextAlphaChange() {\\r\\n        this.title.color
+    = new UnityEngine_1.Color(this.title.color.r, this.title.color.g, this.title.color.b,
+    0.3);\\r\\n        while (this.title.color.a < 1) {\\r\\n            this.title.color
+    = new UnityEngine_1.Color(this.title.color.r, this.title.color.g, this.title.color.b,
+    this.title.color.a + (UnityEngine_1.Time.deltaTime / 1));\\r\\n            yield
+    null;\\r\\n        }\\r\\n        this.StartCoroutine(this.TextColorChange());\\r\\n   
+    }\\r\\n    // text color \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD alpha\uFFFD\uFFFD
+    1\uFFFD\uFFFD\uFFFD\uFFFD 1\uFFFD\u02B5\uFFFD\uFFFD\uFFFD 0.3\uFFFD\uFFFD\uFFFD\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n    *TextColorChange() {\\r\\n        this.title.text
+    = this.ColorPick();\\r\\n        this.title.color = new UnityEngine_1.Color(this.title.color.r,
+    this.title.color.g, this.title.color.b, 1);\\r\\n        while (this.title.color.a
+    > 0.3) {\\r\\n            this.title.color = new UnityEngine_1.Color(this.title.color.r,
+    this.title.color.g, this.title.color.b, this.title.color.a - (UnityEngine_1.Time.deltaTime
+    / 1));\\r\\n            yield null;\\r\\n        }\\r\\n        this.StartCoroutine(this.TextAlphaChange());\\r\\n   
+    }\\r\\n    // \uFFFD\uFFFD, \uFFFD\uFFFD, \uFFFD\uFFFD, \uFFFD\uFFFD, \uFFFD\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\xF7\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD
+    text return\\r\\n    ColorPick() {\\r\\n        const colorCodes = [\\\"#205BB7\\\",
+    \\\"#44B720\\\", \\\"#B72E20\\\", \\\"#B79A20\\\", \\\"#7221A8\\\"];\\r\\n       
+    let resultIndex = this.colorIndex < colorCodes.length - 1 ? this.colorIndex +
+    1 : 0;\\r\\n        this.colorIndex = resultIndex;\\r\\n        const colorTxt
+    = `<color=${colorCodes[resultIndex]}>${this.titleTxt}</color>`;\\r\\n       
+    return colorTxt;\\r\\n    }\\r\\n    Retry() {\\r\\n        // \u0178\uFFFD\uFFFD\xFC\u0169\uFFFD\uFFFD
+    \u0178\uFFFD\uFFFD \uFFFD\u02B1\uFFFD\u022D \uFFFD\u06B5\uFFFD \uFFFD\u06FC\uFFFD\\r\\n       
+    // ...\\r\\n        this.goalLineTrigger.GetComponent($typeof(BGMChange_1.default)).TriggerExit();\\r\\n       
+    this.gameObject.SetActive(false);\\r\\n        // \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u01AE\uFFFD\uFFFD
+    \uFFFD\u0335\uFFFD\\r\\n        ZepetoPlayersManager_1.default.instance.MoveSpawnPoint();\\r\\n   
+    }\\r\\n    // \xE2 \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD Effect \uFFFD\uFFFD
+    menuBar \u0230\uFFFD\uFFFD\u022D\\r\\n    *MoveAndShrinkPanel() {\\r\\n       
+    const targetScale = new UnityEngine_1.Vector3(0.2, 0.2, 1);\\r\\n        const
+    time = 0.1;\\r\\n        let elapsedTime = 0;\\r\\n        const startPos = this.GetComponent($typeof(UnityEngine_1.RectTransform)).anchoredPosition;\\r\\n       
+    const endPos = this.menuBar.GetComponent($typeof(UnityEngine_1.RectTransform)).anchoredPosition;\\r\\n       
+    while (elapsedTime < time) {\\r\\n            elapsedTime += UnityEngine_1.Time.deltaTime;\\r\\n           
+    const t = elapsedTime / time;\\r\\n            this.GetComponent($typeof(UnityEngine_1.RectTransform)).anchoredPosition
+    = UnityEngine_1.Vector2.Lerp(startPos, endPos, t);\\r\\n            this.transform.localScale
+    = UnityEngine_1.Vector3.Lerp(this.transform.localScale, targetScale, t);\\r\\n           
+    yield null;\\r\\n        }\\r\\n        this.gameObject.SetActive(false);\\r\\n       
+    this.menuBar.gameObject.SetActive(true);\\r\\n    }\\r\\n}\\r\\nexports.default
+    = GoalUIController;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiR29hbFVJQ29udHJvbGxlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkdvYWxVSUNvbnRyb2xsZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFDQSw2Q0FBdUY7QUFFdkYsaURBQXFEO0FBQ3JELCtFQUF3RTtBQUN4RSwyQ0FBb0M7QUFFcEMsTUFBcUIsZ0JBQWlCLFNBQVEscUNBQXFCO0lBQW5FOztRQVNZLGVBQVUsR0FBVyxDQUFDLENBQUMsQ0FBQztJQTBGcEMsQ0FBQztJQXJGRyxLQUFLO1FBQ0QsSUFBSSxDQUFDLFFBQVEsR0FBRyxJQUFJLENBQUMsWUFBWSxTQUFDLDJCQUFhLEdBQUksZ0JBQWdCLENBQUM7UUFDcEUsSUFBSSxDQUFDLFVBQVUsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDLFVBQVUsQ0FBQztRQUM1QyxJQUFJLENBQUMsUUFBUSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDO1FBRWhDLElBQUksQ0FBQyxRQUFRLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDbkMsSUFBSSxDQUFDLEtBQUssRUFBRSxDQUFDO1FBQ2pCLENBQUMsQ0FBQyxDQUFDO1FBQ0gsSUFBSSxDQUFDLFNBQVMsQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUNwQyxJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxrQkFBa0IsRUFBRSxDQUFDLENBQUM7UUFDbkQsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDO0lBRUQsUUFBUTtRQUNKLElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLGVBQWUsRUFBRSxDQUFDLENBQUM7UUFDNUMsSUFBSSxDQUFDLFlBQVksU0FBQywyQkFBYSxHQUFJLGdCQUFnQixHQUFHLElBQUksQ0FBQyxRQUFRLENBQUM7UUFDcEUsSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQztJQUNoRCxDQUFDO0lBRUQsU0FB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\",\"assetPath\":\"Assets/Scripts/GoalUIController.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"Unity.TextMeshPro\",\"name\":\"title\",\"type\":\"TMPro.TextMeshProUGUI\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"retryBtn\",\"type\":\"UnityEngine.UI.Button\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"cancleBtn\",\"type\":\"UnityEngine.UI.Button\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"goalLineTrigger\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"menuBar\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]}],\"name\":\"GoalUIController\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 6fbfa3fdcc37810a3a93a4e7ee6242e5
+  onlyWriteTrigger: 0

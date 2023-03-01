@@ -1,12 +1,11 @@
-import { Animator, Collider, Quaternion, Transform, WaitForSeconds } from 'UnityEngine';
-import { CharacterState, ZepetoPlayers } from 'ZEPETO.Character.Controller';
+import { Animator, Collider, WaitForSeconds } from 'UnityEngine';
+import { CharacterState} from 'ZEPETO.Character.Controller';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import PlayerSync from '../Multi/Player/PlayerSync';
+import ZepetoPlayersManager from '../Multi/Player/ZepetoPlayersManager';
 import DataManager from './DataManager';
 
 export default class TouchOut extends ZepetoScriptBehaviour {
-
-    public spawnPoint: Transform;
 
     OnTriggerEnter(coll: Collider) {
         if (!coll.transform.GetComponent<PlayerSync>()?.isLocal)
@@ -30,8 +29,8 @@ export default class TouchOut extends ZepetoScriptBehaviour {
 
         yield new WaitForSeconds(1);
 
+        ZepetoPlayersManager.instance.MoveSpawnPoint();
         character.StateMachine.Start(CharacterState.Idle);
-        ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character.Teleport(this.spawnPoint.position, Quaternion.identity);
     }
     
 }

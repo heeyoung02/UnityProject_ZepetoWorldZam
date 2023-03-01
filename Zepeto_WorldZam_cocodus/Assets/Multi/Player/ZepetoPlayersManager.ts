@@ -3,10 +3,9 @@ import {WorldService, ZepetoWorldMultiplay, Content, OfficialContentType, Zepeto
 import {Room} from "ZEPETO.Multiplay";
 import {SpawnInfo, ZepetoPlayers} from 'ZEPETO.Character.Controller';
 import {State, Player} from "ZEPETO.Multiplay.Schema";
-import { GameObject, Object, WaitForSeconds} from "UnityEngine";
+import { Camera, GameObject, Object, Quaternion, Transform, WaitForSeconds} from "UnityEngine";
 import PlayerSync from './PlayerSync';
 import TransformSyncHelper, { PositionExtrapolationType, PositionInterpolationType } from '../TransformSyncHelper';
-import DataManager from '../../Scripts/DataManager';
 
 export enum ZepetoPlayerSpawnType {
     NoneSpawn,//Do not create players (플레이어 생성 x)
@@ -33,6 +32,9 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
     private multiplay: ZepetoWorldMultiplay;
     private room: Room;
     private currentPlayers: Map<string, Player> = new Map<string, Player>();
+
+    // spawn point
+    @SerializeField() private spawnPoint: Transform;
 
     
     /* Singleton */
@@ -192,6 +194,13 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
         
         yield new WaitForSeconds(10);
         this.CreateAllPlayers();
+    }
+
+    // 스폰 포인트로 이동 & 카메라 정면으로 돌리기
+    public MoveSpawnPoint() {
+        const localCharacter = ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character;
+        localCharacter.Teleport(this.spawnPoint.position, Quaternion.identity);
+        this.GetComponentInChildren<Camera>().transform.parent.rotation = Quaternion.identity;
     }
 
 }
