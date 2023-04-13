@@ -238,7 +238,7 @@ export default class extends Sandbox {
         }
     }
 
-    async onJoin(client: SandboxPlayer) {
+    onJoin(client: SandboxPlayer) {
         const player = new Player();
         player.sessionId = client.sessionId;
         if (client.hashCode) {
