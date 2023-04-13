@@ -18,17 +18,24 @@ ScriptedImporter:
   wrapperTypes: []
   WrapperFilters: []
   wrapperOutputDirectory: Generated
-  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nvar __decorate = (this
+    && this.__decorate) || function (decorators, target, key, desc) {\\r\\n    var
+    c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target,
+    key) : desc, d;\\r\\n    if (typeof Reflect === \\\"object\\\" && typeof Reflect.decorate
+    === \\\"function\\\") r = Reflect.decorate(decorators, target, key, desc);\\r\\n   
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i])
+    r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;\\r\\n   
+    return c > 3 && r && Object.defineProperty(target, key, r), r;\\r\\n};\\r\\nObject.defineProperty(exports,
     \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
     ZEPETO_Multiplay_1 = require(\\\"ZEPETO.Multiplay\\\");\\r\\nconst ZEPETO_Script_1
-    = require(\\\"ZEPETO.Script\\\");\\r\\nconst ZEPETO_World_1 = require(\\\"ZEPETO.World\\\");\\r\\nconst
-    PlayerSync_1 = require(\\\"../Multi/Player/PlayerSync\\\");\\r\\nclass DataManager
-    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    // \uFFFD\u073A\u03BF\uFFFD\uFFFD\uFFFD
-    \uFFFD\u0431\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\r\\n    UserTryCnt() {\\r\\n       
-    return this.userTryCnt;\\r\\n    }\\r\\n    ;\\r\\n    UserSuccessCnt() {\\r\\n       
-    return this.userSuccessCnt;\\r\\n    }\\r\\n    ;\\r\\n    static get instance()
-    {\\r\\n        if (this.m_instance === null) {\\r\\n            this.m_instance
-    = UnityEngine_1.GameObject.FindObjectOfType($typeof(DataManager));\\r\\n           
+    = require(\\\"ZEPETO.Script\\\");\\r\\nconst ZEPETO_World_1 = require(\\\"ZEPETO.World\\\");\\r\\nclass
+    DataManager extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor()
+    {\\r\\n        super(...arguments);\\r\\n        this.counting = false;\\r\\n   
+    }\\r\\n    // \uFFFD\u073A\u03BF\uFFFD\uFFFD\uFFFD \uFFFD\u0431\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\r\\n   
+    UserTryCnt() {\\r\\n        return this.userTryCnt;\\r\\n    }\\r\\n    ;\\r\\n   
+    UserSuccessCnt() {\\r\\n        return this.userSuccessCnt;\\r\\n    }\\r\\n   
+    ;\\r\\n    static get instance() {\\r\\n        if (this.m_instance === null)
+    {\\r\\n            this.m_instance = UnityEngine_1.GameObject.FindObjectOfType($typeof(DataManager));\\r\\n           
     if (this.m_instance === null) {\\r\\n                this.m_instance = new UnityEngine_1.GameObject(DataManager.name).AddComponent($typeof(DataManager));\\r\\n           
     }\\r\\n        }\\r\\n        return this.m_instance;\\r\\n    }\\r\\n    Awake()
     {\\r\\n        if (DataManager.m_instance !== null && DataManager.m_instance
@@ -48,24 +55,56 @@ ScriptedImporter:
     ${playerData.playerSuccessCount}`);\\r\\n                this.userTryCnt = playerData.playerDeadCount;\\r\\n               
     this.userSuccessCnt = playerData.playerSuccessCount;\\r\\n                this.tryTxt.text
     = playerData.playerDeadCount.toString();\\r\\n                this.sucTxt.text
-    = playerData.playerSuccessCount.toString();\\r\\n            });\\r\\n       
-    });\\r\\n    }\\r\\n    ShowData(tryCnt = 0, sucCnt = 0) {\\r\\n        this.userTryCnt
-    = this.NumberSetting(this.userTryCnt, tryCnt, this.tryTxt);\\r\\n        this.userSuccessCnt
-    = this.NumberSetting(this.userSuccessCnt, sucCnt, this.sucTxt);\\r\\n       
-    console.log(`show data! recieve tryCnt is ${tryCnt} , result tryCnt is ${this.userTryCnt}`);\\r\\n   
-    }\\r\\n    // \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD playerData \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n   
-    SaveData() {\\r\\n        const data = new ZEPETO_Multiplay_1.RoomData();\\r\\n       
-    data.Add(\\\"playerDeadCount\\\", this.userTryCnt);\\r\\n        data.Add(\\\"playerSuccessCount\\\",
-    this.userSuccessCnt);\\r\\n        this.room?.Send(\\\"SavePlayerData\\\", data.GetObject());\\r\\n       
-    console.log(`data saved! deadCount : ${this.userTryCnt}, sucCount : ${this.userSuccessCnt}`);\\r\\n   
+    = playerData.playerSuccessCount.toString();\\r\\n            });\\r\\n           
+    this.room.AddMessageHandler(\\\"LabTimeData\\\", (labTimeData) => {\\r\\n               
+    console.log(`prev save lab time is : [${labTimeData}]`);\\r\\n               
+    this.bestTimeTxt.text = labTimeData.toString();\\r\\n            });\\r\\n           
+    // \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \u01AE\uFFFD\uFFFD\uFFFD\u017D\uFFFD
+    \\r\\n            this.room.AddMessageHandler(\\\"CountDownStart\\\", (startServerTime)
+    => {\\r\\n                this.counting = true;\\r\\n                this.StartCoroutine(this.CountStart(startServerTime));\\r\\n           
+    });\\r\\n            // \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \u01AE\uFFFD\uFFFD\uFFFD\u017D\uFFFD\\r\\n           
+    this.room.AddMessageHandler(\\\"ResponseGameReport\\\", (gameReport) => {\\r\\n               
+    this.StopAllCoroutines();\\r\\n                this.GameReport(gameReport.playerUserId,
+    gameReport.playerLapTime);\\r\\n            });\\r\\n        });\\r\\n    }\\r\\n   
+    GameReport(playerUserId, playerLapTime) {\\r\\n        console.log(`Game Report
+    - playerUserId is [${playerUserId}] , playerLapTime is [${playerLapTime}]`);\\r\\n       
+    let bestLapTime = parseFloat(this.bestTimeTxt.text);\\r\\n        if (playerLapTime
+    < bestLapTime)\\r\\n            this.bestTimeTxt.text = playerLapTime.toString();\\r\\n   
+    }\\r\\n    *CountStart(startTime) {\\r\\n        const _startTime = startTime
+    / 1000;\\r\\n        let elapsedTime = 0;\\r\\n        while (this.counting)
+    {\\r\\n            // \uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\xF0\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n           
+    const endTime = +new Date();\\r\\n            // \uFFFD\uFFFD\uFFFD \uFFFD\xF0\uFFFD
+    \uFFFD\uFFFD\uFFFD\\r\\n            elapsedTime = (endTime / 1000) - _startTime;\\r\\n           
+    const textTime = elapsedTime.toFixed(2); // \uFFFD\u5E25 \uFFFD\xF0\uFFFD\uFFFD\uFFFD
+    00.00\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\u06B8\uFFFD\uFFFD\uFFFD string\uFFFD\uFFFD\uFFFD\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\u022F\\r\\n            this.timeTxt.text = textTime;
+    // \uFFFD\u063D\uFFFD\u01AE UI\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u05B1\uFFFD\\r\\n           
+    // 0.01\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\\r\\n            yield new Promise(resolve
+    => setTimeout(resolve, 10));\\r\\n        }\\r\\n    }\\r\\n    CountEnd() {\\r\\n       
+    this.counting = false;\\r\\n        this.room.Send(\\\"FinishPlayer\\\", this.timeTxt.text);
+    // labtime \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n   
+    }\\r\\n    // try count , success count UI\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u05B1\uFFFD\\r\\n   
+    ShowData(tryCnt = 0, sucCnt = 0) {\\r\\n        this.userTryCnt = this.NumberSetting(this.userTryCnt,
+    tryCnt, this.tryTxt);\\r\\n        this.userSuccessCnt = this.NumberSetting(this.userSuccessCnt,
+    sucCnt, this.sucTxt);\\r\\n        console.log(`show data! recieve tryCnt is
+    ${tryCnt} , result tryCnt is ${this.userTryCnt}`);\\r\\n    }\\r\\n    // \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD
+    playerData \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n    SaveData() {\\r\\n        const
+    data = new ZEPETO_Multiplay_1.RoomData();\\r\\n        data.Add(\\\"playerDeadCount\\\",
+    this.userTryCnt);\\r\\n        data.Add(\\\"playerSuccessCount\\\", this.userSuccessCnt);\\r\\n       
+    this.room?.Send(\\\"SavePlayerData\\\", data.GetObject());\\r\\n        console.log(`data
+    saved! deadCount : ${this.userTryCnt}, sucCount : ${this.userSuccessCnt}`);\\r\\n   
     }\\r\\n    // count\uFFFD\uFFFD 9999\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD, \uFFFD\u047E\uEC25\uFFFD\uFFFD\uFFFD
     9999+\uFFFD\uFFFD \u01E5\uFFFD\uFFFD\u01F5\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n   
     NumberSetting(resultCount, receiveCount, text) {\\r\\n        let newResultCount;\\r\\n       
     if (resultCount < 9999) {\\r\\n            newResultCount = resultCount + receiveCount;\\r\\n           
     text.text = newResultCount.toString();\\r\\n        }\\r\\n        else {\\r\\n           
     newResultCount = resultCount;\\r\\n            text.text = `${resultCount}+`;\\r\\n       
-    }\\r\\n        return newResultCount;\\r\\n    }\\r\\n}\\r\\nexports.default
-    = DataManager;\\r\\n/* Singleton */\\r\\nDataManager.m_instance = null;\\r\\n//#
-    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRGF0YU1hbmFnZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJEYXRhTWFuYWdlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUNBLDZDQUFpRDtBQUNqRCx1REFBa0Q7QUFDbEQsaURBQXFEO0FBQ3JELCtDQUFtRDtBQUNuRCwyREFBb0Q7QUFFcEQsTUFBcUIsV0FBWSxTQUFRLHFDQUFxQjtJQVExRCxpQkFBaUI7SUFDVixVQUFVO1FBQ2IsT0FBTyxJQUFJLENBQUMsVUFBVSxDQUFDO0lBQzNCLENBQUM7SUFBQSxDQUFDO0lBQ0ssY0FBYztRQUNqQixPQUFPLElBQUksQ0FBQyxjQUFjLENBQUM7SUFDL0IsQ0FBQztJQUFBLENBQUM7SUFPSyxNQUFNLEtBQUssUUFBUTtRQUN0QixJQUFJLElBQUksQ0FBQyxVQUFVLEtBQUssSUFBSSxFQUFFO1lBQzFCLElBQUksQ0FBQyxVQUFVLEdBQUcsd0JBQVUsQ0FBQyxnQkFBZ0IsU0FBQyxXQUFXLEVBQUcsQ0FBQztZQUM3RCxJQUFJLElBQUksQ0FBQyxVQUFVLEtBQUssSUFBSSxFQUFFO2dCQUMxQixJQUFJLENBQUMsVUFBVSxHQUFHLElBQUksd0JBQVUsQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUMsWUFBWSxTQUFDLFdBQVcsRUFBRyxDQUFDO2FBQ2xGO1NBQ0o7UUFDRCxPQUFPLElBQUksQ0FBQyxVQUFVLENBQUM7SUFDM0IsQ0FBQztJQUNPLEtBQUs7UUFDVCxJQUFJLFdBQVcsQ0FBQyxVQUFVLEtBQUssSUFBSSxJQUFJLFdBQVcsQ0FBQyxVQUFVLEtBQUssSUFBSSxFQUFFO1lBQ3BFLHdCQUFVLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQztTQUN2QzthQUFNO1lBQ0gsV0FBVyxDQUFDLFVBQVUsR0FBRyxJQUFJLENBQUM7WUFDOUIsd0JBQVUsQ0FBQyxpQkFBaUIsQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUM7U0FDakQ7SUFDTCxDQUFDO0lBRUQs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\",\"assetPath\":\"Assets/Scripts/DataManager.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"Unity.TextMeshPro\",\"name\":\"tryTxt\",\"type\":\"TMPro.TextMeshProUGUI\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"Unity.TextMeshPro\",\"name\":\"sucTxt\",\"type\":\"TMPro.TextMeshProUGUI\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"DataManager\",\"description\":\"\"},\"isCompiled\":true}"
-  typescriptHash: 582d0ee229a07134d84532f46bc161c6
+    }\\r\\n        return newResultCount;\\r\\n    }\\r\\n    UIReset() {\\r\\n       
+    this.timeTxt.text = \\\"00:00\\\";\\r\\n        this.counting = false;\\r\\n   
+    }\\r\\n}\\r\\n/* Singleton */\\r\\nDataManager.m_instance = null;\\r\\n__decorate([],
+    DataManager.prototype, \\\"tryTxt\\\", void 0);\\r\\n__decorate([], DataManager.prototype,
+    \\\"sucTxt\\\", void 0);\\r\\n__decorate([], DataManager.prototype, \\\"timeTxt\\\",
+    void 0);\\r\\n__decorate([], DataManager.prototype, \\\"bestTimeTxt\\\", void
+    0);\\r\\nexports.default = DataManager;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRGF0YU1hbmFnZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJEYXRhTWFuYWdlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7OztBQUNBLDZDQUFpRDtBQUNqRCx1REFBa0Q7QUFDbEQsaURBQXFEO0FBQ3JELCtDQUFtRDtBQUVuRCxNQUFxQixXQUFZLFNBQVEscUNBQXFCO0lBQTlEOztRQXFCWSxhQUFRLEdBQVMsS0FBSyxDQUFDO0lBNEhuQyxDQUFDO0lBdklHLGlCQUFpQjtJQUNWLFVBQVU7UUFDYixPQUFPLElBQUksQ0FBQyxVQUFVLENBQUM7SUFDM0IsQ0FBQztJQUFBLENBQUM7SUFDSyxjQUFjO1FBQ2pCLE9BQU8sSUFBSSxDQUFDLGNBQWMsQ0FBQztJQUMvQixDQUFDO0lBQUEsQ0FBQztJQVNLLE1BQU0sS0FBSyxRQUFRO1FBQ3RCLElBQUksSUFBSSxDQUFDLFVBQVUsS0FBSyxJQUFJLEVBQUU7WUFDMUIsSUFBSSxDQUFDLFVBQVUsR0FBRyx3QkFBVSxDQUFDLGdCQUFnQixTQUFDLFdBQVcsRUFBRyxDQUFDO1lBQzdELElBQUksSUFBSSxDQUFDLFVBQVUsS0FBSyxJQUFJLEVBQUU7Z0JBQzFCLElBQUksQ0FBQyxVQUFVLEdBQUcsSUFBSSx3QkFBVSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQyxZQUFZLFNBQUMsV0FBVyxFQUFHLENBQUM7YUFDbEY7U0FDSjtRQUNELE9BQU8sSUFBSSxDQUFDLFVBQVUsQ0FBQztJQUMzQixDQUFDO0lBQ08sS0FBSztRQUNULElBQUksV0FBVyxDQUFDLFVBQVUsS0FBSyxJQUFJLElBQUksV0FBVyxDQUFDLFVBQVUsS0FBSyxJQUFJLEVBQUU7WUFDcEUsd0JBQVUsQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDO1NBQ3ZDO2FBQU07WUFDSCxXQUFXLENBQUMsVUFBVSxHQUFHLElBQUksQ0FBQztZQUM5Qix3QkFBVSxDQUFDLGlCQUFpQixDQUFDLElBQUksQ0FB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\",\"assetPath\":\"Assets/Scripts/DataManager.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"Unity.TextMeshPro\",\"name\":\"tryTxt\",\"type\":\"TMPro.TextMeshProUGUI\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"Unity.TextMeshPro\",\"name\":\"sucTxt\",\"type\":\"TMPro.TextMeshProUGUI\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"Unity.TextMeshPro\",\"name\":\"timeTxt\",\"type\":\"TMPro.TextMeshProUGUI\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"Unity.TextMeshPro\",\"name\":\"bestTimeTxt\",\"type\":\"TMPro.TextMeshProUGUI\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]}],\"name\":\"DataManager\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 3ac0417bcf184fe9d0fa5c309e333e58
   onlyWriteTrigger: 0

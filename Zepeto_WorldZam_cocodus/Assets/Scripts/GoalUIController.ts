@@ -3,15 +3,16 @@ import { Color, GameObject, RectTransform, Time, Vector2, Vector3 } from 'UnityE
 import { Button } from 'UnityEngine.UI';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import ZepetoPlayersManager from '../Multi/Player/ZepetoPlayersManager';
-import BGMChange from './BGMChange';
+import Start_End_Trigger from './Start_End_Trigger';
 
 export default class GoalUIController extends ZepetoScriptBehaviour {
 
     @SerializeField() private title: TextMeshProUGUI;
     @SerializeField() private retryBtn: Button;
     @SerializeField() private cancleBtn: Button;
-    @SerializeField() private goalLineTrigger: GameObject;
     @SerializeField() private menuBar: GameObject;
+
+    private start_end_triggers: Start_End_Trigger[];
 
     private titleTxt: string;
     private colorIndex: number = -1;
@@ -20,6 +21,7 @@ export default class GoalUIController extends ZepetoScriptBehaviour {
     private basicScale: Vector3;
 
     Start() {
+        this.start_end_triggers = GameObject.FindObjectsOfType<Start_End_Trigger>();
         this.basicPos = this.GetComponent<RectTransform>().anchoredPosition;
         this.basicScale = this.transform.localScale;
         this.titleTxt = this.title.text;
@@ -72,10 +74,11 @@ export default class GoalUIController extends ZepetoScriptBehaviour {
         return colorTxt;
     }
 
+    // retry 버튼 클릭시
     private Retry() {
-        // 타임체크시 타임 초기화 코드 작성
-        // ...
-        this.goalLineTrigger.GetComponent<BGMChange>().TriggerExit();
+        this.start_end_triggers.forEach((ele : Start_End_Trigger) => {
+            ele.TriggerExit();
+        });
         this.gameObject.SetActive(false);
         // 스폰포인트로 이동
         ZepetoPlayersManager.instance.MoveSpawnPoint();

@@ -3,12 +3,13 @@ import { GameObject, Object } from 'UnityEngine';
 import { Room, RoomData } from 'ZEPETO.Multiplay';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { ZepetoWorldMultiplay } from 'ZEPETO.World'
-import PlayerSync from '../Multi/Player/PlayerSync';
 
 export default class DataManager extends ZepetoScriptBehaviour {
 
-    public tryTxt: TextMeshProUGUI;
-    public sucTxt: TextMeshProUGUI;
+    @SerializeField() private tryTxt: TextMeshProUGUI;
+    @SerializeField() private sucTxt: TextMeshProUGUI;
+    @SerializeField() private timeTxt: TextMeshProUGUI;
+    @SerializeField() private bestTimeTxt: TextMeshProUGUI;
 
     private multiplay: ZepetoWorldMultiplay;
     private room: Room;
@@ -23,6 +24,8 @@ export default class DataManager extends ZepetoScriptBehaviour {
 
     private userTryCnt: number;
     private userSuccessCnt: number;
+
+    private counting: bool = false;
 
     /* Singleton */
     private static m_instance: DataManager = null;
@@ -58,16 +61,64 @@ export default class DataManager extends ZepetoScriptBehaviour {
 
                 this.tryTxt.text = playerData.playerDeadCount.toString();
                 this.sucTxt.text = playerData.playerSuccessCount.toString();
-            })
+            });
+
+            this.room.AddMessageHandler("LabTimeData", (labTimeData: number) => {
+                console.log(`prev save lab time is : [${labTimeData}]`);
+                this.bestTimeTxt.text = labTimeData.toString();
+            });
+
+            // 시작지점 트리거시 
+            this.room.AddMessageHandler("CountDownStart", (startServerTime: number) => {
+                this.counting = true;
+                this.StartCoroutine(this.CountStart(startServerTime));
+            });
+
+            // 종료지점 트리거시
+            this.room.AddMessageHandler("ResponseGameReport", (gameReport: GameReport) => {
+                this.StopAllCoroutines();
+                this.GameReport(gameReport.playerUserId, gameReport.playerLapTime);
+            });
         }
     }
 
+    private GameReport(playerUserId: string, playerLapTime: number) {
+        console.log(`Game Report - playerUserId is [${playerUserId}] , playerLapTime is [${playerLapTime}]`);
+        let bestLapTime = parseFloat(this.bestTimeTxt.text);
+        if (playerLapTime < bestLapTime)
+            this.bestTimeTxt.text = playerLapTime.toString();
+    }
+
+    private *CountStart(startTime: number) {
+        const _startTime = startTime / 1000
+        let elapsedTime: number = 0;
+
+        while (this.counting) {
+            // 현재 시간 갱신
+            const endTime = +new Date();
+
+            // 경과 시간 계산
+            elapsedTime = (endTime / 1000) - _startTime;
+
+            const textTime = elapsedTime.toFixed(2); // 흐른 시간을 00.00으로 자르고 string으로 형변환
+            this.timeTxt.text = textTime; // 텍스트 UI로 보여주기
+
+            // 0.01초 대기
+            yield new Promise(resolve => setTimeout(resolve, 10));
+        }
+    }
+
+    public CountEnd() {
+        this.counting = false;
+        this.room.Send("FinishPlayer", this.timeTxt.text); // labtime 서버에 전송
+    }
+
+    // try count , success count UI로 보여주기
     public ShowData(tryCnt: number = 0, sucCnt: number = 0): void {
         this.userTryCnt = this.NumberSetting(this.userTryCnt, tryCnt, this.tryTxt);
         this.userSuccessCnt = this.NumberSetting(this.userSuccessCnt, sucCnt, this.sucTxt);
         console.log(`show data! recieve tryCnt is ${tryCnt} , result tryCnt is ${this.userTryCnt}`);
     }
-
 
     // 변경된 playerData 저장
     public SaveData() {
@@ -93,9 +144,19 @@ export default class DataManager extends ZepetoScriptBehaviour {
         }
         return newResultCount;
     }
+
+    public UIReset() {
+        this.timeTxt.text = "00:00";
+        this.counting = false;
+    }
 }
 
 interface PlayerData {
     playerDeadCount: number;
     playerSuccessCount: number;
+}
+
+export interface GameReport {
+    playerUserId: string;
+    playerLapTime: number;
 }

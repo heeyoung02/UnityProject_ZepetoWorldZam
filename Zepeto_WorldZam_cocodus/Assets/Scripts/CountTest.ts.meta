@@ -1,0 +1,54 @@
+fileFormatVersion: 2
+guid: bf7f0907b55c3134d926bc7a623822a9
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
+    ZEPETO_World_1 = require(\\\"ZEPETO.World\\\");\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nclass
+    CountTest extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor()
+    {\\r\\n        super(...arguments);\\r\\n        this.finish = false;\\r\\n   
+    }\\r\\n    Start() {\\r\\n        this.multiplay = UnityEngine_1.Object.FindObjectOfType($typeof(ZEPETO_World_1.ZepetoWorldMultiplay));\\r\\n       
+    this.multiplay.add_RoomJoined((room) => {\\r\\n            this.room = room;\\r\\n           
+    this.room.AddMessageHandler(\\\"CountDownStart\\\", (startServerTime) => {\\r\\n               
+    this.StartGame(startServerTime);\\r\\n                this.StartCoroutine(this.CountStart(startServerTime));\\r\\n           
+    });\\r\\n            this.room.AddMessageHandler(\\\"FirstPlayerGetIn\\\", (endServerTime)
+    => {\\r\\n                this.FinishGame(endServerTime);\\r\\n            });\\r\\n           
+    this.room.AddMessageHandler(\\\"ResponseGameReport\\\", (gameReport) => {\\r\\n               
+    this.GameReport(gameReport.playerUserId, gameReport.playerLapTime);\\r\\n           
+    });\\r\\n        });\\r\\n    }\\r\\n    *CountStart(startTime) {\\r\\n       
+    const _startTime = startTime / 1000;\\r\\n        let currentTime;\\r\\n       
+    let elapsedTime = 0;\\r\\n        while (!this.finish) {\\r\\n            //
+    \uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\xF0\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n           
+    currentTime = (+new Date()) / 1000;\\r\\n            // \uFFFD\uFFFD\uFFFD \uFFFD\xF0\uFFFD
+    \uFFFD\uFFFD\uFFFD\\r\\n            elapsedTime = currentTime - _startTime;\\r\\n           
+    // \uFFFD\uFFFD\uFFFD \uFFFD\xF0\uFFFD \uFFFD\u073C\uFFFD \uFFFD\uFFFD\uFFFD\\r\\n           
+    console.log(elapsedTime.toFixed(2));\\r\\n            // 0.01\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\\r\\n           
+    //yield new Promise(resolve => setTimeout(resolve, 10));\\r\\n            yield
+    null;\\r\\n        }\\r\\n    }\\r\\n    StartGame(startServerTime) {\\r\\n       
+    console.log(`count down start! start server time is : ${startServerTime / 1000}`);\\r\\n       
+    // 1677766296723 \\r\\n    }\\r\\n    FinishGame(endServerTime) {\\r\\n       
+    console.log(`count down finish! end server time is : ${endServerTime / 1000}`);\\r\\n       
+    // count down finish! end server time is : 1677766306640\\r\\n        this.finish
+    = true;\\r\\n    }\\r\\n    GameReport(playerUserId, playerLapTime) {\\r\\n       
+    console.log(`Game Report - playerUserId is [${playerUserId}] , playerLapTime
+    is [${playerLapTime}]`);\\r\\n        // Game Report - playerUserId is [63df6f6f41f0eec3be433ef0]
+    , playerLapTime is [9.867]\\r\\n    }\\r\\n}\\r\\nexports.default = CountTest;\\r\\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ291bnRUZXN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiQ291bnRUZXN0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQ0EsaURBQXFEO0FBQ3JELCtDQUFvRDtBQUNwRCw2Q0FBcUM7QUFHckMsTUFBcUIsU0FBVSxTQUFRLHFDQUFxQjtJQUE1RDs7UUFLWSxXQUFNLEdBQVMsS0FBSyxDQUFDO0lBMERqQyxDQUFDO0lBeERHLEtBQUs7UUFDRCxJQUFJLENBQUMsU0FBUyxHQUFHLG9CQUFNLENBQUMsZ0JBQWdCLFNBQUMsbUNBQW9CLEVBQUcsQ0FBQztRQUNqRSxJQUFJLENBQUMsU0FBUyxnQkFBZSxDQUFDLElBQVUsRUFBRSxFQUFFO1lBQ3hDLElBQUksQ0FBQyxJQUFJLEdBQUcsSUFBSSxDQUFDO1lBRWpCLElBQUksQ0FBQyxJQUFJLENBQUMsaUJBQWlCLENBQUMsZ0JBQWdCLEVBQUUsQ0FBQyxlQUF1QixFQUFFLEVBQUU7Z0JBQ3RFLElBQUksQ0FBQyxTQUFTLENBQUMsZUFBZSxDQUFDLENBQUM7Z0JBQ2hDLElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxlQUFlLENBQUMsQ0FBQyxDQUFDO1lBQzFELENBQUMsQ0FBQyxDQUFDO1lBQ0gsSUFBSSxDQUFDLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxrQkFBa0IsRUFBRSxDQUFDLGFBQXFCLEVBQUUsRUFBRTtnQkFDdEUsSUFBSSxDQUFDLFVBQVUsQ0FBQyxhQUFhLENBQUMsQ0FBQztZQUNuQyxDQUFDLENBQUMsQ0FBQztZQUVILElBQUksQ0FBQyxJQUFJLENBQUMsaUJBQWlCLENBQUMsb0JBQW9CLEVBQUUsQ0FBQyxVQUFzQixFQUFFLEVBQUU7Z0JBQ3pFLElBQUksQ0FBQyxVQUFVLENBQUMsVUFBVSxDQUFDLFlBQVksRUFBRSxVQUFVLENBQUMsYUFBYSxDQUFDLENBQUM7WUFDdkUsQ0FBQyxDQUFDLENBQUM7UUFDUCxDQUFDLEVBQUM7SUFDTixDQUFDO0lBRU8sQ0FBQyxVQUFVLENBQUMsU0FBaUI7UUFDakMsTUFBTSxVQUFVLEdBQUcsU0FBUyxHQUFHLElBQUksQ0FBQTtRQUNuQyxJQUFJLFdBQW1CLENBQUM7UUFDeEIsSUFBSSxXQUFXLEdBQVcsQ0FBQyxDQUFDO1FBRTVCLE9BQU8sQ0FBQyxJQUFJLENBQUMsTUFBTSxFQUFFO1lBQ2pCLGdCQUFnQjtZQUNoQixXQUFXLEdBQUcsQ0FBQyxDQUFDLElBQUksSUFBSSxFQUFFLENBQUMsR0FBRyxJQUFJLENBQUM7WUFFbkMsY0FBYztZQUNkLFdBQVcsR0FBRyxXQUFXLEdBQUcsVUFBVSxDQUFDO1lBRXZDLGtCQUFrQjtZQUNsQixPQUFPLENBQUMsR0FBRyxDQUFDLFdBQVcsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUVwQyxhQUFhO1lBQ2Isd0RBQXdEO1lBQ3hELE1BQU0sSUFBSSxDQUFDO1NBQ2Q7SUFDTCxDQUFDO0lBRU8sU0FBUyxDQUFDLGVBQXVCO1FBQ3JDLE9BQU8sQ0FBQyxHQUFHLENBQUMsNENBQTRDLGVBQWUsR0FBRyxJQUFJLEVBQUUsQ0FBQyxDQUFDO1FBQ2xGLGlCQUFpQjtJQUNyQixDQUFDO0lBRU8sVUFBVSxDQUFDLGFBQXFCO1FBQ3BDLE9BQU8sQ0FBQyxHQUFHLENBQUMsMkNBQTJDLGFBQWEsR0FBRyxJQUFJLEVBQUUsQ0FBQyxDQUFDO1FBQy9FLHdEQUF3RDtRQUV4RCxJQUFJLENBQUMsTUFBTSxHQUFHLElBQUksQ0FBQztJQUN2QixDQUFDO0lBRU8sVUFBVSxDQUFDLFlBQW9CLEVBQUUsYUFBcUI7UUFDMUQsT0FBTyxDQUFDLEdBQUcsQ0FBQyxrQ0FBa0MsWUFBWSx5QkFBeUIsYUFBYSxHQUFHLENBQUMsQ0FBQztRQUNyRyxzRkFBc0Y7SUFDMUYsQ0FBQztDQUNKO0FBL0RELDRCQStEQyJ9\",\"assetPath\":\"Assets/Scripts/CountTest.ts\",\"manifest\":{\"properties\":[],\"name\":\"CountTest\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: fb1c6d4d3821da5db0d717e88154cbee
+  onlyWriteTrigger: 0

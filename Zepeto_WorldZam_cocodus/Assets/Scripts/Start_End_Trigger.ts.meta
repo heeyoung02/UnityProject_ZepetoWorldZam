@@ -1,0 +1,54 @@
+fileFormatVersion: 2
+guid: 9cdfce46fef1448418b62125871e3d3c
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst ZEPETO_World_1 =
+    require(\\\"ZEPETO.World\\\");\\r\\nconst PlayerSync_1 = require(\\\"../Multi/Player/PlayerSync\\\");\\r\\nconst
+    DataManager_1 = require(\\\"./DataManager\\\");\\r\\nconst SoundManager_1 = require(\\\"./SoundManager\\\");\\r\\nclass
+    Start_End_Trigger extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor()
+    {\\r\\n        super(...arguments);\\r\\n        this.startTrigger = false;\\r\\n       
+    this.finishTrigger = false;\\r\\n    }\\r\\n    Start() {\\r\\n        this.multiplay
+    = UnityEngine_1.Object.FindObjectOfType($typeof(ZEPETO_World_1.ZepetoWorldMultiplay));\\r\\n       
+    this.multiplay.add_RoomJoined((room) => {\\r\\n            this.room = room;\\r\\n       
+    });\\r\\n    }\\r\\n    OnTriggerEnter(coll) {\\r\\n        if (!coll.transform.GetComponent($typeof(PlayerSync_1.default))?.isLocal)\\r\\n           
+    return;\\r\\n        SoundManager_1.default.instance.BGM_Start(this.audioClip);
+    // \uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\u02F8\uFFFD\uFFFD\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\\r\\n        // \u0178\uFFFD\u04FE\u01BF\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n        if (this.audioClip.name == \\\"Stage\\\")
+    { // \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u0121\uFFFD\uFFFD\uFFFD\uFFFD \u01AE\uFFFD\uFFFD\uFFFD\u0175\u01FE\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\r\\n           
+    if (this.startTrigger) // \uFFFD\u0479\uFFFD \u01AE\uFFFD\uFFFD\uFFFD\u0175\u01FE\uFFFD\uFFFD\u0678\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n               
+    return;\\r\\n            // \u0178\uFFFD\u04FE\u01BF\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD1\\r\\n           
+    console.log(`time out start..`);\\r\\n            this.startTrigger = true;\\r\\n           
+    this.room.Send(\\\"StartRunningRequest\\\");\\r\\n        }\\r\\n        else
+    { // \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \u01AE\uFFFD\uFFFD\uFFFD\u0175\u01FE\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\r\\n           
+    if (this.finishTrigger)\\r\\n                return;\\r\\n            // \u0178\uFFFD\u04FE\u01BF\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n            this.finishTrigger = true;\\r\\n           
+    DataManager_1.default.instance.CountEnd();\\r\\n            this.goalUI.SetActive(true);\\r\\n           
+    // \uFFFD\uFFFD\uFFFD\uFFFD\u023D\uFFFD\uFFFD \uFFFD\xF8\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\u4E2E\uFFFD\uFFFD\uFFFD\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n            DataManager_1.default.instance.ShowData(0,
+    1);\\r\\n            DataManager_1.default.instance.SaveData();\\r\\n       
+    }\\r\\n    }\\r\\n    // retry\uFFFD\uFFFD \uFFFD\u0634\uFFFD\uFFFD\u053C\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\\r\\n    TriggerExit() {\\r\\n        this.startTrigger
+    = false;\\r\\n        this.finishTrigger = false;\\r\\n        DataManager_1.default.instance.UIReset();\\r\\n   
+    }\\r\\n}\\r\\nexports.default = Start_End_Trigger;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU3RhcnRfRW5kX1RyaWdnZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTdGFydF9FbmRfVHJpZ2dlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUFzRTtBQUV0RSxpREFBcUQ7QUFDckQsK0NBQW9EO0FBQ3BELDJEQUFvRDtBQUNwRCwrQ0FBd0M7QUFDeEMsaURBQTBDO0FBRTFDLE1BQXFCLGlCQUFrQixTQUFRLHFDQUFxQjtJQUFwRTs7UUFRVyxpQkFBWSxHQUFTLEtBQUssQ0FBQztRQUMzQixrQkFBYSxHQUFTLEtBQUssQ0FBQztJQThDdkMsQ0FBQztJQTVDVyxLQUFLO1FBQ1QsSUFBSSxDQUFDLFNBQVMsR0FBRyxvQkFBTSxDQUFDLGdCQUFnQixTQUFDLG1DQUFvQixFQUFHLENBQUM7UUFDakUsSUFBSSxDQUFDLFNBQVMsZ0JBQWUsQ0FBQyxJQUFVLEVBQUUsRUFBRTtZQUN4QyxJQUFJLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQztRQUNyQixDQUFDLEVBQUE7SUFDTCxDQUFDO0lBRUQsY0FBYyxDQUFDLElBQWM7UUFDekIsSUFBSSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsWUFBWSxTQUFDLG9CQUFVLEVBQUcsRUFBRSxPQUFPO1lBQ25ELE9BQU87UUFDWCxzQkFBWSxDQUFDLFFBQVEsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsMkJBQTJCO1FBRTVFLGFBQWE7UUFDYixJQUFJLElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxJQUFJLE9BQU8sRUFBRSxFQUFFLDBCQUEwQjtZQUM1RCxJQUFJLElBQUksQ0FBQyxZQUFZLEVBQUUsK0JBQStCO2dCQUNsRCxPQUFPO1lBRVgsY0FBYztZQUNkLE9BQU8sQ0FBQyxHQUFHLENBQUMsa0JBQWtCLENBQUMsQ0FBQztZQUNoQyxJQUFJLENBQUMsWUFBWSxHQUFHLElBQUksQ0FBQztZQUN6QixJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxxQkFBcUIsQ0FBQyxDQUFDO1NBQ3pDO2FBRUksRUFBRSx5QkFBeUI7WUFDNUIsSUFBSSxJQUFJLENBQUMsYUFBYTtnQkFDbEIsT0FBTztZQUVYLGFBQWE7WUFDYixJQUFJLENBQUMsYUFBYSxHQUFHLElBQUksQ0FBQztZQUMxQixxQkFBVyxDQUFDLFFBQVEsQ0FBQyxRQUFRLEVBQUUsQ0FBQztZQUNoQyxJQUFJLENBQUMsTUFBTSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUM1Qiw4QkFBOEI7WUFDOUIscUJBQVcsQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQztZQUNwQyxxQkFBVyxDQUFDLFFBQVEsQ0FBQyxRQUFRLEVBQUUsQ0FBQztTQUVuQztJQUNMLENBQUM7SUFFRCxzQkFBc0I7SUFDZixXQUFXO1FBQ2QsSUFBSSxDQUFDLFlBQVksR0FBRyxLQUFLLENBQUM7UUFDMUIsSUFBSSxDQUFDLGFBQWEsR0FBRyxLQUFLLENBQUM7UUFDM0IscUJBQVcsQ0FBQyxRQUFRLENBQUMsT0FBTyxFQUFFLENBQUM7SUFDbkMsQ0FBQztDQUNKO0FBdkRELG9DQXVEQyJ9\",\"assetPath\":\"Assets/Scripts/Start_End_Trigger.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.AudioModule\",\"name\":\"audioClip\",\"type\":\"UnityEngine.AudioClip\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"goalUI\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]},{\"assembly\":\"mscorlib\",\"name\":\"startTrigger\",\"type\":\"System.Boolean\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"finishTrigger\",\"type\":\"System.Boolean\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"Start_End_Trigger\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 8106bb425a0755be3243e0a4960b3069
+  onlyWriteTrigger: 0

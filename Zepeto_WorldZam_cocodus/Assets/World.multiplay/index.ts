@@ -148,35 +148,32 @@ export default class extends Sandbox {
             this.masterClient()?.send(MESSAGE.CoinAcquired + transformId, client.sessionId);
         });
 
-        /** Racing Game **/
+        /** labTime **/
         let isStartGame: boolean = false;
-        let startServerTime: number;
         this.onMessage?.(MESSAGE.StartRunningRequest, (client) => {
             if (!isStartGame) {
                 isStartGame = true;
-                startServerTime = +new Date();
-
-                this.broadcast?.(MESSAGE.CountDownStart, startServerTime);
+                const startServerTime = +new Date();
+                console.log(`start server time is : ${ startServerTime }`);
+                client.send(MESSAGE.CountDownStart, startServerTime);
             }
         });
-        this.onMessage?.(MESSAGE.FinishPlayer, (client, finishTime: number) => {
-            let playerLapTime = (finishTime - startServerTime) / 1000;
-            console.log(`${client.sessionId}is enter! ${playerLapTime}`);
+        this.onMessage?.(MESSAGE.FinishPlayer, (client, labTime: string) => {
+            console.log(`${client.sessionId}is enter! ${labTime}`);
             const gameReport: GameReport = {
                 playerUserId: client.userId,
-                playerLapTime: playerLapTime,
+                playerLapTime: parseFloat(labTime),
             };
             this.broadcast?.(MESSAGE.ResponseGameReport, gameReport);
             if (isStartGame) {
                 isStartGame = false;
-                let gameEndTime: number = +new Date();
-                this.broadcast?.(MESSAGE.FirstPlayerGetIn, gameEndTime);
             }
+            this.labTimeSave(client, gameReport.playerUserId, gameReport.playerLapTime);
         });
+
 
         // 데이터관련 onMessage는 클라이언트가 보낸 메시지 타입을 처리할 콜백 등록임
         this.onMessage?.(MESSAGE.SavePlayerData, (client, message: PlayerData) => {
-            console.log(`save message!!??`);
             const playerData: PlayerData = {
                 playerDeadCount: message.playerDeadCount,
                 playerSuccessCount: message.playerSuccessCount
@@ -189,7 +186,21 @@ export default class extends Sandbox {
             this.loadPlayerData(client, userId);
         });
 
+    }
 
+    async labTimeSave(client: SandboxPlayer, userId: string, labTime: number) {
+        const labTimeStorage: DataStorage | undefined = await loadDataStorage(userId);
+        if (labTimeStorage != undefined) {
+            const labTimeData = await labTimeStorage.get<number>("LabTimeData");
+            console.log(`lab time save! predata : [${labTimeData}] , current data : [${labTime}]`);
+            if (labTimeData) {
+                if (labTimeData < labTime) // 기존에 저장된 labTime이 들어온 기록보다 낮다면
+                    return
+                await labTimeStorage.set<number>("LabTimeData", labTime);
+            }
+            else// 저장된 데이터가 없었다면
+                await labTimeStorage.set<number>("LabTimeData", labTime);
+        }
     }
 
     async savePlayerData(client: SandboxPlayer, playerData: PlayerData) {
@@ -207,10 +218,9 @@ export default class extends Sandbox {
         const userStorage: DataStorage | undefined = await loadDataStorage(userId);
         if (userStorage != undefined) {
             const playerData = await userStorage.get<PlayerData>("PlayerData");
-            //console.log(JSON.stringify(playerData));
+            const labTimeData = await userStorage.get<number>("LabTimeData");
 
             if (playerData) {
-                //console.log(`player data exist : (${JSON.stringify(playerData)})`);
                 client.send("PlayerData", playerData);
             }
             else {
@@ -219,8 +229,11 @@ export default class extends Sandbox {
                     playerSuccessCount: 0,
                 }
                 await userStorage.set("PlayerData", empty);
-                //console.log(`player data no exist : (${JSON.stringify(empty)})`);
                 client.send("PlayerData", empty);
+            }
+
+            if (labTimeData) {
+                client.send("LabTimeData", labTimeData);
             }
         }
     }
@@ -280,7 +293,6 @@ interface InstantiateObj {
 interface GameReport {
     playerUserId: string;
     playerLapTime: number;
-
 }
 
 /* player information */
