@@ -34,7 +34,7 @@ export default class Start_End_Trigger extends ZepetoScriptBehaviour {
             if (this.startTrigger) // 한번 트리거되었다면 실행하지 않음
                 return;
 
-            // 타임아웃 시작1
+            // 타임아웃 시작
             console.log(`time out start..`);
             this.startTrigger = true;    
             this.room.Send("StartRunningRequest");

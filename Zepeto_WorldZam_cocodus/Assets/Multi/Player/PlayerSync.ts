@@ -2,7 +2,7 @@ import {ZepetoScriptBehaviour} from 'ZEPETO.Script'
 import {RoomBase, RoomData} from 'ZEPETO.Multiplay';
 import {ZepetoWorldMultiplay} from "ZEPETO.World";
 import {CharacterJumpState, CharacterMoveState, CharacterState, ZepetoPlayer} from 'ZEPETO.Character.Controller';
-import { Object, Animator, AnimatorClipInfo, Resources, AnimationClip, WaitForSeconds, Mathf} from 'UnityEngine';
+import { RuntimeAnimatorController, Object, Animator, AnimatorClipInfo, Resources,CharacterController, AnimationClip, WaitForSeconds, AnimatorOverrideController, Mathf, WaitForEndOfFrame} from 'UnityEngine';
 import {Player} from 'ZEPETO.Multiplay.Schema';
 import ZepetoPlayersManager from './ZepetoPlayersManager';
 import TransformSyncHelper from '../TransformSyncHelper';
@@ -16,73 +16,73 @@ export default class PlayerSync extends ZepetoScriptBehaviour {
     @HideInInspector() public GetAnimationClipFromResources : boolean = true;
     @HideInInspector() public UseZepetoGestureAPI: boolean = false;
 
-    private readonly tick: number = 0.04;
-    private m_animator: Animator;
-    private multiplay: ZepetoWorldMultiplay;
-    private room: RoomBase;
+    private readonly _tick: number = 0.04;
+    private _animator: Animator;
+    private _multiplay: ZepetoWorldMultiplay;
+    private _room: RoomBase;
 
     private Start() {
-        this.m_animator = this.transform.GetComponentInChildren<Animator>();
-        this.multiplay = Object.FindObjectOfType<ZepetoWorldMultiplay>();
-        this.room = this.multiplay.Room;
+        this._animator = this.transform.GetComponentInChildren<Animator>();
+        this._multiplay = Object.FindObjectOfType<ZepetoWorldMultiplay>();
+        this._room = this._multiplay.Room;
         if (this.isLocal) {
-            this.StartCoroutine(this.SendLocalPlayer(this.tick));
+            this.StartCoroutine(this.SendLocalPlayer(this._tick));
         } else{
             this.player.OnChange += (ChangeValue) => this.OnChangedPlayer();
 
-            //If this is not a local character, do not use State Machine. (로컬 캐릭터가 아닌경우 StateMachine Stop)
+            //If this is not a local character, do not use State Machine.
             this.zepetoPlayer.character.StateMachine.Stop();
         } 
     }
 
-    // !isLocal(other player) 로컬이 아닐경우
+    // !isLocal(other player)
     private OnChangedPlayer() {
         if (this.isLocal) return
         const animationParam = this.player.animationParam;
-        
-        this.m_animator.SetInteger("State", animationParam.State);
-        this.m_animator.SetInteger("MoveState", animationParam.MoveState);
-        this.m_animator.SetInteger("JumpState", animationParam.JumpState);
-        this.m_animator.SetInteger("LandingState", animationParam.LandingState);
-        this.m_animator.SetFloat("MotionSpeed", animationParam.MotionSpeed);
-        this.m_animator.SetFloat("FallSpeed", animationParam.FallSpeed);
-        this.m_animator.SetFloat("Acceleration", animationParam.Acceleration);
-        this.m_animator.SetFloat("MoveProgress", animationParam.MoveProgress);
-        this.m_animator.SetBool("isSwimming", animationParam.isSwimming);
-        this.m_animator.SetBool("isSitting", animationParam.isSitting);
-        
+        const animator = this._animator;
+        animator.SetInteger('State', animationParam.State);
+        animator.SetInteger('MoveState', animationParam.MoveState);
+        animator.SetInteger('JumpState', animationParam.JumpState);
+        animator.SetInteger('LandingState', animationParam.LandingState);
+        animator.SetFloat('MotionSpeed', animationParam.MotionSpeed);
+        animator.SetFloat('FallSpeed', animationParam.FallSpeed);
+        animator.SetFloat('Acceleration', animationParam.Acceleration);
+        animator.SetFloat('MoveProgress', animationParam.MoveProgress);
+        animator.SetBool("isSwimming", animationParam.isSwimming);
+        animator.SetBool("isSitting", animationParam.isSitting);
+
         //sync gesture
-        if (animationParam.State == CharacterState.Gesture && this.UseZepetoGestureAPI || this.GetAnimationClipFromResources ) { 
-            const clipInfo: AnimatorClipInfo[] = this.m_animator.GetCurrentAnimatorClipInfo(0);
+        if (animationParam.State == CharacterState.Gesture && ( this.UseZepetoGestureAPI || this.GetAnimationClipFromResources )) { 
+            const clipInfo: AnimatorClipInfo[] = this._animator.GetCurrentAnimatorClipInfo(0);
             const gestureName = this.player.gestureName;
-            if (clipInfo[0].clip.name == gestureName) return;
             
-            let animClip:AnimationClip;
-            if ( this.UseZepetoGestureAPI && ZepetoPlayersManager.instance.GestureAPIContents.has(this.player.gestureName)){
-                const content = ZepetoPlayersManager.instance.GestureAPIContents.get(this.player.gestureName);
+            if (!gestureName || clipInfo[0].clip.name === gestureName) return;
+            let animClip: AnimationClip | null = null;
+            if (this.UseZepetoGestureAPI && ZepetoPlayersManager.instance.GestureAPIContents.has(gestureName)) {
+                const content = ZepetoPlayersManager.instance.GestureAPIContents.get(gestureName);
                 if (!content.IsDownloadedAnimation) {
-                    // If the animation has not been downloaded, download it.(애니메이션이 다운로드되지 않은 경우 다운로드)
+                    // If the animation has not been downloaded, download it.
                     content.DownloadAnimation(() => {
-                        // play animation clip (애니메이션클립 재생)
+                        // play animation clip
                         this.zepetoPlayer.character.SetGesture(content.AnimationClip);
                     });                       
                     return;
                 } else {
                     animClip = content.AnimationClip;
                 }
-            }
-            else if(this.GetAnimationClipFromResources)//resources anim
-                animClip = Resources.Load<AnimationClip>(this.player.gestureName);
+            } else if(this.GetAnimationClipFromResources)// Resources animation.
+                animClip = Resources.Load<AnimationClip>(gestureName);
             
-            if (null == animClip) // When the animation is not in the /Asset/Resources file pass (리소스폴더에 애니메이션이 없는경우)
-                console.warn(`${this.player.gestureName} is null, Add animation in the Resources folder.`);
-            else {
+            if (null == animClip) { 
+                // When the animation is not in the /Asset/Resources file pass
+                console.warn(`${gestureName} is null, Add animation in the Resources folder.`);
+            } else {
                 this.zepetoPlayer.character.SetGesture(animClip);
             }
         }
         
-        if(animationParam.State == CharacterState.Teleport){
-            this.tfHelper.ForceTarget();
+        if(animationParam.State === CharacterState.Teleport){
+            this.StartCoroutine(this.WaitTeleportFrame(5));
         }
 
         const playerAdditionalValue = this.player.playerAdditionalValue;
@@ -96,19 +96,24 @@ export default class PlayerSync extends ZepetoScriptBehaviour {
             let xzSpeed : number = 0;
             if(animationParam.State == CharacterState.Jump && animationParam.JumpState == CharacterJumpState.JumpIdle){
                 xzSpeed = 0;
-            }
-            else if (animationParam.MoveState == CharacterMoveState.MoveRun) {
+            } else if (animationParam.MoveState == CharacterMoveState.MoveRun) {
                 //1.5 : Run Weight between actual Zepeto character and Unity.
                 xzSpeed = this.zepetoPlayer.character.RunSpeed * 1.5 * animationParam.Acceleration;
             } else if (animationParam.MoveState == CharacterMoveState.MoveWalk) {
                 //1.25 : Walk Weight between actual Zepeto character and Unity.
                 xzSpeed = this.zepetoPlayer.character.WalkSpeed * 1.25 * animationParam.Acceleration;
-            } 
-            else
+            } else
                 return;
             
-            this.tfHelper.moveSpeed = xzSpeed+ySpeed;
+            this.tfHelper.moveSpeed = xzSpeed + ySpeed;
         }
+    }
+    
+    //The character's animation synchronization and location synchronization do not occur at the same time, so teleport is executed after a certain frame.
+    private * WaitTeleportFrame(waitFrame:number){
+        for(let i=0; i<waitFrame; i++)
+            yield new WaitForEndOfFrame();
+        this.tfHelper.ForceTarget();
     }
 
     //isLocal(When it's my character)
@@ -117,35 +122,32 @@ export default class PlayerSync extends ZepetoScriptBehaviour {
         let pastIdleCount:number = 0;
         
         while (true) {
-            const state = this.m_animator.GetInteger("State");
+            const state = this._animator.GetInteger("State");
             // Idle status is sent only once.
             if(state != CharacterState.Idle || pastIdleCount < pastIdleCountMax) {
                 const data = new RoomData();
                 const animationParam = new RoomData();
                 animationParam.Add("State", state);
-                animationParam.Add("MoveState", this.m_animator.GetInteger("MoveState"));
-                animationParam.Add("JumpState", this.m_animator.GetInteger("JumpState"));
-                animationParam.Add("LandingState", this.m_animator.GetInteger("LandingState"));
-                animationParam.Add("MotionSpeed", this.m_animator.GetFloat("MotionSpeed"));
-                animationParam.Add("FallSpeed", this.m_animator.GetFloat("FallSpeed"));
-                animationParam.Add("Acceleration", this.m_animator.GetFloat("Acceleration"));
-                animationParam.Add("MoveProgress", this.m_animator.GetFloat("MoveProgress"));
-                animationParam.Add("isSwimming", this.m_animator.GetBool("isSwimming"));
-                animationParam.Add("isSitting", this.m_animator.GetBool("isSitting"));
+                animationParam.Add("MoveState", this._animator.GetInteger("MoveState"));
+                animationParam.Add("JumpState", this._animator.GetInteger("JumpState"));
+                animationParam.Add("LandingState", this._animator.GetInteger("LandingState"));
+                animationParam.Add("MotionSpeed", this._animator.GetFloat("MotionSpeed"));
+                animationParam.Add("FallSpeed", this._animator.GetFloat("FallSpeed"));
+                animationParam.Add("Acceleration", this._animator.GetFloat("Acceleration"));
+                animationParam.Add("MoveProgress", this._animator.GetFloat("MoveProgress"));
+                animationParam.Add("isSwimming", this._animator.GetBool("isSwimming"));
+                animationParam.Add("isSitting", this._animator.GetBool("isSitting"));
                 data.Add("animationParam", animationParam.GetObject());
 
-                if (state === CharacterState.Gesture && (this.GetAnimationClipFromResources || this.UseZepetoGestureAPI)) {
-                    //this.runtimeAnimator.animationClips[1] is always means gesture's clip
-                    data.Add("gestureName", this.m_animator.runtimeAnimatorController.animationClips[1].name);
-                }
-
+                data.Add("gestureName", this._animator.runtimeAnimatorController.animationClips[1].name ?? null);
+                
                 const playerAdditionalValue = new RoomData();
                 playerAdditionalValue.Add("additionalWalkSpeed", this.zepetoPlayer.character.additionalWalkSpeed);
                 playerAdditionalValue.Add("additionalRunSpeed", this.zepetoPlayer.character.additionalRunSpeed);
                 playerAdditionalValue.Add("additionalJumpPower", this.zepetoPlayer.character.additionalJumpPower);
                 data.Add("playerAdditionalValue", playerAdditionalValue.GetObject());
 
-                this.room?.Send("SyncPlayer", data.GetObject());
+                this._room?.Send("SyncPlayer", data.GetObject());
             }
             if(state == CharacterState.Idle)             //Send 10 more frames even if stopped
                 pastIdleCount++;

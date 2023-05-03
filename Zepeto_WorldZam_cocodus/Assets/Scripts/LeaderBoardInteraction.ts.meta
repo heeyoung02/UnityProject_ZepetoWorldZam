@@ -1,0 +1,47 @@
+fileFormatVersion: 2
+guid: 5e3370e440637a44eb1f9205e8e9bfb2
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst ZEPETO_Character_Controller_1
+    = require(\"ZEPETO.Character.Controller\");\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass
+    LeaderBoardInteraction extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n   
+    constructor() {\r\n        super(...arguments);\r\n        this._isIconActive
+    = false;\r\n        this._isDoneFirstTrig = false;\r\n    }\r\n    Update() {\r\n       
+    if (this._isDoneFirstTrig && this._canvas?.gameObject.activeSelf)\r\n           
+    this.UpdateIconRotation();\r\n    }\r\n    OnTriggerEnter(coll) {\r\n       
+    if (coll != ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer?.zepetoPlayer?.character.GetComponent($typeof(UnityEngine_1.Collider)))
+    {\r\n            return;\r\n        }\r\n        this.ShowIcon();\r\n    }\r\n   
+    OnTriggerExit(coll) {\r\n        if (coll != ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer?.zepetoPlayer?.character.GetComponent($typeof(UnityEngine_1.Collider)))
+    {\r\n            return;\r\n        }\r\n        this.HideIcon();\r\n    }\r\n   
+    ShowIcon() {\r\n        if (!this._isDoneFirstTrig) {\r\n            this.CreateIcon();\r\n           
+    this._isDoneFirstTrig = true;\r\n        }\r\n        else\r\n            this._canvas.gameObject.SetActive(true);\r\n       
+    this._isIconActive = true;\r\n    }\r\n    HideIcon() {\r\n        this._canvas?.gameObject.SetActive(false);\r\n       
+    this._isIconActive = false;\r\n    }\r\n    CreateIcon() {\r\n        if (this._canvas
+    === undefined) {\r\n            this.prefIconCanvas.SetActive(true);\r\n           
+    const canvas = this.prefIconCanvas;\r\n            this._canvas = canvas.GetComponent($typeof(UnityEngine_1.Canvas));\r\n           
+    this._button = canvas.GetComponentInChildren($typeof(UnityEngine_UI_1.Button));\r\n           
+    this._canvas.transform.position = this.iconPosition.position;\r\n        }\r\n       
+    this._cachedWorldCamera = UnityEngine_1.Object.FindObjectOfType($typeof(UnityEngine_1.Camera));\r\n       
+    this._canvas.worldCamera = this._cachedWorldCamera;\r\n    }\r\n    UpdateIconRotation()
+    {\r\n        this._canvas.transform.LookAt(this._cachedWorldCamera.transform);\r\n   
+    }\r\n}\r\nexports.default = LeaderBoardInteraction;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTGVhZGVyQm9hcmRJbnRlcmFjdGlvbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkxlYWRlckJvYXJkSW50ZXJhY3Rpb24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSw2Q0FBc0Y7QUFDdEYsbURBQXdDO0FBQ3hDLDZFQUE0RDtBQUM1RCxpREFBcUQ7QUFFckQsTUFBcUIsc0JBQXVCLFNBQVEscUNBQXFCO0lBQXpFOztRQVFZLGtCQUFhLEdBQVksS0FBSyxDQUFDO1FBQy9CLHFCQUFnQixHQUFZLEtBQUssQ0FBQztJQXFEOUMsQ0FBQztJQWxEVyxNQUFNO1FBQ1YsSUFBSSxJQUFJLENBQUMsZ0JBQWdCLElBQUksSUFBSSxDQUFDLE9BQU8sRUFBRSxVQUFVLENBQUMsVUFBVTtZQUM1RCxJQUFJLENBQUMsa0JBQWtCLEVBQUUsQ0FBQztJQUNsQyxDQUFDO0lBRU8sY0FBYyxDQUFDLElBQWM7UUFDakMsSUFBSSxJQUFJLElBQUksMkNBQWEsQ0FBQyxRQUFRLENBQUMsV0FBVyxFQUFFLFlBQVksRUFBRSxTQUFTLENBQUMsWUFBWSxTQUFDLHNCQUFRLEVBQUcsRUFBRTtZQUM5RixPQUFPO1NBQ1Y7UUFDRCxJQUFJLENBQUMsUUFBUSxFQUFFLENBQUM7SUFDcEIsQ0FBQztJQUVPLGFBQWEsQ0FBQyxJQUFjO1FBQ2hDLElBQUksSUFBSSxJQUFJLDJDQUFhLENBQUMsUUFBUSxDQUFDLFdBQVcsRUFBRSxZQUFZLEVBQUUsU0FBUyxDQUFDLFlBQVksU0FBQyxzQkFBUSxFQUFHLEVBQUU7WUFDOUYsT0FBTztTQUNWO1FBQ0QsSUFBSSxDQUFDLFFBQVEsRUFBRSxDQUFDO0lBQ3BCLENBQUM7SUFFTSxRQUFRO1FBQ1gsSUFBSSxDQUFDLElBQUksQ0FBQyxnQkFBZ0IsRUFBRTtZQUN4QixJQUFJLENBQUMsVUFBVSxFQUFFLENBQUM7WUFDbEIsSUFBSSxDQUFDLGdCQUFnQixHQUFHLElBQUksQ0FBQztTQUNoQzs7WUFFRyxJQUFJLENBQUMsT0FBTyxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDNUMsSUFBSSxDQUFDLGFBQWEsR0FBRyxJQUFJLENBQUM7SUFDOUIsQ0FBQztJQUVNLFFBQVE7UUFDWCxJQUFJLENBQUMsT0FBTyxFQUFFLFVBQVUsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDMUMsSUFBSSxDQUFDLGFBQWEsR0FBRyxLQUFLLENBQUM7SUFDL0IsQ0FBQztJQUVPLFVBQVU7UUFDZCxJQUFJLElBQUksQ0FBQyxPQUFPLEtBQUssU0FBUyxFQUFFO1lBQzVCLElBQUksQ0FBQyxjQUFjLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQ3BDLE1BQU0sTUFBTSxHQUFHLElBQUksQ0FBQyxjQUFjLENBQUM7WUFDbkMsSUFBSSxDQUFDLE9BQU8sR0FBRyxNQUFNLENBQUMsWUFBWSxTQUFDLG9CQUFNLEVBQUcsQ0FBQztZQUM3QyxJQUFJLENBQUMsT0FBTyxHQUFHLE1BQU0sQ0FBQyxzQkFBc0IsU0FBQyx1QkFBTSxFQUFHLENBQUM7WUFDdkQsSUFBSSxDQUFDLE9BQU8sQ0FBQyxTQUFTLENBQUMsUUFBUSxHQUFHLElBQUksQ0FBQyxZQUFZLENBQUMsUUFBUSxDQUFDO1NBQ2hFO1FBQ0QsSUFBSSxDQUFDLGtCQUFrQixHQUFHLG9CQUFNLENBQUMsZ0JBQWdCLFNBQUMsb0JBQU0sRUFBRyxDQUFDO1FBQzVELElBQUksQ0FBQyxPQUFPLENBQUMsV0FBVyxHQUFHLElBQUksQ0FBQyxrQkFBa0IsQ0FBQztJQUN2RCxDQUFDO0lBRU8sa0JBQWtCO1FBQ3RCLElBQUksQ0FBQyxPQUFPLENBQUMsU0FBUyxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsa0JBQWtCLENBQUMsU0FBUyxDQUFDLENBQUM7SUFDckUsQ0FBQztDQUVKO0FBOURELHlDQThEQyJ9","assetPath":"Assets/Scripts/LeaderBoardInteraction.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"prefIconCanvas","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.CoreModule","name":"iconPosition","type":"UnityEngine.Transform","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"LeaderBoardInteraction","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 921303189616812718f78dbe607e1e14
+  onlyWriteTrigger: 0

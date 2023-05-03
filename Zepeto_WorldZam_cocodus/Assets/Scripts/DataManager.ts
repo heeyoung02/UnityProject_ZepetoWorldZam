@@ -2,7 +2,9 @@ import { TextMeshPro, TextMeshProUGUI } from 'TMPro';
 import { GameObject, Object } from 'UnityEngine';
 import { Room, RoomData } from 'ZEPETO.Multiplay';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
+import { LeaderboardAPI } from 'ZEPETO.Script.Leaderboard';
 import { ZepetoWorldMultiplay } from 'ZEPETO.World'
+import LeaderboardManager from '../Zepeto LeaderBoard Module/ZepetoScript/LeaderBoardManager';
 
 export default class DataManager extends ZepetoScriptBehaviour {
 
@@ -78,14 +80,16 @@ export default class DataManager extends ZepetoScriptBehaviour {
             this.room.AddMessageHandler("ResponseGameReport", (gameReport: GameReport) => {
                 this.StopAllCoroutines();
                 this.GameReport(gameReport.playerUserId, gameReport.playerLapTime);
+                LeaderboardManager.instance.SendScore(gameReport.playerLapTime * 100);
+                console.log(`leaderboard admit : [${gameReport.playerLapTime * 100}]`);
             });
         }
     }
 
     private GameReport(playerUserId: string, playerLapTime: number) {
         console.log(`Game Report - playerUserId is [${playerUserId}] , playerLapTime is [${playerLapTime}]`);
-        let bestLapTime = parseFloat(this.bestTimeTxt.text);
-        if (playerLapTime < bestLapTime)
+        let bestLapTime = parseFloat(this.bestTimeTxt.text); // 유저 최고기록(처음이면 0)
+        if (playerLapTime < bestLapTime || bestLapTime == 0)
             this.bestTimeTxt.text = playerLapTime.toString();
     }
 
@@ -101,7 +105,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
             elapsedTime = (endTime / 1000) - _startTime;
 
             const textTime = elapsedTime.toFixed(2); // 흐른 시간을 00.00으로 자르고 string으로 형변환
-            this.timeTxt.text = textTime; // 텍스트 UI로 보여주기
+            this.timeTxt.text = textTime;
 
             // 0.01초 대기
             yield new Promise(resolve => setTimeout(resolve, 10));
@@ -125,7 +129,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
         const data = new RoomData();
         data.Add("playerDeadCount", this.userTryCnt);
         data.Add("playerSuccessCount", this.userSuccessCnt);
-        this.room?.Send("SavePlayerData", data.GetObject());
+        this.room.Send("SavePlayerData", data.GetObject());
         console.log(`data saved! deadCount : ${this.userTryCnt}, sucCount : ${this.userSuccessCnt}`);
     }
 

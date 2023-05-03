@@ -135,6 +135,24 @@
       },
       "url": "https://upm.zepeto.run"
     },
+    "zepeto.buildit.city": {
+      "version": "1.0.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "zepeto.buildit.common": "1.0.2"
+      },
+      "url": "https://upm.zepeto.run"
+    },
+    "zepeto.buildit.classroom": {
+      "version": "1.0.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "zepeto.buildit.common": "1.0.1"
+      },
+      "url": "https://upm.zepeto.run"
+    },
     "zepeto.buildit.common": {
       "version": "1.0.2",
       "depth": 0,
@@ -149,6 +167,24 @@
       "depth": 0,
       "source": "registry",
       "dependencies": {},
+      "url": "https://upm.zepeto.run"
+    },
+    "zepeto.buildit.themepark": {
+      "version": "1.0.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "zepeto.buildit.common": "1.0.2"
+      },
+      "url": "https://upm.zepeto.run"
+    },
+    "zepeto.buildit.wedding": {
+      "version": "1.0.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "zepeto.buildit.common": "1.0.2"
+      },
       "url": "https://upm.zepeto.run"
     },
     "zepeto.character": {
@@ -211,6 +247,16 @@
       "dependencies": {},
       "url": "https://upm.zepeto.run"
     },
+    "zepeto.product": {
+      "version": "1.1.0-preview",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "zepeto.world.gui": "1.1.0-preview",
+        "zepeto.script": "1.8.0"
+      },
+      "url": "https://upm.zepeto.run"
+    },
     "zepeto.script": {
       "version": "1.9.0",
       "depth": 1,
@@ -260,6 +306,13 @@
     },
     "zepeto.world.common": {
       "version": "1.0.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://upm.zepeto.run"
+    },
+    "zepeto.world.gui": {
+      "version": "1.1.0-preview",
       "depth": 1,
       "source": "registry",
       "dependencies": {},

@@ -1,20 +1,21 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import {WorldService, ZepetoWorldMultiplay, Content, OfficialContentType, ZepetoWorldContent} from "ZEPETO.World";
 import {Room} from "ZEPETO.Multiplay";
-import {SpawnInfo, ZepetoPlayers} from 'ZEPETO.Character.Controller';
+import {SpawnInfo, ZepetoPlayer, ZepetoPlayers} from 'ZEPETO.Character.Controller';
 import {State, Player} from "ZEPETO.Multiplay.Schema";
-import { Camera, GameObject, Object, Quaternion, Transform, WaitForSeconds} from "UnityEngine";
+import {Camera, GameObject, Object, Quaternion, Transform, Vector3, WaitForSeconds} from "UnityEngine";
 import PlayerSync from './PlayerSync';
 import TransformSyncHelper, { PositionExtrapolationType, PositionInterpolationType } from '../TransformSyncHelper';
 
 export enum ZepetoPlayerSpawnType {
-    NoneSpawn,//Do not create players (플레이어 생성 x)
-    SinglePlayerSpawnOnStart,//Single zepeto player created at start (단일 플레이어)
-    MultiplayerSpawnOnJoinRoom,// Creates a multi-zepeto player when connected to a server (Default) (멀티-기본)
-    MultiplayerSpawnLater,// When you calling "ZepetoPlayers.instance.CreatePlayerWithUserId()" to another script (다른 스크립트에 "ZepetoPlayers.instance.CreatePlayerWithUserId()"를 호출할 때)
+    NoneSpawn,//Do not create players
+    SinglePlayerSpawnOnStart,//Single zepeto player created at start
+    MultiplayerSpawnOnJoinRoom,// Creates a multi-zepeto player when connected to a server (Default)
+    MultiplayerSpawnLater,// When you calling "ZepetoPlayers.instance.CreatePlayerWithUserId()" to another script
 }
-export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
 
+// This script manages the spawning and synchronization of Zepeto players in a multiplayer game.
+export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
     /** Options **/
     @Header("SpawnOption")
     public readonly ZepetoPlayerSpawnType : ZepetoPlayerSpawnType = ZepetoPlayerSpawnType.MultiplayerSpawnOnJoinRoom;
@@ -26,16 +27,15 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
     public readonly ExtrapolationType: PositionExtrapolationType = PositionExtrapolationType.Disable;
     @Tooltip("The creditworthiness of the offset figure of the extrapolation.") @SerializeField() private readonly extraMultipler: number = 1;
     @Header("Gesture Sync")
-    public readonly GetAnimationClipFromResources: boolean = true; // You can synchronize gestures within a resource folder. (리소스 폴더 내에서 제스처를 동기화할 수 있음)
-    public readonly UseZepetoGestureAPI: boolean = false; // Synchronize the Zepeto World Gesture API animation. (Zepeto World Gesture API 애니메이션 동기화)
+    public readonly GetAnimationClipFromResources: boolean = true; // You can synchronize gestures within a resource folder.
+    public readonly UseZepetoGestureAPI: boolean = false; // Synchronize the Zepeto World Gesture API animation.
 
-    private multiplay: ZepetoWorldMultiplay;
-    private room: Room;
-    private currentPlayers: Map<string, Player> = new Map<string, Player>();
+    private _multiplay: ZepetoWorldMultiplay;
+    private _room: Room;
+    private _currentPlayers: Map<string, Player> = new Map<string, Player>();
 
     // spawn point
     @SerializeField() private spawnPoint: Transform;
-
     
     /* Singleton */
     private static m_instance: ZepetoPlayersManager = null;
@@ -58,7 +58,6 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
     }
 
     private Start() {
-
         switch (+this.ZepetoPlayerSpawnType){
             case ZepetoPlayerSpawnType.NoneSpawn:
                 break;
@@ -67,10 +66,10 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
                 break;
             case ZepetoPlayerSpawnType.MultiplayerSpawnOnJoinRoom:
             case ZepetoPlayerSpawnType.MultiplayerSpawnLater:
-                this.multiplay = Object.FindObjectOfType<ZepetoWorldMultiplay>();
-                this.multiplay.RoomJoined += (room: Room) => {
-                    this.room = room;
-                    this.room.OnStateChange += this.OnStateChange;
+                this._multiplay = Object.FindObjectOfType<ZepetoWorldMultiplay>();
+                this._multiplay.RoomJoined += (room: Room) => {
+                    this._room = room;
+                    this._room.OnStateChange += this.OnStateChange;
                 }
                 ZepetoPlayers.instance.OnAddedPlayer.AddListener((sessionId: string) => {
                     this.AddPlayerSync(sessionId);
@@ -90,10 +89,10 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
     /** multiplayer Spawn **/
     private OnStateChange(state: State, isFirst: boolean) {
         const join = new Map<string, Player>();
-        const leave = new Map<string, Player>(this.currentPlayers);
+        const leave = new Map<string, Player>(this._currentPlayers);
 
         state.players.ForEach((sessionId: string, player: Player) => {
-            if (!this.currentPlayers.has(sessionId)) {
+            if (!this._currentPlayers.has(sessionId)) {
                 join.set(sessionId, player);
             }
             leave.delete(sessionId);
@@ -105,10 +104,30 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
         // [RoomState] Remove the player instance for players that exit the room
         leave.forEach((player: Player, sessionId: string) => this.OnLeavePlayer(sessionId, player));
     }
+
+    private OnJoinPlayer(sessionId: string, player: Player) {
+        console.log(`[OnJoinPlayer] players - sessionId : ${sessionId}`);
+        this._currentPlayers.set(sessionId, player);
+
+        if(this.ZepetoPlayerSpawnType == ZepetoPlayerSpawnType.MultiplayerSpawnOnJoinRoom) {
+            const spawnInfo = new SpawnInfo();
+            spawnInfo.position = this.transform.position;
+            spawnInfo.rotation = this.transform.rotation;
+            const isLocal = this._room.SessionId === player.sessionId;
+            ZepetoPlayers.instance.CreatePlayerWithUserId(sessionId, player.zepetoUserId, spawnInfo, isLocal);
+        }
+    }
+
+    private OnLeavePlayer(sessionId: string, player: Player) {
+        console.log(`[OnLeavePlayer] players - sessionId : ${sessionId}`);
+        this._currentPlayers.delete(sessionId);
+        ZepetoPlayers.instance.RemovePlayer(sessionId);
+    }
     
+    // Attach a sync script to the ZEPETO character.
     private AddPlayerSync(sessionId:string){
-        const isLocal:boolean = this.room.SessionId === sessionId;
-        const player: Player = this.currentPlayers.get(sessionId);
+        const isLocal:boolean = this._room.SessionId === sessionId;
+        const player: Player = this._currentPlayers.get(sessionId);
         const zepetoPlayer = ZepetoPlayers.instance.GetPlayer(sessionId);
         
         const tfHelper = zepetoPlayer.character.transform.gameObject.AddComponent<TransformSyncHelper>();
@@ -128,20 +147,18 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
         playerStateSync.UseZepetoGestureAPI = this.UseZepetoGestureAPI;
         playerStateSync.tfHelper = tfHelper;
 
+        // Inject the character's speed into TransformSyncHelper during character speed-based synchronization.
         const isUseInjectSpeed:boolean = this.InterpolationType == PositionInterpolationType.MoveToward 
             || this.InterpolationType == PositionInterpolationType.Lerp 
             || this.ExtrapolationType == PositionExtrapolationType.FixedSpeed;
-        
-        if(isUseInjectSpeed) {
-            playerStateSync.isUseInjectSpeed= true;
-        }
-
-        //const playerDataManager = zepetoPlayer.character.transform.gameObject.AddComponent<DataManager>();
+        playerStateSync.isUseInjectSpeed = isUseInjectSpeed;
     }
-    
+
+    // This is <Content Id, Content> Map for content such as official gestures and poses.
     public GestureAPIContents:Map<string,Content> =  new Map<string, Content>();
+    
     private ContentRequest() {
-        //Gesture Type Request
+        //API support through the ZepetoWorldContent API, and the Gesture API content map is API contents map.
         ZepetoWorldContent.RequestOfficialContentList(OfficialContentType.All, contents => {
             for(let i=0; i<contents.length; i++) {
                 this.GestureAPIContents.set(contents[i].Id, contents[i]);
@@ -149,34 +166,16 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
         });
     }
     
-    private OnJoinPlayer(sessionId: string, player: Player) {
-        console.log(`[OnJoinPlayer] players - sessionId : ${sessionId}`);
-        this.currentPlayers.set(sessionId, player);
-        
-        if(this.ZepetoPlayerSpawnType == ZepetoPlayerSpawnType.MultiplayerSpawnOnJoinRoom) {
-            const spawnInfo = new SpawnInfo();
-            spawnInfo.position = this.transform.position;
-            spawnInfo.rotation = this.transform.rotation;
-            const isLocal = this.room.SessionId === player.sessionId;
-            ZepetoPlayers.instance.CreatePlayerWithUserId(sessionId, player.zepetoUserId, spawnInfo, isLocal);
-        }
-    }
-
-    private OnLeavePlayer(sessionId: string, player: Player) {
-        this.currentPlayers.delete(sessionId);
-        ZepetoPlayers.instance.RemovePlayer(sessionId);
-    }
-    
-    
     /** MultiplayerSpawnLater SampleCode */
+    
     /** Creates all players who have entered a room that has not yet been created. 
      * When MultiplayerSpawnLater option, call and use it at the desired time.*/
     public CreateAllPlayers(){
         const spawnInfo = new SpawnInfo();
         spawnInfo.position = this.transform.position;
         spawnInfo.rotation = this.transform.rotation;
-        this.currentPlayers.forEach((player:Player)=> {
-            const isLocal = this.room.SessionId === player.sessionId;
+        this._currentPlayers.forEach((player:Player)=> {
+            const isLocal = this._room.SessionId === player.sessionId;
             if(!ZepetoPlayers.instance.HasPlayer(player.sessionId)) {
                 console.log(`Spawn ${player.sessionId}`);
                 ZepetoPlayers.instance.CreatePlayerWithUserId(player.sessionId, player.zepetoUserId, spawnInfo, isLocal);
@@ -190,11 +189,12 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
         const spawnInfo = new SpawnInfo();
         spawnInfo.position = this.transform.position;
         spawnInfo.rotation = this.transform.rotation;
-        ZepetoPlayers.instance.CreatePlayerWithUserId(this.room.SessionId, WorldService.userId, spawnInfo, true);
+        ZepetoPlayers.instance.CreatePlayerWithUserId(this._room.SessionId, WorldService.userId, spawnInfo, true);
         
         yield new WaitForSeconds(10);
         this.CreateAllPlayers();
     }
+
 
     // 스폰 포인트로 이동 & 카메라 정면으로 돌리기
     public MoveSpawnPoint() {
@@ -202,5 +202,4 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
         localCharacter.Teleport(this.spawnPoint.position, Quaternion.identity);
         this.GetComponentInChildren<Camera>().transform.parent.rotation = Quaternion.identity;
     }
-
 }
