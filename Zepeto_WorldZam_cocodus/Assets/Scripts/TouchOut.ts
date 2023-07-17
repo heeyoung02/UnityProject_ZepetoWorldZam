@@ -1,21 +1,29 @@
-import { Animator, Collider, WaitForSeconds } from 'UnityEngine';
+import { Animator, Collider, Object, WaitForSeconds } from 'UnityEngine';
 import { CharacterState} from 'ZEPETO.Character.Controller';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import PlayerSync from '../Multi/Player/PlayerSync';
 import ZepetoPlayersManager from '../Multi/Player/ZepetoPlayersManager';
 import DataManager from './DataManager';
+import FallCheck from './FallCheck';
 
 export default class TouchOut extends ZepetoScriptBehaviour {
 
-    OnTriggerEnter(coll: Collider) {
-        if (!coll.transform.GetComponent<PlayerSync>()?.isLocal)
-            return;
+    private fallCheck: FallCheck;
 
+    private Start() {
+        this.fallCheck = Object.FindObjectOfType<FallCheck>();
+    }
+
+    OnTriggerEnter(coll: Collider) {
+        if (!coll.transform.GetComponent<PlayerSync>()?.isLocal || ZepetoPlayersManager.instance.dying)
+            return;
         const player = coll.GetComponent<PlayerSync>();
         this.StartCoroutine(this.DieCoroutine(player));
     }
 
     private *DieCoroutine(player: PlayerSync) {
+        console.log(`dying coroutine start`);
+        ZepetoPlayersManager.instance.dying = true;
 
         DataManager.instance.ShowData(1);
         DataManager.instance.SaveData();
@@ -29,7 +37,7 @@ export default class TouchOut extends ZepetoScriptBehaviour {
 
         yield new WaitForSeconds(1);
 
-        ZepetoPlayersManager.instance.MoveSpawnPoint();
+        this.fallCheck.SpawnPositionChecking();
         character.StateMachine.Start(CharacterState.Idle);
     }
     

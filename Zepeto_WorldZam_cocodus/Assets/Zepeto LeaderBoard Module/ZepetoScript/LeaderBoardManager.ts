@@ -168,7 +168,7 @@ export default class LeaderboardManager extends ZepetoScriptBehaviour {
                         leaderboardManager.seasonText.text = "End of Season : Every" + leaderboard.resetInfoList[0].day, + leaderboard.resetInfoList[0].hour, leaderboard.resetInfoList[0].min;
                         break;
                     default:
-                        leaderboardManager.seasonText.text = "No reset Rule";
+                        leaderboardManager.seasonText.text = "";
                         break;
                 }
 

@@ -11,11 +11,11 @@ export default class extends Sandbox {
 
     async onCreate(options: SandboxOptions) {
         this._modules.push(new SyncComponentModule(this));
+        this._modules.push(new ProductModule(this));
         for (const module of this._modules) {
             await module.OnCreate();
         }
         this._isCreated = true;
-        this._modules.push(new ProductModule(this));
     }
 
     async onJoin(client: SandboxPlayer) {

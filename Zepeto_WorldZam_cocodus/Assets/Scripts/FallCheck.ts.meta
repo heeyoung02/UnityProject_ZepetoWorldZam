@@ -22,16 +22,28 @@ ScriptedImporter:
     \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
     ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst PlayerSync_1 = require(\\\"../Multi/Player/PlayerSync\\\");\\r\\nconst
     ZepetoPlayersManager_1 = require(\\\"../Multi/Player/ZepetoPlayersManager\\\");\\r\\nconst
-    DataManager_1 = require(\\\"./DataManager\\\");\\r\\nclass FallCheck extends
-    ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    OnTriggerEnter(coll) {\\r\\n       
+    DataManager_1 = require(\\\"./DataManager\\\");\\r\\nconst CoinManager_1 = require(\\\"./Product/CoinManager\\\");\\r\\nclass
+    FallCheck extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    //private
+    spawnItemUsing: boolean = false;\\r\\n    OnTriggerEnter(coll) {\\r\\n       
     if (!coll.transform.GetComponent($typeof(PlayerSync_1.default))?.isLocal)\\r\\n           
     return;\\r\\n        this.UserDataRenual();\\r\\n        this.StartCoroutine(this.MoveSpawnPoint());\\r\\n   
     }\\r\\n    *MoveSpawnPoint() {\\r\\n        yield new UnityEngine_1.WaitForSeconds(1);
     // \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD 1\uFFFD\uFFFD \uFFFD\uFFFD
     \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u04B7\uFFFD \uFFFD\u06B7\uFFFD\uFFFD\uFFFD\u01AE(\uFFFD\u05B4\u03F8\uFFFD\uFFFD\u033C\uFFFD
-    \uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD)\\r\\n        ZepetoPlayersManager_1.default.instance.MoveSpawnPoint();\\r\\n   
+    \uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD)\\r\\n        this.SpawnPositionChecking();\\r\\n   
     }\\r\\n    UserDataRenual() {\\r\\n        DataManager_1.default.instance.ShowData(1);\\r\\n       
-    DataManager_1.default.instance.SaveData();\\r\\n    }\\r\\n}\\r\\nexports.default
-    = FallCheck;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRmFsbENoZWNrLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiRmFsbENoZWNrLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQXVEO0FBQ3ZELGlEQUFxRDtBQUNyRCwyREFBb0Q7QUFDcEQsK0VBQXdFO0FBQ3hFLCtDQUF3QztBQUV4QyxNQUFxQixTQUFVLFNBQVEscUNBQXFCO0lBRWhELGNBQWMsQ0FBQyxJQUFjO1FBQ2pDLElBQUksQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLFlBQVksU0FBQyxvQkFBVSxFQUFHLEVBQUUsT0FBTztZQUNuRCxPQUFPO1FBQ1gsSUFBSSxDQUFDLGNBQWMsRUFBRSxDQUFDO1FBQ3RCLElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLGNBQWMsRUFBRSxDQUFDLENBQUM7SUFDL0MsQ0FBQztJQUVPLENBQUMsY0FBYztRQUNuQixNQUFNLElBQUksNEJBQWMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLHFEQUFxRDtRQUNsRiw4QkFBb0IsQ0FBQyxRQUFRLENBQUMsY0FBYyxFQUFFLENBQUM7SUFDbkQsQ0FBQztJQUVPLGNBQWM7UUFDbEIscUJBQVcsQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ2pDLHFCQUFXLENBQUMsUUFBUSxDQUFDLFFBQVEsRUFBRSxDQUFDO0lBQ3BDLENBQUM7Q0FFSjtBQW5CRCw0QkFtQkMifQ==\",\"assetPath\":\"Assets/Scripts/FallCheck.ts\",\"manifest\":{\"properties\":[],\"name\":\"FallCheck\",\"description\":\"\"},\"isCompiled\":true}"
-  typescriptHash: f07d9785a984ed3670577065a3f466d7
+    DataManager_1.default.instance.SaveData();\\r\\n    }\\r\\n    SpawnItemUse(itemTransformPos)
+    {\\r\\n        this.userSpawnPoint = itemTransformPos;\\r\\n    }\\r\\n    SpawnPositionChecking()
+    {\\r\\n        var usingItem = CoinManager_1.default.instance.spawnItemUsing;\\r\\n       
+    if (!usingItem) {\\r\\n            // \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD
+    \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\xB6\uFFFD\uFFFD
+    \uFFFD\u2EBB \uFFFD\uFFFD\u0121\uFFFD\uFFFD \uFFFD\u0335\uFFFD\\r\\n           
+    ZepetoPlayersManager_1.default.instance.MoveSpawnPoint(this.basicSpawnPoint.position);\\r\\n       
+    }\\r\\n        else if (usingItem) {\\r\\n            // \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD
+    \uFFFD\uFFFD\u0678\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\u0121\uFFFD\uFFFD
+    \uFFFD\u0335\uFFFD\\r\\n            ZepetoPlayersManager_1.default.instance.MoveSpawnPoint(this.userSpawnPoint);\\r\\n           
+    CoinManager_1.default.instance.PrevFlagHide();\\r\\n            CoinManager_1.default.instance.spawnItemUsing
+    = false;\\r\\n        }\\r\\n    }\\r\\n}\\r\\nexports.default = FallCheck;\\r\\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRmFsbENoZWNrLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiRmFsbENoZWNrLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQTJFO0FBQzNFLGlEQUFxRDtBQUNyRCwyREFBb0Q7QUFDcEQsK0VBQXdFO0FBQ3hFLCtDQUF3QztBQUN4Qyx1REFBZ0Q7QUFFaEQsTUFBcUIsU0FBVSxTQUFRLHFDQUFxQjtJQU94RCwwQ0FBMEM7SUFFbEMsY0FBYyxDQUFDLElBQWM7UUFDakMsSUFBSSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsWUFBWSxTQUFDLG9CQUFVLEVBQUcsRUFBRSxPQUFPO1lBQ25ELE9BQU87UUFDWCxJQUFJLENBQUMsY0FBYyxFQUFFLENBQUM7UUFDdEIsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsY0FBYyxFQUFFLENBQUMsQ0FBQztJQUMvQyxDQUFDO0lBRU8sQ0FBQyxjQUFjO1FBQ25CLE1BQU0sSUFBSSw0QkFBYyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMscURBQXFEO1FBQ2xGLElBQUksQ0FBQyxxQkFBcUIsRUFBRSxDQUFDO0lBQ2pDLENBQUM7SUFFTyxjQUFjO1FBQ2xCLHFCQUFXLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUNqQyxxQkFBVyxDQUFDLFFBQVEsQ0FBQyxRQUFRLEVBQUUsQ0FBQztJQUNwQyxDQUFDO0lBRU0sWUFBWSxDQUFDLGdCQUF5QjtRQUN6QyxJQUFJLENBQUMsY0FBYyxHQUFHLGdCQUFnQixDQUFDO0lBQzNDLENBQUM7SUFFTSxxQkFBcUI7UUFFeEIsSUFBSSxTQUFTLEdBQUcscUJBQVcsQ0FBQyxRQUFRLENBQUMsY0FBYyxDQUFDO1FBQ3BELElBQUksQ0FBQyxTQUFTLEVBQUU7WUFDWiw0Q0FBNEM7WUFDNUMsOEJBQW9CLENBQUMsUUFBUSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsZUFBZSxDQUFDLFFBQVEsQ0FBQyxDQUFDO1NBQy9FO2FBRUksSUFBSSxTQUFTLEVBQUU7WUFDaEIsZ0NBQWdDO1lBQ2hDLDhCQUFvQixDQUFDLFFBQVEsQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLGNBQWMsQ0FBQyxDQUFDO1lBQ2xFLHFCQUFXLENBQUMsUUFBUSxDQUFDLFlBQVksRUFBRSxDQUFDO1lBQ3BDLHFCQUFXLENBQUMsUUFBUSxDQUFDLGNBQWMsR0FBRyxLQUFLLENBQUM7U0FDL0M7SUFDTCxDQUFDO0NBRUo7QUE5Q0QsNEJBOENDIn0=\",\"assetPath\":\"Assets/Scripts/FallCheck.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"basicSpawnPoint\",\"type\":\"UnityEngine.Transform\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"SerializeField\",\"args\":[]}]}],\"name\":\"FallCheck\",\"description\":\"\",\"hasAnimatorMove\":false},\"isCompiled\":true}"
+  typescriptHash: d3ff4b2190ce37ed87a57e6901daf8f8
   onlyWriteTrigger: 0

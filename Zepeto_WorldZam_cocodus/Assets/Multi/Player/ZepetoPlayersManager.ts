@@ -1,7 +1,7 @@
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import {WorldService, ZepetoWorldMultiplay, Content, OfficialContentType, ZepetoWorldContent} from "ZEPETO.World";
 import {Room} from "ZEPETO.Multiplay";
-import {SpawnInfo, ZepetoPlayer, ZepetoPlayers} from 'ZEPETO.Character.Controller';
+import {SpawnInfo, ZepetoPlayers} from 'ZEPETO.Character.Controller';
 import {State, Player} from "ZEPETO.Multiplay.Schema";
 import {Camera, GameObject, Object, Quaternion, Transform, Vector3, WaitForSeconds} from "UnityEngine";
 import PlayerSync from './PlayerSync';
@@ -195,11 +195,13 @@ export default class ZepetoPlayersManager extends ZepetoScriptBehaviour {
         this.CreateAllPlayers();
     }
 
-
-    // 스폰 포인트로 이동 & 카메라 정면으로 돌리기
-    public MoveSpawnPoint() {
+    @HideInInspector() public dying: boolean = false;
+    // 스폰 포인트로 이동
+    public MoveSpawnPoint(spawnPosition: Vector3) {
         const localCharacter = ZepetoPlayers.instance.LocalPlayer.zepetoPlayer.character;
-        localCharacter.Teleport(this.spawnPoint.position, Quaternion.identity);
-        this.GetComponentInChildren<Camera>().transform.parent.rotation = Quaternion.identity;
+        localCharacter.Teleport(spawnPosition, Quaternion.identity);
+
+        //this.GetComponentInChildren<Camera>().transform.parent.rotation = Quaternion.identity;
+        this.dying = false;
     }
 }

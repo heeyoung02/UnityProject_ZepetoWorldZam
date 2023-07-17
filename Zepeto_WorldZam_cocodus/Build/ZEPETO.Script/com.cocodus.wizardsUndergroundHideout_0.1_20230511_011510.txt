@@ -1,0 +1,193 @@
+[World Settings]
+world id             com.cocodus.wizardsundergroundhideout
+version              0.1                 
+max clients          8                   
+orientation          horizontal          
+disable invite       false               
+disable room list    false               
+disable private room false               
+
+[Build Manifest]
+28 mb                assets/scene/main.unity
+2 mb                 assets/animations/sitting.fbx
+2 mb                 assets/textmesh pro/resources\fonts & materials\liberationsans sdf.asset
+2 mb                 assets/animations/swimming.fbx
+2 mb                 assets/animations/falling.fbx
+1 mb                 assets/animations/falling flat impact.fbx
+1 mb                 packages/zepeto.character.controller/runtime/_resources/animations/gesture/4_ok.anim
+1 mb                 packages/zepeto.character.controller/runtime/_resources/animations/base/v2/landing_deep.anim
+1 mb                 packages/zepeto.character.controller/runtime/_resources/animations/base/fall_end.anim
+1 mb                 packages/zepeto.character.controller/runtime/_resources/animations/base/jump_idle.anim
+1 mb                 packages/zepeto.character.controller/runtime/_resources/animations/base/v2/move_walk.anim
+1 mb                 packages/zepeto.character.controller/runtime/_resources/animations/base/jump_move.anim
+1 mb                 packages/zepeto.character.controller/runtime/_resources/animations/base/walk.anim
+1014 kb              packages/zepeto.character.controller/runtime/_resources/animations/base/v2/idle.anim
+940 kb               packages/zepeto.character.controller/runtime/_resources/animations/base/run.anim
+828 kb               packages/zepeto.character.controller/runtime/_resources/animations/base/v2/move_turn.anim
+739 kb               packages/zepeto.buildit.wedding/data/tree1/data/wd_tree_001.prefab
+734 kb               packages/zepeto.buildit.common/common/world_ap_commons/data/texture/ap_texturemap_001.png
+618 kb               packages/zepeto.character.controller/runtime/_resources/animations/base/v2/jump_idle.anim
+600 kb               packages/zepeto.character.controller/runtime/_resources/animations/base/v2/landing_slight.anim
+574 kb               packages/zepeto.character.controller/runtime/_resources/animations/base/v2/landing_roll.anim
+560 kb               packages/zepeto.character.controller/runtime/_resources/animations/base/idle.anim
+539 kb               assets/textmesh pro/resources\fonts & materials\liberationsans sdf - fallback.asset
+489 kb               packages/zepeto.character.controller/runtime/_resources/animations/base/v2/move_walk_fast.anim
+465 kb               assets/music/stage.ogg
+464 kb               packages/zepeto.character.controller/runtime/_resources/animations/base/v2/jump_double.anim
+451 kb               packages/zepeto.character.controller/runtime/_resources/animations/base/v2/stamp.anim
+451 kb               packages/zepeto.character.controller/runtime/_resources/animations/base/v2/jump_dash.anim
+445 kb               packages/zepeto.character.controller/runtime/_resources/animations/base/v2/move_run.anim
+442 kb               packages/zepeto.character.controller/runtime/_resources/animations/base/v2/jump_move.anim
+428 kb               packages/zepeto.character.controller/runtime/_resources/animations/base/hand_idle_01.anim
+374 kb               packages/zepeto.character.controller/runtime/_resources/animations/base/v2/move_run_fast.anim
+350 kb               assets/music/shelter.ogg
+341 kb               assets/textmesh pro/fonts/liberationsans.ttf
+330 kb               packages/zepeto.character.controller/runtime/_resources/animations/base/v2/falling.anim
+303 kb               assets/animations/myanimator.controller
+297 kb               packages/zepeto.character.controller/runtime/_resources/animatorcontroller/zepetoanimatorv2.controller
+296 kb               assets/zepeto leaderboard module/resources\ui\guide.png
+231 kb               assets/prefabs/item-spawn.prefab
+192 kb               packages/zepeto.buildit.common/common/world-resource-common/data/[fx]/fx_texture/fxt_normal_01.tga
+131 kb               packages/zepeto.buildit.wedding/data/tree1/data/wd_tree_001_col.prefab
+126 kb               packages/zepeto.buildit.themepark/data/plant d2/data/ap_plant_d002.prefab
+108 kb               packages/zepeto.buildit.themepark/data/plant d1/data/ap_plant_d001.prefab
+101 kb               packages/com.unity.textmeshpro/editor resources/gizmos/tmp - font asset icon.psd
+87 kb                packages/zepeto.buildit.wedding/data/tree2/data/wd_tree_002.prefab
+87 kb                packages/com.unity.textmeshpro/editor resources/gizmos/tmp - text component icon.psd
+84 kb                packages/zepeto.buildit.city/data/manhole 2/data/sa_manhole_002.prefab
+77 kb                packages/zepeto.buildit.common/common/cooltime_commons/data/texture/ct_water_01.png
+77 kb                packages/zepeto.buildit.themepark/data/plant b3/data/ap_plant_b003.prefab
+66 kb                packages/zepeto.buildit.themepark/data/plant d3/data/ap_plant_d003.prefab
+64 kb                packages/zepeto.buildit.themepark/data/lamp 3/data/ap_lamp_003.prefab
+62 kb                packages/zepeto.buildit.wedding/data/tree2/data/wd_tree_002_col.prefab
+62 kb                packages/zepeto.character.controller/runtime/_resources/animations/base/gesture.anim
+62 kb                packages/zepeto.character.controller/runtime/_resources/animations/base/action1.anim
+62 kb                packages/zepeto.character.controller/runtime/_resources/animations/base/action2.anim
+48 kb                packages/zepeto.buildit.themepark/data/plant b4/data/ap_plant_b004.prefab
+40 kb                assets/product/resources\wizard_item_flag_package.png
+39 kb                assets/images/coin/mesh/default.mesh
+35 kb                packages/zepeto.character.controller/runtime/_resources/inputactions/zepetoinputcontrol.inputactions
+32 kb                packages/zepeto.buildit.themepark/data/plant c1/data/ap_plant_c001.prefab
+31 kb                packages/com.unity.inputsystem/inputsystem/plugins/playerinput/defaultinputactions.inputactions
+29 kb                packages/zepeto.buildit.city/data/road sign 1/data/sa_raodsign_001.prefab
+27 kb                packages/zepeto.buildit.common/common/world_commons/data/texture/colortexture_001.png
+27 kb                packages/zepeto.character.controller/runtime/_resources/prefabs/uicontroller_touchpad_horizontal.prefab
+27 kb                assets/prefabs/uicontroller_touchpad_horizontal.prefab
+27 kb                packages/zepeto.character.controller/runtime/_resources/prefabs/uicontroller_touchpad_vertical.prefab
+26 kb                assets/product/resources\wizard_item_flag.png
+23 kb                assets/product/resources\wizard_item_coin_100.png
+22 kb                assets/images/sittingicon.png
+21 kb                packages/zepeto.buildit.city/data/billboard 3/data/sa_billboard_003.prefab
+21 kb                packages/zepeto.buildit.themepark/data/plant b11/data/ap_plant_b011.prefab
+18 kb                packages/zepeto.character.controller/runtime/_resources/animatorcontroller/zepetoanimator.controller
+14 kb                assets/images/magiccoinimg.png
+14 kb                assets/product/resources\currency_wizard_item_coin.png
+14 kb                assets/zepeto leaderboard module/resources\prefab\itm_rank_vertical.prefab
+14 kb                assets/zepeto leaderboard module/resources\prefab\itm_rank_horizontal.prefab
+14 kb                packages/zepeto.buildit.common/common/020_stadium-common/data/texture/fxt_targetcircle_01.png
+14 kb                packages/zepeto.buildit.common/common/020_stadium-common/data/shader/fx_master_addtive_two.shader
+13 kb                assets/textmesh pro/resources\sprite assets\emojione.asset
+13 kb                packages/zepeto.character.controller/runtime/_resources/images/touchpad_handle_base.png
+12 kb                packages/zepeto.buildit.common/common/1_mattex/data/fx_glow01.png
+12 kb                packages/zepeto.character.controller/runtime/_resources/images/touchpad_jump_base.png
+11 kb                assets/scripts/product/itm_inventoryitem 1.prefab
+11 kb                assets/zepeto product module/ui/icons/potion1.png
+10 kb                packages/zepeto.buildit.themepark/data/stepstone/data/ap_stepstone.prefab
+10 kb                packages/zepeto.buildit.city/data/awning/data/sa_awning_001.prefab
+9 kb                 packages/zepeto.buildit.themepark/data/small stone/data/ap_stone_s.prefab
+8 kb                 packages/zepeto.buildit.themepark/lamp 3.prefab
+7 kb                 packages/zepeto.buildit.common/common/cooltime_commons/data/build it water no light.shader
+7 kb                 assets/textmesh pro/shaders/tmp_sdf-mobile.shader
+7 kb                 packages/zepeto.character.controller/runtime/_resources/animatorcontroller/uicontrollertouchpadhandleorigin.controller
+7 kb                 packages/zepeto.character.controller/runtime/_resources/animatorcontroller/uicontrollertouchpadhandle.controller
+7 kb                 assets/zepeto product module/ui/common/bg_inven_list.png
+7 kb                 assets/zepeto product module/ui/prefabs/itm_information.prefab
+6 kb                 assets/zepeto interaction module/resources\worldeventicons\prefabs\preficoncanvas.prefab
+6 kb                 assets/zepeto interaction module/resources\worldeventicons\textures\button_dice.png
+5 kb                 packages/zepeto.character.controller/runtime/_resources/images/touchpad_handle_icon.png
+5 kb                 assets/images/coin/animation/coinidle.anim
+5 kb                 assets/zepeto interaction module/resources\worldeventicons\textures\button_occupation.png
+5 kb                 packages/zepeto.character.controller/runtime/_resources/images/touchpad_jump_icon.png
+5 kb                 packages/zepeto.buildit.themepark/plant d1.prefab
+5 kb                 assets/zepeto interaction module/resources\worldeventicons\textures\button_clothes.png
+5 kb                 packages/zepeto.buildit.common/common/cooltime_commons/data/builditstandard.shader
+5 kb                 assets/zepeto interaction module/resources\worldeventicons\textures\button_fishing.png
+4 kb                 assets/zepeto interaction module/resources\worldeventicons\textures\button_transspot.png
+4 kb                 packages/zepeto.buildit.themepark/plant d2.prefab
+4 kb                 assets/textmesh pro/resources\style sheets\default style sheet.asset
+4 kb                 assets/zepeto product module/ui/common/purple01.png
+4 kb                 assets/zepeto product module/ui/icons/ui_btn_inventory 5.png
+4 kb                 packages/zepeto.buildit.wedding/tree2.prefab
+4 kb                 packages/zepeto.buildit.wedding/tree1.prefab
+4 kb                 packages/zepeto.buildit.city/road sign 1.prefab
+4 kb                 packages/zepeto.buildit.themepark/stepstone.prefab
+4 kb                 packages/zepeto.buildit.themepark/small stone.prefab
+4 kb                 assets/prefabs/magiccoin.prefab
+3 kb                 packages/zepeto.buildit.common/common/cooltime_commons/data/texture/materials/build it select box.mat
+3 kb                 assets/zepeto interaction module/resources\worldeventicons\textures\button_game.png
+3 kb                 assets/zepeto product module/ui/ui_common_atlas.spriteatlas
+3 kb                 packages/zepeto.buildit.common/common/020_stadium-common/data/texture/fxt_star_02.png
+3 kb                 packages/zepeto.buildit.common/common/world-resource-common/data/[fx]/shader/fx_basic_additive.shader
+3 kb                 packages/zepeto.buildit.themepark/plant d3.prefab
+3 kb                 packages/zepeto.buildit.themepark/plant b11.prefab
+3 kb                 packages/zepeto.buildit.themepark/plant c1.prefab
+3 kb                 packages/zepeto.buildit.themepark/plant b4.prefab
+3 kb                 packages/zepeto.buildit.themepark/plant b3.prefab
+3 kb                 assets/zepeto product module/ui/icons/shop 3.png
+3 kb                 assets/zepeto product module/ui/ui_icons_atlas.spriteatlas
+3 kb                 assets/zepeto product module/ui/common/purple02.png
+3 kb                 assets/zepeto product module/ui/common/white02.png
+3 kb                 assets/zepeto product module/ui/icons/zem.png
+3 kb                 packages/zepeto.character.controller/runtime/_resources/animations/ui/controller/touchpad_handle_origin_ziggle.anim
+3 kb                 packages/zepeto.character.controller/runtime/_resources/animations/ui/controller/touchpad_handle_ziggle.anim
+3 kb                 packages/zepeto.buildit.common/common/020_stadium-common/data/texture/txt_materials/fxt_savepoint_portal.mat
+3 kb                 packages/zepeto.character.controller/runtime/_resources/prefabs/shadow/charactershadow.prefab
+2 kb                 packages/zepeto.character.controller/runtime/_resources/prefabs/eventsystem.prefab
+2 kb                 assets/textmesh pro/resources\fonts & materials\liberationsans sdf - drop shadow.mat
+2 kb                 assets/textmesh pro/resources\fonts & materials\liberationsans sdf - outline.mat
+2 kb                 packages/zepeto.buildit.common/common/world_ap_commons/data/ap_texturemap_001.mat
+2 kb                 packages/zepeto.buildit.common/common/world_commons/data/colortexture_001.mat
+2 kb                 assets/zepeto product module/ui/common/pop_close.png
+2 kb                 packages/zepeto.character.controller/runtime/_resources/prefabs/shadow/fxt_blobshadow.mat
+2 kb                 packages/zepeto.character.controller/runtime/_resources/animations/ui/controller/touchpad_handle_origin_off.anim
+2 kb                 packages/zepeto.character.controller/runtime/_resources/animations/ui/controller/touchpad_handle_origin_on.anim
+2 kb                 packages/zepeto.character.controller/runtime/_resources/animations/ui/controller/touchpad_handle_off.anim
+2 kb                 packages/zepeto.character.controller/runtime/_resources/animations/ui/controller/touchpad_handle_on.anim
+2 kb                 assets/zepeto leaderboard module/resources\ui\image_noprofile.png
+2 kb                 packages/zepeto.buildit.common/common/1_mattex/data/fx_glow01_add.mat
+2 kb                 packages/zepeto.buildit.common/common/cooltime_commons/data/build it select box.shader
+2 kb                 assets/zepeto leaderboard module/resources\ui\materials\image_noprofile.mat
+2 kb                 assets/images/coin/materials/coin.mat
+2 kb                 assets/zepeto interaction module/resources\materials\grey.mat
+1 kb                 packages/zepeto.buildit.common/common/020_stadium-common/data/texture/txt_materials/fxt_target_circle_01.mat
+1 kb                 assets/images/coin/animation/coin.controller
+1 kb                 assets/images/timeicon.png
+1 kb                 assets/zepeto product module/ui/common/bg_popup.png
+1 kb                 packages/zepeto.character.controller/runtime/_resources/camera/zepetocamera.prefab
+1 kb                 assets/zepeto leaderboard module/resources\ui\ic_70_close.png
+1 kb                 assets/images/return.png
+1 kb                 assets/zepeto leaderboard module/resources\ui\icon_trophy.png
+1 kb                 assets/zepeto product module/ui/common/selected_line.png
+1 kb                 assets/zepeto interaction module/resources\worldeventicons\textures\icon62pxsetting.png
+1 kb                 assets/zepeto interaction module/resources\worldeventicons\textures\setting.png
+1 kb                 assets/textmesh pro/resources\tmp settings.asset
+1 kb                 packages/zepeto.character.controller/runtime/_resources/prefabs/shadow/fxt_blobshadow.png
+1 kb                 assets/zepeto product module/ui/common/rectangle 2302.png
+1 kb                 assets/zepeto product module/ui/common/rectangle 2303.png
+1 kb                 assets/zepeto leaderboard module/resources\ui\rect_70_70_r34.png
+1 kb                 packages/com.unity.inputsystem/inputsystem/editor/icons/inputsystemuiinputmodule@64.png
+1 kb                 assets/zepeto product module/ui/common/shop.png
+992 b                assets/zepeto product module/ui/common/bg_currency.png
+942 b                assets/zepeto leaderboard module/resources\ui\circle_60.png
+828 b                assets/zepeto product module/ui/common/inputbox_bg.png
+795 b                packages/zepeto.buildit.common/common/cooltime_commons/data/build it effect addictive.shader
+779 b                packages/zepeto.buildit.common/common/020_stadium-common/data/texture/fxt_edgemask.png
+624 b                assets/zepeto leaderboard module/resources\ui\rect_42_42_r20.png
+521 b                packages/zepeto.buildit.common/common/020_stadium-common/data/texture/fxt_rind_aura_clamp.png
+458 b                assets/product/resources\productsettings.asset
+385 b                assets/zepeto product module/ui/common/divisionline.png
+332 b                assets/new physic material.physicmaterial
+269 b                assets/textmesh pro/resources\linebreaking following characters.txt
+189 b                assets/zepeto product module/ui/common/slash.png
+138 b                assets/zepeto product module/ui/common/whitebox.png
+95 b                 assets/textmesh pro/resources\linebreaking leading characters.txt

@@ -1,0 +1,55 @@
+fileFormatVersion: 2
+guid: f3a0622de61d6894c940c718b64ac37f
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nexports.Currency = exports.InventoryAction = void 0;\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Currency_1 = require(\"ZEPETO.Currency\");\r\nconst ZEPETO_Product_1 =
+    require(\"ZEPETO.Product\");\r\nconst ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nconst
+    ZEPETO_Multiplay_1 = require(\"ZEPETO.Multiplay\");\r\nclass Product_UI_Balance
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Start() {\r\n        this.RefreshAllBalanceUI();\r\n       
+    this._multiplay = UnityEngine_1.Object.FindObjectOfType($typeof(ZEPETO_World_1.ZepetoWorldMultiplay));\r\n       
+    this._multiplay.add_RoomJoined((room) => {\r\n            this._room = room;\r\n           
+    this.InitMessageHandler();\r\n        });\r\n    }\r\n    InitMessageHandler()
+    {\r\n        this._room.AddMessageHandler(\"SyncBalances\", (message) => {\r\n           
+    this.RefreshAllBalanceUI();\r\n        });\r\n        ZEPETO_Product_1.ProductService.OnPurchaseCompleted.AddListener((product,
+    response) => {\r\n            this.RefreshAllBalanceUI();\r\n        });\r\n   
+    }\r\n    RefreshAllBalanceUI() {\r\n        this.StartCoroutine(this.RefreshBalanceUI());\r\n       
+    this.StartCoroutine(this.RefreshOfficialCurrencyUI());\r\n    }\r\n    *RefreshBalanceUI()
+    {\r\n        const request = ZEPETO_Currency_1.CurrencyService.GetUserCurrencyBalancesAsync();\r\n       
+    yield new UnityEngine_1.WaitUntil(() => request.keepWaiting == false);\r\n       
+    if (request.responseData.isSuccess) {\r\n            this.magicCoinTxt.text =
+    request.responseData.currencies?.ContainsKey(Currency.magicCoin) ? request.responseData.currencies?.get_Item(Currency.magicCoin).toString()
+    : \"0\";\r\n            this.shop_MCTxt.text = request.responseData.currencies?.ContainsKey(Currency.magicCoin)
+    ? request.responseData.currencies?.get_Item(Currency.magicCoin).toString() :
+    \"0\";\r\n        }\r\n    }\r\n    *RefreshOfficialCurrencyUI() {\r\n       
+    const request = ZEPETO_Currency_1.CurrencyService.GetOfficialCurrencyBalanceAsync();\r\n       
+    yield new UnityEngine_1.WaitUntil(() => request.keepWaiting == false);\r\n       
+    this.zemTxt.text = request.responseData.currency.quantity.toString();\r\n       
+    this.shop_zemTxt.text = request.responseData.currency.quantity.toString();\r\n   
+    }\r\n}\r\nexports.default = Product_UI_Balance;\r\nvar InventoryAction;\r\n(function
+    (InventoryAction) {\r\n    InventoryAction[InventoryAction[\"Removed\"] = -1]
+    = \"Removed\";\r\n    InventoryAction[InventoryAction[\"Used\"] = 0] = \"Used\";\r\n   
+    InventoryAction[InventoryAction[\"Added\"] = 1] = \"Added\";\r\n})(InventoryAction
+    = exports.InventoryAction || (exports.InventoryAction = {}));\r\nvar Currency;\r\n(function
+    (Currency) {\r\n    Currency[\"magicCoin\"] = \"wizard_item_coin\";\r\n})(Currency
+    = exports.Currency || (exports.Currency = {}));\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUHJvZHVjdF9VSV9CYWxhbmNlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiUHJvZHVjdF9VSV9CYWxhbmNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQUFBLGlEQUFxRDtBQUVyRCw2Q0FBK0Q7QUFFL0QscURBQXNGO0FBQ3RGLG1EQUErRDtBQUMvRCwrQ0FBb0Q7QUFDcEQsdURBQWtEO0FBRWxELE1BQXFCLGtCQUFtQixTQUFRLHFDQUFxQjtJQVN6RCxLQUFLO1FBQ1QsSUFBSSxDQUFDLG1CQUFtQixFQUFFLENBQUM7UUFDM0IsSUFBSSxDQUFDLFVBQVUsR0FBRyxvQkFBTSxDQUFDLGdCQUFnQixTQUFDLG1DQUFvQixFQUFHLENBQUM7UUFFbEUsSUFBSSxDQUFDLFVBQVUsZ0JBQWUsQ0FBQyxJQUFVLEVBQUUsRUFBRTtZQUN6QyxJQUFJLENBQUMsS0FBSyxHQUFHLElBQUksQ0FBQztZQUNsQixJQUFJLENBQUMsa0JBQWtCLEVBQUUsQ0FBQztRQUM5QixDQUFDLEVBQUE7SUFDTCxDQUFDO0lBRU8sa0JBQWtCO1FBQ3RCLElBQUksQ0FBQyxLQUFLLENBQUMsaUJBQWlCLENBQWMsY0FBYyxFQUFFLENBQUMsT0FBTyxFQUFFLEVBQUU7WUFDbEUsSUFBSSxDQUFDLG1CQUFtQixFQUFFLENBQUM7UUFDL0IsQ0FBQyxDQUFDLENBQUM7UUFDSCwrQkFBYyxDQUFDLG1CQUFtQixDQUFDLFdBQVcsQ0FBQyxDQUFDLE9BQU8sRUFBRSxRQUFRLEVBQUUsRUFBRTtZQUNqRSxJQUFJLENBQUMsbUJBQW1CLEVBQUUsQ0FBQztRQUMvQixDQUFDLENBQUMsQ0FBQztJQUNQLENBQUM7SUFFTyxtQkFBbUI7UUFDdkIsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsZ0JBQWdCLEVBQUUsQ0FBQyxDQUFDO1FBQzdDLElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLHlCQUF5QixFQUFFLENBQUMsQ0FBQztJQUMxRCxDQUFDO0lBRU8sQ0FBQyxnQkFBZ0I7UUFDckIsTUFBTSxPQUFPLEdBQUcsaUNBQWUsQ0FBQyw0QkFBNEIsRUFBRSxDQUFDO1FBQy9ELE1BQU0sSUFBSSx1QkFBUyxDQUFDLEdBQUcsRUFBRSxDQUFDLE9BQU8sQ0FBQyxXQUFXLElBQUksS0FBSyxDQUFDLENBQUM7UUFDeEQsSUFBSSxPQUFPLENBQUMsWUFBWSxDQUFDLFNBQVMsRUFBRTtZQUNoQyxJQUFJLENBQUMsWUFBWSxDQUFDLElBQUksR0FBRyxPQUFPLENBQUMsWUFBWSxDQUFDLFVBQVUsRUFBRSxXQUFXLENBQUMsUUFBUSxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxPQUFPLENBQUMsWUFBWSxDQUFDLFVBQVUsRUFBRSxRQUFRLENBQUMsUUFBUSxDQUFDLFNBQVMsQ0FBQyxDQUFDLFFBQVEsRUFBRSxDQUFDLENBQUMsQ0FBQyxHQUFHLENBQUM7WUFDM0ssSUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLEdBQUcsT0FBTyxDQUFDLFlBQVksQ0FBQyxVQUFVLEVBQUUsV0FBVyxDQUFDLFFBQVEsQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDLENBQUMsT0FBTyxDQUFDLFlBQVksQ0FBQyxVQUFVLEVBQUUsUUFBUSxDQUFDLFFBQVEsQ0FBQyxTQUFTLENBQUMsQ0FBQyxRQUFRLEVBQUUsQ0FBQyxDQUFDLENBQUMsR0FBRyxDQUFDO1NBQzVLO0lBQ0wsQ0FBQztJQUVPLENBQUMseUJBQXlCO1FBQzlCLE1BQU0sT0FBTyxHQUFHLGlDQUFlLENBQUMsK0JBQStCLEVBQUUsQ0FBQztRQUNsRSxNQUFNLElBQUksdUJBQVMsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxPQUFPLENBQUMsV0FBVyxJQUFJLEtBQUssQ0FBQyxDQUFDO1FBQ3hELElBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxHQUFHLE9BQU8sQ0FBQyxZQUFZLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxRQUFRLEVBQUUsQ0FBQztRQUNyRSxJQUFJLENBQUMsV0FBVyxDQUFDLElBQUksR0FBRyxPQUFPLENBQUMsWUFBWSxDQUFDLFFBQVEsQ0FBQyxRQUFRLENBQUMsUUFBUSxFQUFFLENBQUM7SUFDOUUsQ0FBQztDQUVKO0FBakRELHFDQWlEQztBQWNELElBQVksZUFJWDtBQUpELFdBQVksZUFBZTtJQUN2Qiw0REFBWSxDQUFBO0lBQ1oscURBQUksQ0FBQTtJQUNKLHVEQUFLLENBQUE7QUFDVCxDQUFDLEVBSlcsZUFBZSxHQUFmLHVCQUFlLEtBQWYsdUJBQWUsUUFJMUI7QUFFRCxJQUFZLFFBRVg7QUFGRCxXQUFZLFFBQVE7SUFDaEIsMENBQThCLENBQUE7QUFDbEMsQ0FBQyxFQUZXLFFBQVEsR0FBUixnQkFBUSxLQUFSLGdCQUFRLFFBRW5CIn0=","assetPath":"Assets/Scripts/Product/Product_UI_Balance.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"magicCoinTxt","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"zemTxt","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"shop_zemTxt","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]},{"assembly":"UnityEngine.UI","name":"shop_MCTxt","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[{"name":"SerializeField","args":[]}]}],"name":"Product_UI_Balance","description":"","hasAnimatorMove":false},"isCompiled":true}'
+  typescriptHash: 986388bb03f48d7a97b271c6f1f487a0
+  onlyWriteTrigger: 0

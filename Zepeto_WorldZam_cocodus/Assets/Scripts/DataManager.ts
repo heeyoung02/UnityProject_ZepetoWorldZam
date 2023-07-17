@@ -5,6 +5,7 @@ import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { LeaderboardAPI } from 'ZEPETO.Script.Leaderboard';
 import { ZepetoWorldMultiplay } from 'ZEPETO.World'
 import LeaderboardManager from '../Zepeto LeaderBoard Module/ZepetoScript/LeaderBoardManager';
+import CoinManager from './Product/CoinManager';
 
 export default class DataManager extends ZepetoScriptBehaviour {
 
@@ -12,6 +13,7 @@ export default class DataManager extends ZepetoScriptBehaviour {
     @SerializeField() private sucTxt: TextMeshProUGUI;
     @SerializeField() private timeTxt: TextMeshProUGUI;
     @SerializeField() private bestTimeTxt: TextMeshProUGUI;
+    @SerializeField() private alarmObj: GameObject;
 
     private multiplay: ZepetoWorldMultiplay;
     private room: Room;
@@ -68,6 +70,17 @@ export default class DataManager extends ZepetoScriptBehaviour {
             this.room.AddMessageHandler("LabTimeData", (labTimeData: number) => {
                 console.log(`prev save lab time is : [${labTimeData}]`);
                 this.bestTimeTxt.text = labTimeData.toString();
+            });
+
+            this.room.AddMessageHandler("WelcomeGift", (num: number) => {
+                console.log(`client welcome gift... [${num}]`);
+                if (num == 0) // 웰컴선물 안받았으면
+                {
+                    this.alarmObj.SetActive(true);
+                    CoinManager.instance.GiftCoin(500);
+                }
+                else // 웰컴선물 받았으면(1)
+                    this.alarmObj.SetActive(false);
             });
 
             // 시작지점 트리거시 

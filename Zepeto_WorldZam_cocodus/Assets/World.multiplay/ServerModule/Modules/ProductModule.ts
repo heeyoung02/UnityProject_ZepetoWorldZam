@@ -10,78 +10,69 @@ export default class ProductModule extends IModule {
     storageMap: Map<string, DataStorage> = new Map<string, DataStorage>();
 
     async OnCreate() {
+        // 클라이언트에서 통화얻을때 전송한 데이터 받기
         this.server.onMessage("onCredit", (client, message:CurrencyMessage) => {
-
             console.log(`[onCredit]`);
             const currencyId = message.currencyId;
             const quantity = message.quantity ?? 1;
-
             this.AddCredit(client, currencyId, quantity);
         });
 
+        // 클라이언트에서 통화 사용시 전송한 데이터 받기
         this.server.onMessage("onDebit", (client, message:CurrencyMessage) => {
-
             console.log(`[onDebit]`);
             const currencyId = message.currencyId;
             const quantity = message.quantity ?? 1;
-
             this.OnDebit(client, currencyId, quantity);
         });
 
-
         this.server.onMessage("onAddInventory", (client, message:InventoryMessage) => {
-
             console.log(`[onAddInventory]`);
             const productId = message.productId;
             const quantity = message.quantity ?? 1;
-
             this.AddInventory(client, productId, quantity);
         });
 
-
         this.server.onMessage("onUseInventory", (client, message:InventoryMessage) => {
-
             console.log(`[onUseInventory]`);
             const productId = message.productId;
             const quantity = message.quantity ?? 1;
-
             this.UseInventory(client, productId, quantity);
         });
 
         this.server.onMessage("onRemoveInventory", (client, message:InventoryMessage) => {
-
             console.log(`[onRemoveInventory]`);
             const productId = message.productId;
-
             this.RemoveInventory(client, productId);
         });
 
 
         // DataStorage
-        this.server.onMessage("onSetStorage", (client, message:StorageMessage) => {
 
+        // 클라이언트가 보낸 스토리지값 수신
+        this.server.onMessage("onSetStorage", (client, message: StorageMessage) => {
             console.log(`[onSetStorage]`);
             const key = message.key;
             const value = message.value ?? "";
             this.SetStorage(client, key, value);
         });
 
+        // 클라이언트가 보낸 스토리지 요청 수신
         this.server.onMessage("onGetStorage", (client, message:StorageMessage) => {
-
             const key = message.key;
             console.log(`[onGetStorage] ${key}`);
-
             this.GetStorage(client, key);
         });
 
     }
 
+    // 스토리지 등록하기
     async SetStorage(client: SandboxPlayer, key: string, value: string) {
-
         try {
             const dataStorage = await loadDataStorage(client.userId);
             const result = await dataStorage.set(key, value);
-            client.send("onSetStorageResult", result);
+            if(result)
+                client.send("onSetStorageResult", value);
         }
         catch (e)
         {
@@ -89,22 +80,20 @@ export default class ProductModule extends IModule {
         }
     }
 
-
-
+    // 스토리지 가져오기
     async GetStorage(client: SandboxPlayer, key: string) {
-
         try {
             const dataStorage = await loadDataStorage(client.userId);
             const result = await dataStorage.get(key) as string;
 
             if (result === undefined) {
                 // it is an empty string
-                client.send("onGetStorageResult", "");
+                client.send("onGetStorageResult", result);
             } else
             {
+                console.log(`coin count is.. ${result}`);
                 client.send("onGetStorageResult", result);
             }
-
         }
         catch (e)
         {
@@ -112,9 +101,7 @@ export default class ProductModule extends IModule {
         }
     }
 
-
     async AddInventory(client: SandboxPlayer, productId: string, quantity: number) {
-
         try {
             const inventory = await loadInventory(client.userId);
             await inventory.add(productId, quantity);
@@ -124,7 +111,6 @@ export default class ProductModule extends IModule {
             }
             client.send("SyncInventories",inventorySync);
             console.log("success add");
-
         }
         catch (e)
         {
@@ -132,9 +118,7 @@ export default class ProductModule extends IModule {
         }
     }
 
-
     async UseInventory(client: SandboxPlayer, productId: string, quantity: number) {
-
         try {
             const inventory = await loadInventory(client.userId);
             if (await inventory.use(productId, quantity) === true) {
@@ -142,9 +126,8 @@ export default class ProductModule extends IModule {
                     productId: productId,
                     inventoryAction: InventoryAction.Use
                 }
-                client.send("SyncInventories", inventorySync);
+                client.send("SyncInventories", inventorySync); // 인벤토리에서 아이템 사용했다는 정보 클라이언트에 전송
                 console.log("success use");
-
             }
             else{
                 console.log("use error");
@@ -156,9 +139,7 @@ export default class ProductModule extends IModule {
         }
     }
 
-
     async RemoveInventory(client: SandboxPlayer, productId: string) {
-
         try {
             const inventory = await loadInventory(client.userId);
             if (await inventory.remove(productId) === true) {
@@ -179,10 +160,7 @@ export default class ProductModule extends IModule {
         }
     }
 
-
-
     async AddCredit(client: SandboxPlayer, currencyId: string, quantity: number) {
-
         try {
             const currency = await loadCurrency(client.userId);
             await currency.credit(currencyId, quantity);
@@ -190,6 +168,7 @@ export default class ProductModule extends IModule {
                 currencyId : currencyId,
                 quantity : quantity
             }
+            console.log(`AddCredit success. currencyId : [${currencyId}], quantity : [${quantity}]`);
             client.send("SyncBalances",currencySync);
         }
         catch (e)
@@ -199,7 +178,6 @@ export default class ProductModule extends IModule {
     }
 
     async OnDebit(client: SandboxPlayer, currencyId: string, quantity: number) {
-
         try {
             const currency = await loadCurrency(client.userId);
             if(await currency.debit(currencyId, quantity) === true) {

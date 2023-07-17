@@ -1,24 +1,32 @@
-import { AudioClip, Collider, GameObject, Object } from 'UnityEngine';
+import { AudioClip, Collider, Color, GameObject, Object } from 'UnityEngine';
+import { Button, Image } from 'UnityEngine.UI';
 import { Room } from 'ZEPETO.Multiplay';
 import { ZepetoScriptBehaviour } from 'ZEPETO.Script'
 import { ZepetoWorldMultiplay } from 'ZEPETO.World';
 import PlayerSync from '../Multi/Player/PlayerSync';
 import DataManager from './DataManager';
+import CoinManager from './Product/CoinManager';
 import SoundManager from './SoundManager';
 
 export default class Start_End_Trigger extends ZepetoScriptBehaviour {
 
     @SerializeField() private audioClip: AudioClip;
     @SerializeField() private goalUI: GameObject;
+    @SerializeField() private invenIcon: GameObject;
 
     private multiplay: ZepetoWorldMultiplay;
     private room: Room;
 
-    public startTrigger: bool = false;
-    public finishTrigger: bool = false;
+    private invenButton: Button;
+    private invenImg: Image;
+
+    private startTrigger: bool = false;
+    private finishTrigger: bool = false;
 
     private Start() {
         this.multiplay = Object.FindObjectOfType<ZepetoWorldMultiplay>();
+        this.invenButton = this.invenIcon.GetComponent<Button>();
+        this.invenImg = this.invenIcon.transform.GetChild(0).transform.GetComponent<Image>();
         this.multiplay.RoomJoined += (room: Room) => {
             this.room = room;
         }
@@ -51,14 +59,32 @@ export default class Start_End_Trigger extends ZepetoScriptBehaviour {
             // 성공횟수 올리고 스토리지에 저장
             DataManager.instance.ShowData(0, 1);
             DataManager.instance.SaveData();
-
+            // 코인 스토리지 저장 및 재배치
+            CoinManager.instance.CoinActive();
+            // 사용한 깃발 초기화
+            CoinManager.instance.FlagReset();
+            // 인벤토리 아이콘 비활성화
+            this.DisableInvenIcon();
+ 
         }
+    }
+
+    private DisableInvenIcon() {
+        this.invenButton.interactable = false;
+        this.invenImg.color = Color.gray;
+    }
+
+    private EnableInvenIcon() {
+        this.invenButton.interactable = true;
+        this.invenImg.color = Color.white;
     }
 
     // retry시 해당함수 실행
     public TriggerExit() {
         this.startTrigger = false;
         this.finishTrigger = false;
-        DataManager.instance.UIReset();
+        
+        // 인벤토리 아이콘 활성화
+        this.EnableInvenIcon();
     }
 }

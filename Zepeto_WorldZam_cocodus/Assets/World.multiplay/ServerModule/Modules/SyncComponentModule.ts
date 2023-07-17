@@ -253,6 +253,9 @@ export default class SyncComponentModule extends IModule {
         const playerData = await userStorage.get<PlayerData>("PlayerData");
         const labTimeData = await userStorage.get<number>("LabTimeData");
 
+        const welcomeGift = await userStorage.get<number>("WelcomeGift");
+
+        // 도전,성공횟수 데이터
         if (playerData) {
             client.send("PlayerData", playerData);
         }
@@ -265,8 +268,20 @@ export default class SyncComponentModule extends IModule {
             client.send("PlayerData", empty);
         }
 
+        // 랩타임 데이터
         if (labTimeData) {
             client.send("LabTimeData", labTimeData);
+        }
+
+        // 웰컴선물 데이터 받았으면 1, 안받았으면 0
+        if (welcomeGift) {
+            console.log(`i have welcomegift! [${welcomeGift}]`);
+            client.send("WelcomeGift", welcomeGift);
+        }
+        else {
+            console.log(`i dont have welcomegift!`);
+            await userStorage.set("WelcomeGift", 1)
+            client.send("WelcomeGift", 0);
         }
     }
 }

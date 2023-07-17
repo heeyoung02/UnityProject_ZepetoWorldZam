@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   productTextureInfo:
   - targetId: wizard_item_coin_100
-    targetAssetPath: Assets/Product/Resources\product_EmojiOne.png
+    targetAssetPath: Assets/Product/Resources/wizard_item_coin_100.png
   - targetId: wizard_item_flag
-    targetAssetPath: Assets/Product/Resources\product_thumbnail.png
+    targetAssetPath: Assets/Product/Resources/wizard_item_flag.png
+  - targetId: wizard_package_spawn_10
+    targetAssetPath: Assets/Product/Resources/wizard_item_flag_package.png
+  - targetId: wizard_package_spawn_5
+    targetAssetPath: Assets/Product/Resources/wizard_item_flag_package.png
   currencyTextureInfo:
-  - targetId: energy
-    targetAssetPath: 
-  - targetId: star
-    targetAssetPath: 
   - targetId: wizard_item_coin
-    targetAssetPath: Packages/zepeto.product/Runtime/Resources/Images/_img_credit_coin_180.png
+    targetAssetPath: Assets/Product/Resources/currency_wizard_item_coin.png

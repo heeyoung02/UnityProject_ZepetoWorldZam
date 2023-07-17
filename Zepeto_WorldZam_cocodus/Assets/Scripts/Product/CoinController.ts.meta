@@ -1,0 +1,34 @@
+fileFormatVersion: 2
+guid: 1ef5f8e7587dd7941adcf78d51519d38
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    ZEPETO_Character_Controller_1 = require(\\\"ZEPETO.Character.Controller\\\");\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst CoinManager_1 =
+    require(\\\"./CoinManager\\\");\\r\\nclass CoinController extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\\r\\n    OnTriggerEnter(coll) {\\r\\n        if (coll != ZEPETO_Character_Controller_1.ZepetoPlayers.instance.LocalPlayer?.zepetoPlayer?.character.GetComponent($typeof(UnityEngine_1.Collider)))
+    {\\r\\n            return;\\r\\n        }\\r\\n        // UI\uFFFD\uFFFD\u022D\\r\\n       
+    CoinManager_1.default.instance.AddCoin();\\r\\n        CoinManager_1.default.instance.PutCoinObj(this.gameObject);\\r\\n       
+    // \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u01AE \uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD
+    \uFFFD\uFFFD \uFFFD\uFFFD\u0230\uFFFD\uFFFD\u022D\\r\\n        this.transform.rotation
+    = UnityEngine_1.Quaternion.Euler(90, 0, 0);\\r\\n        this.gameObject.SetActive(false);\\r\\n   
+    }\\r\\n}\\r\\nexports.default = CoinController;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ29pbkNvbnRyb2xsZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJDb2luQ29udHJvbGxlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUFtRDtBQUNuRCw2RUFBNEQ7QUFDNUQsaURBQXFEO0FBQ3JELCtDQUF3QztBQUV4QyxNQUFxQixjQUFlLFNBQVEscUNBQXFCO0lBRzdELGNBQWMsQ0FBQyxJQUFjO1FBQ3pCLElBQUksSUFBSSxJQUFJLDJDQUFhLENBQUMsUUFBUSxDQUFDLFdBQVcsRUFBRSxZQUFZLEVBQUUsU0FBUyxDQUFDLFlBQVksU0FBQyxzQkFBUSxFQUFHLEVBQUU7WUFDOUYsT0FBTztTQUNWO1FBRUQsUUFBUTtRQUNSLHFCQUFXLENBQUMsUUFBUSxDQUFDLE9BQU8sRUFBRSxDQUFDO1FBQy9CLHFCQUFXLENBQUMsUUFBUSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUM7UUFFakQsOEJBQThCO1FBQzlCLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxHQUFHLHdCQUFVLENBQUMsS0FBSyxDQUFDLEVBQUUsRUFBRSxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUM7UUFDckQsSUFBSSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7SUFFckMsQ0FBQztDQUVKO0FBbEJELGlDQWtCQyJ9\",\"assetPath\":\"Assets/Scripts/Product/CoinController.ts\",\"manifest\":{\"properties\":[],\"name\":\"CoinController\",\"description\":\"\",\"hasAnimatorMove\":false},\"isCompiled\":true}"
+  typescriptHash: c682696d94ae1d6f3d8c655e05cebb91
+  onlyWriteTrigger: 0
